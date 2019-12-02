@@ -515,7 +515,7 @@
 		"C": "Configure netfilter to not permit port 25 traffic on the public network",
 		"D": "Restrict Postfix to only relay outbound SMTP from the internal network",
 		"E": "Upgrade the mailbox format from mbox to maildir",
-		"corr_answer": "#C.#D"
+		"corr_answer": "#C,#D"
 	},
 	{
 		"question_num": "QUESTION 57","type":"5",
@@ -696,7 +696,7 @@
 		"C": "ErrorLog",
 		"D": "ServerLog",
 		"E": "VHostLog",
-		"corr_answer": "#A,#B"
+		"corr_answer": "#B,#C"
 	},
 	{
 		"question_num": "QUESTION 77","type":"5",
@@ -928,7 +928,7 @@
 		"corr_answer": "#D"
 	},
 	{
-		"question_num": "QUESTION 101","type":"5",
+		"question_num": "QUESTION 101","type":"1",
 		"question": "Which doveadm sub-command displays a list of connections of Dovecot in the following format? (Specify ONLY the command without any parameters.)",
 		"corr_answer": "who"
 	},
