@@ -80,7 +80,7 @@
 		"C": "PermitPlaintextLogin",
 		"D": "UsePasswords",
 		"E": "PasswordAuthentication",
-		"corr_answer": "#BD,#E"
+		"corr_answer": "#B,#E"
 	},
 	{
 		"question_num": "QUESTION 9","type":"5",
