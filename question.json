@@ -156,7 +156,7 @@
 	},
 	{
 		"question_num": "QUESTION 17","type":"5",
-		"question": "In which CIFS share must printer drivers be placed to allow Point'n'Print driver deployment on <br> Windows?",
+		"question": "In which CIFS share must printer drivers be placed to allow Point'n'Print driver deployment on <br> Windows? ",
 		"A": "winx64drv$",
 		"B": "print$",
 		"C": "The name of the share is specified in the option print driver share within each printable share in smb.conf",
@@ -166,13 +166,13 @@
 	},
 	{
 		"question_num": "QUESTION 18","type":"5",
-		"question": "Which of the following Samba services handles the membership of a file server in an Active Directory <br> domain?",
+		"question": "Which of the following Samba services handles the membership of a file server in an Active Directory <br> domain? (Korrigiert, E?)",
 		"A": "winbindd",
 		"B": "nmbd",
 		"C": "msadd",
 		"D": "admemb",
 		"E": "samba",
-		"corr_answer": "#E"
+		"corr_answer": "#A"
 	},
 	{
 		"question_num": "QUESTION 19","type":"5",
