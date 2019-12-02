@@ -1,7 +1,7 @@
 [{
                 "question_num": "QUESTION 1",
                 "type":"5",
-		"question": "On a Linux router, packet forwarding for IPv4 has been enabled. After a reboot, <br> the machine no longer forwards IP packets from other hosts. <br> The command: echo 1 > /proc/sys/net/ipv4/ip_forward temporarily resolves this issue. Which one of the following options is the best way to ensure this setting is saved across system restarts?",
+		"question": "On a Linux router, packet forwarding for IPv4 has been enabled. After a reboot, <br> the machine no longer forwards IP packets from other hosts. <br> The command: echo 1 > /proc/sys/net/ipv4/ip_forward temporarily resolves this issue. <br> Which one of the following options is the best way to ensure this setting is saved across system restarts?",
 		"A": "echo 1 > /proc/sys/net/ipv4/ip_forward to the root user login script",
 		"B": "Add echo 1 > /proc/sys/net/ipv4/ip_forward to any user login script",
 		"C": "In /etc/sysctl.conf change net.ipv4.ip_forward to 1",
