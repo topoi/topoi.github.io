@@ -572,17 +572,17 @@
 	},
 	{
 		"question_num": "QUESTION 63","type":"5",
-		"question": "In order to join a file server to the Active Directory domain intra.example.com, the <br> following smb.conf has been created: The command net ads join raises an error and the server is not joined to the domain. What should be done to successfully join the domain?",
+		"question": "In order to join a file server to the Active Directory domain intra.example.com, the <br> following smb.conf has been created: The command net ads join raises an error and the server is not joined to the domain. What should be done to successfully join the domain? (Korrigiert)",
 		"A": "Change server role to ad member server to join an Active Directory domain instead of an NT4 domain.",
 		"B": "Add realm = intra.example.com to the smb.conf and change workgroup to the domain's netbios workgroup name.",
 		"C": "Manually create a machine account in the Active Directory domain and specify the machine account's name with -U when starting net ads join.",
 		"D": "Remove the winbind enum users and winbind enum groups since winbind is incompatible with Active Directory domains.",
 		"E": "Remove all idmap configuration stanzas since the id mapping is defined globally in an Active Directory domain and cannot be changed on a member server.",
-		"corr_answer": "#E"
+		"corr_answer": "#B"
 	},
 	{
 		"question_num": "QUESTION 64","type":"1",
-		"question": "In order to export /usr and /bin via NFSv4, /exports was created and contains working bind mounts <br> to /usr and /bin. The following lines are added to /etc/exports on the NFC server: <br> After running mount -t nfsv4 server:/ /mnt of an NFC-Client, it is observed that /mnt contains the content of the server's /usr directory instead of the content of the NFSv4 root folder. Which option in /etc/exports has to be changed or removed in order to make the NFSv4 root folder appear when mounting the highest level of the server? (Specify ONLY the option name without any values or parameters.)",
+		"question": "In order to export /usr and /bin via NFSv4, /exports was created and contains working bind mounts <br> to /usr and /bin. The following lines are added to /etc/exports on the NFS server: <br> After running mount -t nfsv4 server:/ /mnt of an NFC-Client, it is observed that /mnt contains the content of the server's /usr directory instead of the content of the NFSv4 root folder. Which option in /etc/exports has to be changed or removed in order to make the NFSv4 root folder appear when mounting the highest level of the server? (Specify ONLY the option name without any values or parameters.)",
 		"corr_answer": "nfs-client"
 	},
 	{
@@ -613,7 +613,7 @@
 		"C": "host deny = 192.168.1.100/255.255.255.0 192.168.2.31 localhost",
 		"D": "host deny = 192.168.2.200/255.255.255.0 192.168.2.31 localhost",
 		"E": "host allow = 192.168.1.0/255.255.255.0 192.168.2.0/255.255.255.0 localhost",
-		"corr_answer": "#D,#E"
+		"corr_answer": "#E"
 	},
 	{
 		"question_num": "QUESTION 68","type":"1",
@@ -879,7 +879,7 @@
 		"C": "The $ORIGIN declaration cannot be used in zone files that are included for a specific zone name in the BIND configuration.",
 		"D": "An A record cannot contain an IPv4 address because its value is supposed to be a reverse DNS name.",
 		"E": "Names of records in a zone file cannot be fully qualified domain names.",
-		"corr_answer": "#C"
+		"corr_answer": "#B"
 	},
 	{
 		"question_num": "QUESTION 96","type":"5",
