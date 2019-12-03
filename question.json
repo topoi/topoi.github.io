@@ -225,7 +225,7 @@
 		"corr_answer": "#A"
 	},
 	{
-		"question_num": "QUESTION 24","type":"5",
+		"question_num": "QUESTION 24","type":"4",
 		"question": "Performing a DNS lookup with dig results in this answer:",
 		"A": "There is no . after linuserv.example.net in the PTR record in the forward lookup zone file",
 		"B": "There is no . after linuserv in the PTR record in the forward lookup zone file",
