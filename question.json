@@ -572,7 +572,7 @@
 	},
 	{
 		"question_num": "QUESTION 63","type":"5",
-		"question": "In order to join a file server to the Active Directory domain intra.example.com, the <br> following smb.conf has been created: The command net ads join raises an error and the server is not joined to the domain. What should be done to successfully join the domain? (Korrigiert)",
+		"question": "In order to join a file server to the Active Directory domain intra.example.com, the <br> following smb.conf has been created: <br><br> workgroup = intra.example.com <br> netbios name = Fileserver <br> server role = member server <br> idmap config * : backend =tdb <br> idmap config * : range = 10000-199999 <br> winbind enum users = yes <br> winbind enum group = yes <br><br>The command net ads join raises an error and the server is not joined to the domain. What should be done to successfully join the domain? (Korrigiert)",
 		"A": "Change server role to ad member server to join an Active Directory domain instead of an NT4 domain.",
 		"B": "Add realm = intra.example.com to the smb.conf and change workgroup to the domain's netbios workgroup name.",
 		"C": "Manually create a machine account in the Active Directory domain and specify the machine account's name with -U when starting net ads join.",
