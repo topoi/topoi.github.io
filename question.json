@@ -552,7 +552,7 @@
 		"corr_answer": "#B,#C,#D"
 	},
 	{
-		"question_num": "QUESTION 61","type":"5",
+		"question_num": "QUESTION 61","type":"4",
 		"question": "Which of the following services belongs to NFSv4 and does not exist in NFSv3?",
 		"A": "rpc.idmapd",
 		"B": "rpc.statd",
