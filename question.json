@@ -266,7 +266,7 @@
 	},
 	{
 		"question_num": "QUESTION 28","type":"5",
-		"question": "What word is missing from the following excerpt of a named.conf file?",
+		"question": "What word is missing from the following excerpt of a named.conf file? <br> <br> ____friends { <br> 10.10.0.0/24; 192.168.1.0/24; <br> }; <br> options { <br> allow-query {friends;}; <br> }; <br><br>",
 		"A": "networks",
 		"B": "net",
 		"C": "list",
