@@ -853,7 +853,7 @@
 	},
 	{
 		"question_num": "QUESTION 93","type":"5",
-		"question": "Which of these tools provides DNS information in the following format? (Kein Ausgabeformat)",
+		"question": "Which of these tools provides DNS information in the following format? <br> (Kein Ausgabeformat, falls 'www.example.com has address 172.25.25.55.....' dann host! )",
 		"A": "dig",
 		"B": "nslookup",
 		"C": "host",
