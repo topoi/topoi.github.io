@@ -583,7 +583,7 @@
 	{
 		"question_num": "QUESTION 64","type":"1",
 		"question": "In order to export /usr and /bin via NFSv4, /exports was created and contains working bind mounts <br> to /usr and /bin. The following lines are added to /etc/exports on the NFS server: <br> After running mount -t nfsv4 server:/ /mnt of an NFC-Client, it is observed that /mnt contains the content <br> of the server's /usr directory instead of the content of the NFSv4 root folder. <br> Which option in /etc/exports has to be changed or removed in order to make the NFSv4 root folder <br> appear when mounting the highest level of the server? (Specify ONLY the option name without any values or parameters.)",
-		"corr_answer": "nfs-client"
+		"corr_answer": "fsid"
 	},
 	{
 		"question_num": "QUESTION 65","type":"5",
@@ -929,18 +929,18 @@
 	},
 	{
 		"question_num": "QUESTION 101","type":"1",
-		"question": "Which doveadm sub-command displays a list of connections of Dovecot in the <br> following format? (Specify ONLY the command without any parameters.)",
+		"question": "Which doveadm sub-command displays a list of connections of Dovecot in the following format (Achtung, output NICHT aus Originalfrage!)? <br><br> username # proto (pids) (ips) <br> jane 2 imap  (30155 30412) (::1)  <br><br> (Specify ONLY the command without any parameters.)",
 		"corr_answer": "who"
 	},
 	{
 		"question_num": "QUESTION 102","type":"5",
-		"question": "Which of the following actions are available in Sieve core filters? (Choose three.)",
+		"question": "Which of the following actions are available in Sieve core filters? (Choose three.) (Korrigiert)",
 		"A": "drop",
 		"B": "discard",
 		"C": "fileinto",
 		"D": "relay",
 		"E": "reject",
-		"corr_answer": "#C,#D,#E"
+		"corr_answer": "#B,#C,#E"
 	},
 	{
 		"question_num": "QUESTION 103","type":"5",
