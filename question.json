@@ -607,7 +607,7 @@
 	},
 	{
 		"question_num": "QUESTION 67","type":"5",
-		"question": "The Samba configuration file contains the following lines: A workstation is on the wired network with an <br> IP address of 192.168.1.177 but is unable to access the Samba server. <br> A wireless laptop with an IP address 192.168.2.93 can access the Samba server. <br>  Additional trouble shooting shows that almost every machine on the wired network is <br> unable to access the Samba server. Which alternate host allow declaration will <br> permit wired workstations to connect to the Samba server without denying access to anyone else?",
+		"question": "The Samba configuration file contains the following lines: <br><br> host allow = 192.168.1.100 192.168.2.0/255.255.255.0  local host <br> host deny = 192.168.2.31 <br> interfaces = 192.168.1.0/255.255.255.0192.168.2.0/255.255.255.0  <br><br> A workstation is on the wired network with an <br> IP address of 192.168.1.177 but is unable to access the Samba server. <br> A wireless laptop with an IP address 192.168.2.93 can access the Samba server. <br>  Additional trouble shooting shows that almost every machine on the wired network is <br> unable to access the Samba server. Which alternate host allow declaration will <br> permit wired workstations to connect to the Samba server without denying access to anyone else?",
 		"A": "host allow = 192.168.1.1-255",
 		"B": "host allow = 192.168.1.100 192.168.2.200 localhost",
 		"C": "host deny = 192.168.1.100/255.255.255.0 192.168.2.31 localhost",
