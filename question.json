@@ -950,7 +950,7 @@
 		"C": "noneof",
 		"D": "and",
 		"E": "or",
-		"corr_answer": "#A,#E"
+		"corr_answer": "#A,#B"
 	},
 	{
 		"question_num": "QUESTION 104","type":"5",
