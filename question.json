@@ -43,7 +43,7 @@
 	},
 	{
 		"question_num": "QUESTION 5","type":"5",
-		"question": "Which of the statements below are correct regarding the following commands, <br> which are executed on a Linux router? (Choose two.)",
+		"question": "Which of the statements below are correct regarding the following commands <br><br> ip6tables -A FORWARD -s fe80::/64 -j DROP <br> ip6tables -A FORWARD -d fe80::/64 -j DROP  <br><br> which are executed on a Linux router? (Choose two.)",
 
 		"A": "Packets with source or destination addresses from fe80::/64 will never occur in the FORWARD chain",
 		"B": "The rules disable packet forwarding because network nodes always use addresses from fe80::/64 to identify routers in their routing tables",
