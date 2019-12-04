@@ -36,8 +36,34 @@
     <!-- Script to get JSON file and display its content --> 
     <script type = "text/javascript" language="javascript"> 
 
-      $(document).ready(function() { 
-            par=-1
+      $(document).ready(function() {
+
+	      par=0
+	      $.getJSON('question.json', function(emp) {
+		  
+		 $('#display').html('<p><label id="qn"> ' + emp[par].question_num + '</label></br>');
+		 $('#display').append('<p><label id="q"> ' + emp[par].question + '</label></br>');
+		 if (emp[par].type == "5") {
+		 $('#display').append('A: <input type="checkbox"><label id="A"> ' + emp[par].A+ '</label></br>'); 
+                 $('#display').append('B: <input type="checkbox"><label id="B"> ' + emp[par].B+ '</label></br>'); 
+                 $('#display').append('C: <input type="checkbox"><label id="C"> ' + emp[par].C+ '</label></br>'); 
+                 $('#display').append('D: <input type="checkbox"><label id="D"> ' + emp[par].D+ '</label></br>');
+		 $('#display').append('E: <input type="checkbox"><label id="E"> ' + emp[par].E+ '</label></br>');
+		 };
+		 if (emp[par].type == "4") {
+		 $('#display').append('A: <input type="checkbox"><label id="A"> ' + emp[par].A+ '</label></br>'); 
+                 $('#display').append('B: <input type="checkbox"><label id="B"> ' + emp[par].B+ '</label></br>'); 
+                 $('#display').append('C: <input type="checkbox"><label id="C"> ' + emp[par].C+ '</label></br>'); 
+                 $('#display').append('D: <input type="checkbox"><label id="D"> ' + emp[par].D+ '</label></br>');
+		 };
+		 if (emp[par].type == "1") {
+		     $('#display').append('<input></label></br>');
+		     $('#display').append('<label style="opacity:0" id="single"> Answer:  ' + emp[par].corr_answer+ '</label></br>');
+		 }
+             });
+
+	  
+            par=0
             $("#fetch").click(function(event){
 	     par=par+1
              $.getJSON('question.json', function(emp) {
