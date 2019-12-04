@@ -386,7 +386,7 @@
 	},
 	{
 		"question_num": "QUESTION 41","type":"5",
-		"question": "When trying to reverse proxy a web server through Nginx, what keyword is missing from the following <br> configuration sample? <br> location/ { <br> ________http://proxiedserver:8080; <br> }",
+		"question": "When trying to reverse proxy a web server through Nginx, what keyword is missing from the following <br> configuration sample? <br><br> location/ { <br> ________http://proxiedserver:8080; <br> }",
 		"A": "remote_proxy",
 		"B": "reverse_proxy",
 		"C": "proxy_reverse",
