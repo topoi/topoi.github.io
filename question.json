@@ -953,7 +953,7 @@
 		"corr_answer": "#A,#B"
 	},
 	{
-		"question_num": "QUESTION 104","type":"5",
+		"question_num": "QUESTION 104","type":"4",
 		"question": "Which configuration parameter on a Postfix server modifies only the sender address <br> and not the recipient address?",
 		"A": "alias_maps",
 		"B": "alias_rewrite_maps",
