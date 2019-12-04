@@ -617,7 +617,7 @@
 	},
 	{
 		"question_num": "QUESTION 68","type":"1",
-		"question": "What command displays NFC kernel statistics? (Specify ONLY the command without any path or parameters.)",
+		"question": "What command displays NFS kernel statistics? (Specify ONLY the command without any path or parameters.)",
 		"corr_answer": "nfsstat"
 	},
 	{
