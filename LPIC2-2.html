@@ -62,8 +62,17 @@
 		 }
              });
 
-	  
-            par=0
+	  $("#answer").click(function(event){
+		    alert(par)
+		     $.getJSON('question.json', function(emp) {
+			 if (emp[par].type == "1")
+			 {
+                             $('#single').css("opacity", "1")
+			 } else {
+			     $(emp[par].corr_answer).css("background-color", "lightgreen")}
+		   });
+		 });
+	 
             $("#fetch").click(function(event){
 	     par=par+1
              $.getJSON('question.json', function(emp) {
@@ -89,7 +98,8 @@
 		 }
              });
 
-		 $("#answer").click(function(event){
+		$("#answer").click(function(event){
+	
 		     $.getJSON('question.json', function(emp) {
 			 if (emp[par].type == "1")
 			 {
