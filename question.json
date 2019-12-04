@@ -963,8 +963,8 @@
 	},
 	{
 		"question_num": "QUESTION 105","type":"1",
-		"question": "Which option in the Postfix configuration makes Postfix pass email to external <br> destinations to another SMTP-server? (Specify ONLY the option name without any values.)",
-		"corr_answer": " relay"
+		"question": "Which option in the Postfix configuration makes Postfix pass email to external <br> destinations to another SMTP-server? (Specify ONLY the option name without any values.) (Korrigiert)",
+		"corr_answer": "relayhost"
 	},
 	{
 		"question_num": "QUESTION 106","type":"5",
@@ -998,13 +998,13 @@
 	},
 	{
 		"question_num": "QUESTION 109","type":"5",
-		"question": "Which of these sets of entries does the following command return?",
+		"question": "Which of these sets of entries does the following command return? <br><br> ldapsearch -x '(|(cn=marie) (!(telephoneNumber=9)))'  <br>",
 		"A": "Entries that don't have a cn of marie or don't have a telephoneNumber that begins with 9.",
 		"B": "Entries that have a cn of marie or don't have a telephoneNumber beginning with 9.",
 		"C": "Entries that have a cn of marie and a telephoneNumber that ending with 9.",
 		"D": "Entries that don't have a cn of marie and don't have a telephoneNumber beginning with 9.",
 		"E": "Entries that have a cn of marie or have a telephoneNumber beginning with 9.",
-		"corr_answer": "#C"
+		"corr_answer": "#B"
 	},
 	{
 		"question_num": "QUESTION 110","type":"5",
@@ -1018,8 +1018,8 @@
 	},
 	{
 		"question_num": "QUESTION 111","type":"1",
-		"question": "Which attitude of an object in LDAP defines which other attributes <br> can be set for the object? (Specify ONLY the attribute name without any values.)",
-		"corr_answer": "class"
+		"question": "Which attribute of an object in LDAP defines which other attributes <br> can be set for the object? (Specify ONLY the attribute name without any values.) (Korrigiert)",
+		"corr_answer": "objectClass"
 	},
 	{
 		"question_num": "QUESTION 112","type":"5",
@@ -1033,13 +1033,13 @@
 	},
 	{
 		"question_num": "QUESTION 113","type":"5",
-		"question": "Which of the following is correct about this excerpt from an LDIF file?",
+		"question": "Which of the following is correct about this excerpt from an LDIF file? <br><br> db: cn=PrintOperators, ou=Groups, o=IT, DC=mycompany, DC=example, DC=com <br> <br>",
 		"A": "dn is the domain name.",
 		"B": "o is the operator name.",
 		"C": "cn is the common name.",
 		"D": "dn is the relative distinguished name.",
 		"E": "DC is the delegation container.",
-		"corr_answer": "#D"
+		"corr_answer": "#C"
 	},
 	{
 		"question_num": "QUESTION 114","type":"4",
