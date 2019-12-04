@@ -226,7 +226,7 @@
 	},
 	{
 		"question_num": "QUESTION 24","type":"4",
-		"question": "Performing a DNS lookup with dig results in this answer:",
+		"question": "Performing a DNS lookup with dig results in this answer: <br> <br> ;; QUESTION SECTION: <br> ;5.123.168.192.in-addr.arpa.   IN  PTR <br> ;; ANSWER SECTION: <br> ;5.123.168.192.in-addr.arpa. 600  IN  PTR linuserv.example.net.123.168.192.in-addr.arpa. <br>  ;; AUTHORITY SECTION: <br> ;5.123.168.192.in-addr.arpa. 600  IN  NS linuserv.example.net. <br> ;; ADDITIONAL SECTION: <br> ; linuserv.example.net 600  IN  A 192.168.123.5<br> <br> ",
 		"A": "There is no . after linuserv.example.net in the PTR record in the forward lookup zone file",
 		"B": "There is no . after linuserv in the PTR record in the forward lookup zone file",
 		"C": "There is no . after linuserv.example.net in the PTR record in the reverse lookup zone file",
@@ -296,7 +296,7 @@
 	},
 	{
 		"question_num": "QUESTION 31","type":"5",
-		"question": "In order to protect a directory on an Apache HTTPD web server with a password, this configuration <br>  was added to an .htaccess file in the respective directory: <br> Furthermore, a file /var/www/dir/ .htpasswd was created with the following content: usera:S3cr3t <br> Given that all these files were correctly processed by the web server processes, which of the following statements is true about requests to the directory?",
+		"question": "In order to protect a directory on an Apache HTTPD web server with a password, this configuration <br>  was added to an .htaccess file in the respective directory: <br><br> AuthType Basic <br> AuthName 'Protected Directory' <br> AuthUserFile /var/www/dir/ .htpasswd <br> Require valid-user <br><br> Furthermore, a file /var/www/dir/ .htpasswd was created with the following content: usera:S3cr3t <br> Given that all these files were correctly processed by the web server processes, which of the following statements is true about requests to the directory?",
 		"A": "The user usera can access the site using the password s3cr3t",
 		"B": "Accessing the directory as usera raises HTTP error code 442 (User Not Existent)",
 		"C": "Requests are answered with HTTP error code 500 (Internal Server Error)",
