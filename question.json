@@ -361,7 +361,7 @@
 	{
 		"question_num": "QUESTION 38","type":"5",
 		"question": "Which tool creates a Certificate Signing Request (CSR) for serving HTTPS with Apache HTTPD?",
-		"A": "apachect1",
+		"A": "apachectl",
 		"B": "certgen",
 		"C": "cartool",
 		"D": "httpsgen",
