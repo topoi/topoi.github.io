@@ -11,6 +11,7 @@
   font-family: 'Helvetica', 'Arial', sans-serif;
   font-size: 110%;
       }
+
 .butt {
   background-color: lightblue;
   border: none;
@@ -25,7 +26,20 @@
   cursor: pointer;
 }
       
-      
+    .butt1 {
+  background-color: lightblue;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 22px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 1px 2px;
+  cursor: pointer;
+}
+        
 </style>
     <title>LPIC2 Exam 2 NEU</title> 
       
@@ -62,20 +76,14 @@
 		 }
              });
 
-          $("#30").click(function(event){
+          $("#10,#20,#30,#40,#50,#60,#70,#80,#90,#100,#110").click(function(event){
               par = parseInt($(this).val())
-	      jump(par)
+	      jump(par-1)
           });
 
-          $("#60").click(function(event){
-              par = parseInt($(this).val())
-	      jump(par)
-          });
-	   $("#90").click(function(event){
-               par = parseInt($(this).val())
-	       jump(par)
-          });
-	  
+         
+
+
 	  
 	    $("#answer").click(function(event){
 		    
@@ -207,9 +215,17 @@
      <input type = "button" class="butt" id = "fetch" value = ">>" />
      <br>
      <p style="font-family: 'Helvetica', 'Arial', sans-serif;"> Jump to </p>
-     <input type = "button" class="butt" id = "30" value="30"/>
-     <input type = "button" class="butt" id = "60" value="60"/>
-     <input type = "button" class="butt" id = "90" value="90"/> 
+      <input type = "button" class="butt1" id = "10" value="10"/>
+     <input type = "button" class="butt1" id = "20" value="20"/>
+     <input type = "button" class="butt1" id = "30" value="30"/> 
+     <input type = "button" class="butt1" id = "40" value="40"/>
+     <input type = "button" class="butt1" id = "50" value="50"/>
+     <input type = "button" class="butt1" id = "60" value="60"/>
+     <input type = "button" class="butt1" id = "70" value="70"/>
+     <input type = "button" class="butt1" id = "80" value="80"/> 
+     <input type = "button" class="butt1" id = "90" value="90"/>
+     <input type = "button" class="butt1" id = "100" value="100"/>
+     <input type = "button" class="butt1" id = "110" value="110"/>
     
    </body> 
 </html> 
