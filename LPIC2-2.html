@@ -54,7 +54,7 @@
      
      <div id = "display" style = "background-color:#FFFFFF;"></div>
      <br>
-     <p style="font-family: 'Helvetica', 'Arial', sans-serif;"> Jump to </p>
+     <p id="jump" style="font-family: 'Helvetica', 'Arial', sans-serif;"> Jump to </p>
      <input type = "button" class="butt1" id = "1" value="1"/>
      <input type = "button" class="butt1" id = "2" value="2"/>
      <input type = "button" class="butt1" id = "3" value="3"/> 
@@ -198,17 +198,20 @@
 
     $(document).ready(function() {
      
+     $('#jump').hide();
      $('#switch').show();
      $('#switchoff').hide();
      $('.butt1').hide();
 	   
 	    
       $("#switch").click(function(event){
+	           $('#jump').show();
 	           $('#switch').hide()      
 	           $('#switchoff').show()   
 		   $('.butt1').show()
        });
       $("#switchoff").click(function(event){
+	           $('#jump').hide();
 	           $('#switch').show()
 	           $('#switchoff').hide()
 		   $('.butt1').hide()
