@@ -50,7 +50,7 @@
      <input type = "button" class="butt" id = "fetch" value = ">>" />
      <br>
      <p style="font-family: 'Helvetica', 'Arial', sans-serif;"> Jump to </p>
-     <input type ="button" class="butt" id="switch" onclick="changeSingle()" value="show single"/>
+     <input type ="button" class="butt" id="switch" value="show all questions"/>
      <input type = "button" class="butt1" id = "1" value="1"/>
      <input type = "button" class="butt1" id = "2" value="2"/>
      <input type = "button" class="butt1" id = "3" value="3"/> 
@@ -200,13 +200,9 @@
 	    
       $(document).ready(function() {
 
-	       function changeSingle() {
-		   alert("test")
+      $("#switch").click(function(event){
 		   $('#butt1').css("opacity",1)
-		    
-	    };
-	    
-	      
+       });
 	      par=0
 	      $.getJSON('question.json', function(emp) {
 		  
