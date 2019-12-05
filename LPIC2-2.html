@@ -29,6 +29,7 @@
     .butt1 {
   background-color: lightblue;
   border: none;
+  opacity:0;
   width: 20px;
   color: white;
   border-radius: 8px;
@@ -49,6 +50,7 @@
      <input type = "button" class="butt" id = "fetch" value = ">>" />
      <br>
      <p style="font-family: 'Helvetica', 'Arial', sans-serif;"> Jump to </p>
+     <input type ="button" class="butt" id="switch" onclick="changeSingle()" value="show single"/>
      <input type = "button" class="butt1" id = "1" value="1"/>
      <input type = "button" class="butt1" id = "2" value="2"/>
      <input type = "button" class="butt1" id = "3" value="3"/> 
@@ -194,6 +196,13 @@
     <!-- Script to get JSON file and display its content --> 
     <script type = "text/javascript" language="javascript"> 
 
+	    changeSingle() {
+		
+		   $('#butt1').css("opacity",1)
+		    
+	    }
+	    
+	    
       $(document).ready(function() {
 
 	      par=0
