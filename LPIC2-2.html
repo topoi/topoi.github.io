@@ -197,16 +197,21 @@
     <script type = "text/javascript" language="javascript"> 
 
     $(document).ready(function() {
-
+     
+     $('#switch').show();
+     $('#switchoff').hide();
+     $('.butt1').hide();
+	   
+	    
       $("#switch").click(function(event){
-	           $('#switch').css("opacity",0)         
-	           $('#switchoff').css("opacity",1)   
-		   $('.butt1').css("opacity","1")
+	           $('#switch').hide()      
+	           $('#switchoff').show()   
+		   $('.butt1').show()
        });
       $("#switchoff").click(function(event){
-	           $('#switch').css("opacity",1)         
-	           $('#switchoff').css("opacity",0)   
-		   $('.butt1').css("opacity","0")
+	           $('#switch').show()
+	           $('#switchoff').hide()
+		   $('.butt1').hide()
        });
 	    
 	    
