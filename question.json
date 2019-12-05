@@ -875,7 +875,7 @@
 		"question_num": "QUESTION 95","type":"5",
 		"question": "A zone file contains the following lines: <br><br> $ORIGIN example.com <br> host2.example.org IN A 198.51.100.102 <br><br> and is included in the BIND configuration using this configuration stanza: <br><br> zone 'example.com' { <br> type master; <br> file 'db.example.com'; <br> };  <br><br> Which problem is contained in this configuration?",
 		"A": "The zone statement is the BIND configuration must contain the cross-zone-data yes; statement.",
-		"B": "The zone cannon contain records for a name which is outside the zone's hierarchy.",
+		"B": "The zone cannot contain records for a name which is outside the zone's hierarchy.",
 		"C": "The $ORIGIN declaration cannot be used in zone files that are included for a specific zone name in the BIND configuration.",
 		"D": "An A record cannot contain an IPv4 address because its value is supposed to be a reverse DNS name.",
 		"E": "Names of records in a zone file cannot be fully qualified domain names.",
