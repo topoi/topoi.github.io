@@ -181,10 +181,6 @@
      <input type = "button" class="butt1" id = "118" value="118"/>
      <input type = "button" class="butt1" id = "119" value="119"/> 
 	  
-	  
-	  
-	  
-	  
      <div id = "display" style = "background-color:#FFFFFF;"></div>
     <!--</body>--> 
     <title>LPIC2 Exam 2 NEU</title> 
@@ -196,14 +192,14 @@
     <!-- Script to get JSON file and display its content --> 
     <script type = "text/javascript" language="javascript"> 
 
-  
-	    
-      $(document).ready(function() {
+    $(document).ready(function() {
 
       $("#switch").click(function(event){
+	           alert("TEST")
 		   $('#butt1').css("opacity",1)
        });
-	      par=0
+	    
+      par=0
 	      $.getJSON('question.json', function(emp) {
 		  
 		 $('#display').html('<p><label id="qn"> ' + emp[par].question_num + '</label></br>');
@@ -232,11 +228,7 @@
 	      jump(par-1)
           });
 
-         
-
-
-	  
-	    $("#answer").click(function(event){
+          $("#answer").click(function(event){
 		    
 		     $.getJSON('question.json', function(emp) {
 			 if (emp[par].type == "1")
