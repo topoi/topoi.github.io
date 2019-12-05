@@ -627,7 +627,7 @@
 		"B": "allow",
 		"C": "http_allow",
 		"D": "permit",
-		"corr_answer": "#B"
+		"corr_answer": "#A"
 	},
 	{
 		"question_num": "QUESTION 70","type":"5",
