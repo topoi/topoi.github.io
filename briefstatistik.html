@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,Namen,Erwähnung,Sender,Empfänger
+0,Friedrich Wilhelm Hemprich,1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+1,Martin Hinrich Lichtenstein,1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+2,"Karl August, Fürst von Hardenberg",1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+3,Friedrich Wilhelm Hemprich,1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+4,Friedrich Wilhelm Hemprich,1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+5,Johann Ludwig Burkhardt,1820-04-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+6,"Georg, Graf von Cancrin",1829-02-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+7,"Karl, Freiherr vom Stein zum Altenstein",1829-02-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+8,"Karl, Freiherr vom Stein zum Altenstein",1829-02-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+9,"Karl, Freiherr vom Stein zum Altenstein",1829-02-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+10,Louis François Ramond de Carbonnières,1829-04-12,Alexander von Humboldt,Christian Gottfried Ehrenberg
+11,"Georg, Graf von Cancrin",1829-03-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+12,"Nikolaj I., Kaiser von Russland",1829-03-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+13,"Nikolaj I., Kaiser von Russland",1829-03-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+14,Carl Friedrich von Ledebour,1828-09-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+15,Dominique-François-Jean Arago,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+16,Georges Baron de Cuvier,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+17,Georges Baron de Cuvier,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+18,Etienne Geoffroy Saint-Hilaire,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+19,Dominique-François-Jean Arago,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+20,Dominique-François-Jean Arago,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+21,Etienne Geoffroy Saint-Hilaire,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+22,Georges Baron de Cuvier,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+23,Everard Baronet Home,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+24,Jean-Baptiste Bory de Saint-Vincent,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+25,Léon Dufour,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+26,Joseph Paul Gaimard,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+27,Julie Ehrenberg,1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+28,"Georg, Graf von Cancrin",1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+29,"Georg, Graf von Cancrin",1831-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+30,André Étienne d’Audebert de Férussac,1832-01-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+31,"Georg, Graf von Cancrin",1832-01-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+32,Christian Samuel Weiss,1832-01-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+33,Joseph Paul Gaimard,1831-06-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+34,"Karl, Freiherr vom Stein zum Altenstein",1833-08-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+35,Friedrich Wilhelm Hemprich,1833-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+36,"Karl, Freiherr vom Stein zum Altenstein",1833-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+37,"Klemens Wenzel Lothar, Fürst von Metternich",1833-08-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+38,"Karl, Freiherr vom Stein zum Altenstein",1833-08-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+39,"Klemens Wenzel Lothar, Fürst von Metternich",1833-08-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+40,"Karl, Freiherr vom Stein zum Altenstein",1833-09-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+41,Heinrich Theodor von Schön,1834-05-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+42,"Karl, Freiherr vom Stein zum Altenstein",1835-06-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+43,"Johann Jacob, Freiherr von Berzelius",1835-09-17,Alexander von Humboldt,Christian Gottfried Ehrenberg
+44,Julie Ehrenberg,1835-09-17,Alexander von Humboldt,Christian Gottfried Ehrenberg
+45,Christian Samuel Weiss,1835-09-17,Alexander von Humboldt,Christian Gottfried Ehrenberg
+46,Friedrich Strauß,1833-05-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+47,August Joseph Carl Corda,1836-07-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+48,"Alexandra, Kaiserin von Russland",1838-07-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+49,Léon de Laborde,1838-07-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+50,"Elisabeth Ludovika, Königin von Preußen",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+51,"Friederike Caroline Wilhelmine, Königin von Bayern",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+52,"Friedrich Wilhelm IV., König von Preußen",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+53,Ludwig von Meyerinck,1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+54,Ludwig von Meyerinck,1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+55,"Karl, Freiherr vom Stein zum Altenstein",1839-06-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+56,"Karl, Freiherr vom Stein zum Altenstein",1839-06-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+57,Leopold von Buch,1839-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+58,"Klemens Wenzel Lothar, Fürst von Metternich",1839-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+59,"Klemens Wenzel Lothar, Fürst von Metternich",1839-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+60,"Klemens Wenzel Lothar, Fürst von Metternich",1839-12-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+61,"Friedrich Wilhelm IV., König von Preußen",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+62,Ludwig von Meyerinck,1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+63,"Friedrich Wilhelm IV., König von Preußen",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+64,"Friederike Caroline Wilhelmine, Königin von Bayern",1839-08-20,Alexander von Humboldt,Christian Gottfried Ehrenberg
+65,Adalbert von Ladenberg,1840-06-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+66,Leopold von Buch,1840-06-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+67,Julie Ehrenberg,1840-10-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+68,Gustav Magnus,1839-12-09,Alexander von Humboldt,Christian Gottfried Ehrenberg
+69,Friedrich Eichhorn,1840-12-21,Alexander von Humboldt,Christian Gottfried Ehrenberg
+70,Friedrich August Staegemann,1840-12-21,Alexander von Humboldt,Christian Gottfried Ehrenberg
+71,"Friedrich Wilhelm IV., König von Preußen",1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+72,Friedrich Eichhorn,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+73,Adalbert von Ladenberg,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+74,Leopold Voß,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+75,"Karl, Freiherr vom Stein zum Altenstein",1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+76,Adalbert von Ladenberg,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+77,Leopold Voß,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+78,Martin Hinrich Lichtenstein,1840-10-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+79,Leopold von Buch,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+80,Georg Adolf Erman,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+81,Georg Adolf Erman,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+82,Jean Louis Rodolphe Agassiz,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+83,Leopold von Buch,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+84,Christian Samuel Weiss,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+85,Georg Adolf Erman,1844-08-10,Alexander von Humboldt,Christian Gottfried Ehrenberg
+86,Martin Hinrich Lichtenstein,1842-02-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+87,Peter Theophil Riess,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+88,Friedrich Eichhorn,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+89,Peter Theophil Riess,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+90,Peter Theophil Riess,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+91,Gottfried Wilhelm Freiherr von Leibniz,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+92,Friedrich Eichhorn,1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+93,"Friedrich Wilhelm IV., König von Preußen",1842-06-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+94,Susanne Schinkel,1842-01-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+95,"Friedrich Wilhelm IV., König von Preußen",1842-01-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+96,Friedrich Eichhorn,1842-01-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+97,Ludwig Friedrich Kaemtz,1842-01-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+98,"Wilhelm Friedrich Karl von Oranien-Nassau, Prinz der Niederlande",1843-10-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+99,"Friedrich Wilhelm IV., König von Preußen",1857-02-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+100,"Friedrich Wilhelm IV., König von Preußen",1857-02-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+101,Friedrich Wilhelm Hemprich,1856-08-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+102,August Neander,1844-01-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+103,Christian Samuel Weiss,1844-01-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+104,"Friedrich Wilhelm IV., König von Preußen",1844-01-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+105,Hermann Ludwig Leopold Gottlieb von Boyen,1844-01-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+106,"Friedrich Wilhelm IV., König von Preußen",1844-01-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+107,Johann Ludwig Burkhardt,1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+108,Ernst Heinrich Carl von Dechen,1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+109,"Friedrich Wilhelm IV., König von Preußen",1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+110,"Victoria I., Königin von Großbritannien",1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+111,"Friedrich Wilhelm IV., König von Preußen",1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+112,"Victoria I., Königin von Großbritannien",1845-07-19,Alexander von Humboldt,Christian Gottfried Ehrenberg
+113,Otto Wilhelm Hermann von Abich,1845-05-18,Alexander von Humboldt,Christian Gottfried Ehrenberg
+114,"Sergej Semenovič, Graf Uvarov",1845-05-18,Alexander von Humboldt,Christian Gottfried Ehrenberg
+115,"Friedrich Wilhelm IV., König von Preußen",1846-07-01,Alexander von Humboldt,Christian Gottfried Ehrenberg
+116,"Friedrich Wilhelm IV., König von Preußen",1846-07-01,Alexander von Humboldt,Christian Gottfried Ehrenberg
+117,Aleksandr Fedorovič Middendorf,1846-07-01,Alexander von Humboldt,Christian Gottfried Ehrenberg
+118,Gabriele von Bülow,1846-03-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+119,Julie Ehrenberg,1846-03-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+120,Leopold von Buch,1846-03-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+121,Johann Carl Freiesleben,1846-03-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+122,Johanna Bessel,1846-03-26,Alexander von Humboldt,Christian Gottfried Ehrenberg
+123,Julie Ehrenberg,1847-05-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+124,Gustav Magnus,1847-05-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+125,Christian Samuel Weiss,1847-05-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+126,Jean Louis Rodolphe Agassiz,1847-05-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+127,Leopold von Buch,1847-05-30,Alexander von Humboldt,Christian Gottfried Ehrenberg
+128,"Maximilian Joseph II., König von Bayern",1846-06-06,Alexander von Humboldt,Christian Gottfried Ehrenberg
+129,Julie Ehrenberg,1846-06-06,Alexander von Humboldt,Christian Gottfried Ehrenberg
+130,"Maximilian Joseph II., König von Bayern",1846-06-06,Alexander von Humboldt,Christian Gottfried Ehrenberg
+131,Leopold von Buch,1847-01-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+132,Leopold von Buch,1847-01-16,"Encke, Johann Franz",Christian Gottfried Ehrenberg
+133,Johann Gotthelf Fischer von Waldheim,1847-01-16,"Encke, Johann Franz",Christian Gottfried Ehrenberg
+134,Johann Gotthelf Fischer von Waldheim,1847-01-16,"Encke, Johann Franz",Christian Gottfried Ehrenberg
+135,"Friedrich Wilhelm IV., König von Preußen",1847-06-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+136,"Friedrich Wilhelm IV., König von Preußen",1847-06-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+137,"Friedrich Wilhelm IV., König von Preußen",1847-06-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+138,"Friedrich Wilhelm IV., König von Preußen",1847-06-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+139,"Christian Carl Josias, Freiherr von Bunsen",1847-06-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+140,"Friedrich Wilhelm IV., König von Preußen",1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+141,August Böckh,1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+142,Leopold von Buch,1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+143,Georg Adolf Erman,1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+144,August Böckh,1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+145,Friedrich Adolf Märcker,1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+146,"Friedrich Wilhelm IV., König von Preußen",1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+147,"Friedrich Wilhelm IV., König von Preußen",1848-05-31,Alexander von Humboldt,Christian Gottfried Ehrenberg
+148,"Elisabeth Ludovika, Königin von Preußen",1848-07-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+149,Julie Ehrenberg,1848-07-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+150,Antoine Jean Letronne,1848-07-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+151,Joseph Dalton Hooker,1848-03-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+152,Joseph Dalton Hooker,1848-03-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+153,Carl Sigismund Kunth,1848-03-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+154,"Friedrich Wilhelm IV., König von Preußen",1849-05-09,Alexander von Humboldt,Christian Gottfried Ehrenberg
+155,Charles Darwin,1848-09-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+156,"Friedrich Wilhelm IV., König von Preußen",1848-09-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+157,Mary Somerville,1848-09-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+158,Gotthilf Schwartze,1848-09-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+159,Johann Friedrich Cotta von Cottendorf,1848-09-07,Alexander von Humboldt,Christian Gottfried Ehrenberg
+160,Charles Darwin,1848-09-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+161,Urbain Jean Joseph Leverrier,1850-05-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+162,Honoré Théodoric Paul Joseph d’ Albert de Luynes,1850-05-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+163,Désiré Raoul Rochette,1850-05-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+164,"Friedrich Wilhelm IV., König von Preußen",1850-05-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+165,"Friedrich Wilhelm IV., König von Preußen",1848-01-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+166,"Friedrich Wilhelm IV., König von Preußen",1848-01-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+167,"Wilhelm I., Deutscher Kaiser und König von Preußen",1848-01-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+168,"Friedrich Wilhelm IV., König von Preußen",1848-01-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+169,Joseph Louis Gay-Lussac,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+170,Simeon Denis Poisson,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+171,Johann Georg Forchhammer,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+172,Karl Gustav Bischof,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+173,Karl Gustav Bischof,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+174,Dominique-François-Jean Arago,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+175,Hervé Auguste Étienne Albans Faye,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+176,"Napoléon Bonaparte, Kaiser der Franzosen",1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+177,Joseph Dalton Hooker,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+178,Joseph Dalton Hooker,1848-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+179,Juan Manuel Fernández Pacheco,1849-08-15,Alexander von Humboldt,Christian Gottfried Ehrenberg
+180,"Friedrich Wilhelm IV., König von Preußen",1849-08-23,Alexander von Humboldt,Christian Gottfried Ehrenberg
+181,Leopold von Buch,1850-05-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+182,Joseph Louis Gay-Lussac,1850-05-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+183,Jean Henri Samuel Formey,1850-05-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+184,Leopold von Buch,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+185,Gottfried Wilhelm Freiherr von Leibniz,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+186,August Böckh,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+187,Leopold von Buch,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+188,Urbain Jean Joseph Leverrier,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+189,Gottfried Wilhelm Freiherr von Leibniz,1850-05-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+190,Samuel Thomas von Soemmerring,1850-10-17,Alexander von Humboldt,Christian Gottfried Ehrenberg
+191,Marcus Carsten Nicolaus von Niebuhr,1850-10-18,Alexander von Humboldt,Christian Gottfried Ehrenberg
+192,Carl Sigismund Kunth,1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+193,"Elisabeth Ludovika, Königin von Preußen",1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+194,"Auguste de Beauharnais, Herzogin von Leuchtenberg",1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+195,"Friedrich Wilhelm IV., König von Preußen",1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+196,"Nikolaj I., Kaiser von Russland",1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+197,"Elisabeth Ludovika, Königin von Preußen",1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+198,Alexander Braun,1851-05-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+199,Georg Friedrich Creuzer,1850-03-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+200,Carl Sigismund Kunth,1850-03-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+201,Joseph Freiherr von Hammer-Purgstall,1850-03-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+202,Johann Carl Eduard Buschmann,1851-04-09,Alexander von Humboldt,Christian Gottfried Ehrenberg
+203,Carl Vogel,1856-05-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+204,Carl Theodor von Siebold,1852-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+205,Alexander Braun,1852-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+206,Leopold von Buch,1852-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+207,Leopold von Buch,1852-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+208,Carl Theodor von Siebold,1852-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+209,Friederike Karoline Ehrenberg,1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+210,Thomas Babington Macaulay,1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+211,"Friedrich Wilhelm IV., König von Preußen",1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+212,Leopold von Buch,1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+213,Christian Gottfried Daniel Nees von Esenbeck,1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+214,Christian Gottfried Daniel Nees von Esenbeck,1852-09-29,Alexander von Humboldt,Christian Gottfried Ehrenberg
+215,Christian Samuel Weiss,1853-05-05,Alexander von Humboldt,Christian Gottfried Ehrenberg
+216,"Ernest de Cadoine, marquis de Gabriac",1853-07-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+217,Friederike Karoline Ehrenberg,1853-07-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+218,Adolf Theodor Kupffer,1853-07-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+219,Hermann Burmeister,1856-09-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+220,Hermann Burmeister,1856-09-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+221,"Elisabeth Ludovika, Königin von Preußen",1856-09-25,Alexander von Humboldt,Christian Gottfried Ehrenberg
+222,"Friedrich Wilhelm IV., König von Preußen",1854-11-13,Alexander von Humboldt,Christian Gottfried Ehrenberg
+223,Auguste Édouard Mariette,1855-12-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+224,Heinrich Ferdinand Karl Brugsch,1855-12-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+225,Franz Liszt,1855-12-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+226,Auguste Édouard Mariette,1855-12-03,Alexander von Humboldt,Christian Gottfried Ehrenberg
+227,"Friedrich Wilhelm IV., König von Preußen",1854-11-24,Alexander von Humboldt,Christian Gottfried Ehrenberg
+228,Hermann Burmeister,1856-03-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+229,Joseph Arthur de Gobineau,1856-03-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+230,Georg Carl Berendt,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+231,Hermann Burmeister,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+232,Hermann Burmeister,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+233,Joseph Paul Gaimard,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+234,"Napoleon I., Kaiser der Franzosen",1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+235,Charles Lucien Jules Laurent Bonaparte,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+236,"Napoléon Eugène Louis Jean Joseph Bonaparte, Kronprinz
+                            von Frankreich",1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+237,Carl Vogel,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+238,Eduard Vogel,1856-05-27,Alexander von Humboldt,Christian Gottfried Ehrenberg
+239,Jean-Baptiste Bory de Saint-Vincent,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+240,Aimé Bonpland,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+241,Hermann Burmeister,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+242,Alexander Braun,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+243,Léonce Elie de Beaumont,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+244,Dominique-François-Jean Arago,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+245,Léonce Elie de Beaumont,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+246,Leopold von Buch,1856-05-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+247,Christian Samuel Weiss,1856-12-09,Alexander von Humboldt,Christian Gottfried Ehrenberg
+248,Gustav Magnus,1858-01-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+249,Alexander Braun,1858-01-08,Alexander von Humboldt,Christian Gottfried Ehrenberg
+250,"Friedrich Wilhelm IV., König von Preußen",1858-01-01,Alexander von Humboldt,Christian Gottfried Ehrenberg
+251,Johann Carl Eduard Buschmann,1857-11-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+252,Jacob Grimm,1857-11-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+253,Wilhelm von Humboldt,1857-11-14,Alexander von Humboldt,Christian Gottfried Ehrenberg
+254,"Christian Carl Josias, Freiherr von Bunsen",1857-09-22,Alexander von Humboldt,Christian Gottfried Ehrenberg
+255,Joseph Freiherr von Hammer-Purgstall,1857-04-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+256,Carl von Scherzer,1857-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+257,Carl von Scherzer,1857-01-28,Alexander von Humboldt,Christian Gottfried Ehrenberg
+258,Hermann Burmeister,1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+259,"Friedrich Wilhelm IV., König von Preußen",1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+260,Hermann Burmeister,1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+261,Aimé Bonpland,1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+262,Aimé Bonpland,1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+263,Aimé Bonpland,1857-10-02,Alexander von Humboldt,Christian Gottfried Ehrenberg
+264,Gajus Secundus Plinius,1859-04-16,Alexander von Humboldt,Christian Gottfried Ehrenberg
+265,Dominique-François-Jean Arago,1848-10-11,Alexander von Humboldt,Christian Gottfried Ehrenberg
+266,Carl Bernhard von Cotta,1848-10-11,Alexander von Humboldt,Christian Gottfried Ehrenberg
+267,Carl Bernhard von Cotta,1848-10-11,Alexander von Humboldt,Christian Gottfried Ehrenberg
+268,Rudolf Amandus Philippi,1848-09-04,Christian Gottfried Ehrenberg,Alexander von Humboldt
+269,Friedrich August Marschall von Bieberstein,1848-10-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+270,Karl Ludwig Willdenow,1848-10-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+271,Carl Heinrich Emil Koch,1848-10-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+272,Carl Heinrich Emil Koch,1848-10-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+273,Carl Heinrich Emil Koch,1848-10-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+274,Leopold Voß,1854-12-24,Christian Gottfried Ehrenberg,Alexander von Humboldt
+275,"Friedrich Wilhelm IV., König von Preußen",1854-12-24,Christian Gottfried Ehrenberg,Alexander von Humboldt
+276,"Charles, 1st Baronet and Sir Lyell",1858-06-21,Christian Gottfried Ehrenberg,Alexander von Humboldt
+277,Ernst Reinhold Hofmann,1858-06-21,Christian Gottfried Ehrenberg,Alexander von Humboldt
+278,"Charles, 1st Baronet and Sir Lyell",1858-06-21,Christian Gottfried Ehrenberg,Alexander von Humboldt
+279,Georges Baron de Cuvier,1832-04-05,Christian Gottfried Ehrenberg,Alexander von Humboldt
+280,Charles Heideloff,1832-04-05,Christian Gottfried Ehrenberg,Alexander von Humboldt
+281,Georges Baron de Cuvier,1832-04-05,Christian Gottfried Ehrenberg,Alexander von Humboldt
+282,Leopold von Buch,1840-03-24,Christian Gottfried Ehrenberg,Alexander von Humboldt
+283,Friederike Karoline Ehrenberg,1852-05-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+284,Charles Darwin,1858-03-25,Christian Gottfried Ehrenberg,Alexander von Humboldt
+285,Hermann Schlagintweit-Sakünlünski,1858-03-25,Christian Gottfried Ehrenberg,Alexander von Humboldt
+286,Joseph Dalton Hooker,1856-08-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+287,Carl Theodor von Siebold,1856-08-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+288,Rudolf Leuckart,1856-08-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+289,Carl Theodor von Siebold,1856-08-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+290,Rudolf Leuckart,1856-08-03,Christian Gottfried Ehrenberg,Alexander von Humboldt
+291,"Victoria I., Königin von Großbritannien",1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+292,"Victoria I., Königin von Großbritannien",1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+293,Julie Ehrenberg,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+294,Urbain Jean Joseph Leverrier,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+295,Henri Milne-Edwards,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+296,Henri Milne-Edwards,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+297,Friedrich Georg Wilhelm von Struve,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+298,Urbain Jean Joseph Leverrier,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+299,"Louis-Philipp, König von Frankreich",1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+300,"Louis-Philipp, König von Frankreich",1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+301,Henri Milne-Edwards,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+302,Friedrich Georg Wilhelm von Struve,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+303,Friedrich Georg Wilhelm von Struve,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+304,Julie Ehrenberg,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+305,"Louis-Philipp, König von Frankreich",1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+306,Dominique-François-Jean Arago,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+307,Jean-Baptiste Bory de Saint-Vincent,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+308,Jean Louis Armand de Quatrefages de Bréau,1847-08-06,Christian Gottfried Ehrenberg,Alexander von Humboldt
+309,Karl Ludwig Willdenow,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+310,Christian Hendrik Persoon,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+311,Christian Hendrik Persoon,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+312,Albrecht Wilhelm Roth,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+313,Karl Ludwig Willdenow,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+314,Christian Gottfried Daniel Nees von Esenbeck,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+315,Karl Gustav Bischof,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+316,Christian Gottfried Daniel Nees von Esenbeck,1828-04-19,Christian Gottfried Ehrenberg,Alexander von Humboldt
+317,Antony van Leeuwenhoek,1837-09-09,Christian Gottfried Ehrenberg,Alexander von Humboldt
+318,Christian Hendrik Persoon,1837-09-09,Christian Gottfried Ehrenberg,Alexander von Humboldt
+319,Christian Hendrik Persoon,1837-09-09,Christian Gottfried Ehrenberg,Alexander von Humboldt
+320,Alcide-Charles-Victor Dessalines d’ Orbigny,1839-02-20,Christian Gottfried Ehrenberg,Alexander von Humboldt
+321,Joseph Dalton Hooker,1844-05-13,Christian Gottfried Ehrenberg,Alexander von Humboldt
+322,Joseph Dalton Hooker,1844-05-13,Christian Gottfried Ehrenberg,Alexander von Humboldt
+323,Charles Darwin,1844-05-13,Christian Gottfried Ehrenberg,Alexander von Humboldt
+324,Joseph Dalton Hooker,1844-05-13,Christian Gottfried Ehrenberg,Alexander von Humboldt
+325,Charles Darwin,1844-05-14,Christian Gottfried Ehrenberg,Alexander von Humboldt
+326,Joseph Dalton Hooker,1844-05-14,Christian Gottfried Ehrenberg,Alexander von Humboldt
+327,Charles Darwin,1844-05-22,Christian Gottfried Ehrenberg,Alexander von Humboldt
+328,Joseph Dalton Hooker,1844-05-22,Christian Gottfried Ehrenberg,Alexander von Humboldt
+329,Charles Darwin,1844-07-16,Christian Gottfried Ehrenberg,Alexander von Humboldt
+330,Charles Darwin,1844-07-16,Christian Gottfried Ehrenberg,Alexander von Humboldt
+331,Charles Darwin,1844-07-16,Christian Gottfried Ehrenberg,Alexander von Humboldt
+332,Charles Darwin,1844-07-16,Christian Gottfried Ehrenberg,Alexander von Humboldt
+333,Franz Ferdinand Schulze,1844-12-07,Christian Gottfried Ehrenberg,Alexander von Humboldt
+334,Carl Richard Lepsius,1844-12-21,Christian Gottfried Ehrenberg,Alexander von Humboldt
+335,François Jules Pictet,1846-06-08,Christian Gottfried Ehrenberg,Alexander von Humboldt
+336,François Jules Pictet,1846-06-08,Christian Gottfried Ehrenberg,Alexander von Humboldt
+337,Leopold von Buch,1847-02-27,Christian Gottfried Ehrenberg,Alexander von Humboldt
+338,Leopold von Buch,1847-02-27,Christian Gottfried Ehrenberg,Alexander von Humboldt
+339,Julie Ehrenberg,1847-02-27,Christian Gottfried Ehrenberg,Alexander von Humboldt
+340,John Charles Frémont,1849-02-10,Christian Gottfried Ehrenberg,Alexander von Humboldt
+341,John Charles Frémont,1849-02-10,Christian Gottfried Ehrenberg,Alexander von Humboldt
+342,John Charles Frémont,1849-02-10,Christian Gottfried Ehrenberg,Alexander von Humboldt
+343,Johann Carl Eduard Buschmann,1849-12-24,Christian Gottfried Ehrenberg,Alexander von Humboldt
+344,Leopold Voß,1853-06-07,Christian Gottfried Ehrenberg,Alexander von Humboldt
+345,Leopold Voß,1853-06-07,Christian Gottfried Ehrenberg,Alexander von Humboldt
+346,Leopold Voß,1853-06-07,Christian Gottfried Ehrenberg,Alexander von Humboldt
+347,Jean Louis Rodolphe Agassiz,1857-03-10,Christian Gottfried Ehrenberg,Alexander von Humboldt
+348,Jean-Victoire Audouin,1858-12-28,Christian Gottfried Ehrenberg,Alexander von Humboldt
+349,"Karl Alexander Anselm, Freiherr von Hügel",1858-12-28,Christian Gottfried Ehrenberg,Alexander von Humboldt
+350,Hermann Schlagintweit-Sakünlünski,1849-10-25,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+351,Adolph von Schlagintweit,1849-10-25,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+352,Hermann Schlagintweit-Sakünlünski,1849-10-25,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+353,Adolph von Schlagintweit,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+354,Deodat Gratet de Dolomieu,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+355,Leopold von Buch,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+356,Leopold von Buch,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+357,Leopold von Buch,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+358,Jean-Baptiste-Armand-Louis-Léonce Élie de Beaumont,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+359,Jean-Baptiste-Armand-Louis-Léonce Élie de Beaumont,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+360,Karl Gustav Bischof,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+361,Jean-Baptiste-Armand-Louis-Léonce Élie de Beaumont,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+362,Jean-Baptiste-Armand-Louis-Léonce Élie de Beaumont,1851-12-18,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+363,Adolph von Schlagintweit,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+364,Karl Gustav Bischof,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+365,Joseph Louis Gay-Lussac,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+366,Karl Friedrich Rammelsberg,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+367,Jean-Baptiste-Armand-Louis-Léonce Élie de Beaumont,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+368,Karl Friedrich Rammelsberg,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+369,Karl Gustav Bischof,1852-06-02,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+370,Hermann Schlagintweit-Sakünlünski,1852-03-19,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+371,Adolph von Schlagintweit,1852-03-19,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+372,Adolph von Schlagintweit,1852-03-19,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+373,"Friedrich Wilhelm IV., König von Preußen",1852-03-19,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+374,Hermann Schlagintweit-Sakünlünski,1852-08-01,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+375,Hermann Schlagintweit-Sakünlünski,1852-08-01,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+376,Adolph von Schlagintweit,1852-08-01,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+377,"Friedrich Wilhelm IV., König von Preußen",1852-08-01,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+378,Hermann Schlagintweit-Sakünlünski,1852-10-30,"Humboldt, Alexander von (1769-1859)","Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)"
+379,Benito R. de Monfort,1852-10-30,"Humboldt, Alexander von (1769-1859)","Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)"
+380,François-Marie-Napoléon Moigno,1852-10-30,"Humboldt, Alexander von (1769-1859)","Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)"
+381,Adolph von Schlagintweit,1852-10-30,"Humboldt, Alexander von (1769-1859)","Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)"
+382,Adolph von Schlagintweit,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+383,Hermann Schlagintweit-Sakünlünski,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+384,Adolph von Schlagintweit,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+385,"Friedrich Wilhelm IV., König von Preußen",1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+386,"Friedrich Wilhelm IV., König von Preußen",1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+387,Carl Richard Lepsius,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+388,Carl Richard Lepsius,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+389,Friedrich Eichhorn,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+390,Adolph von Schlagintweit,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+391,Hermann Schlagintweit-Sakünlünski,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+392,"Friedrich Wilhelm IV., König von Preußen",1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+393,"Friedrich Wilhelm IV., König von Preußen",1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+394,Ignaz Franz Maria von Olfers,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+395,Ignaz Franz Maria von Olfers,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+396,Ignaz Franz Maria von Olfers,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+397,Hermann Schlagintweit-Sakünlünski,1854-11-10,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+398,Hermann Schlagintweit-Sakünlünski,1854-12-14,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+399,"Friedrich Wilhelm IV., König von Preußen",1854-12-14,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+400,Adolph von Schlagintweit,1854-12-14,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+401,"Friedrich Wilhelm IV., König von Preußen",1854-12-14,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+402,"Friedrich Wilhelm IV., König von Preußen",1854-12-14,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+403,Hermann Schlagintweit-Sakünlünski,1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+404,"Friedrich Wilhelm IV., König von Preußen",1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+405,"Friedrich Wilhelm IV., König von Preußen",1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+406,"Friedrich Wilhelm IV., König von Preußen",1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+407,Archibald Campbell,1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+408,"Friedrich Wilhelm IV., König von Preußen",1855-04-24,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+409,Adolph von Schlagintweit,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+410,Hermann Schlagintweit-Sakünlünski,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+411,Hermann Schlagintweit-Sakünlünski,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+412,Christian Samuel Weiss,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+413,Friedrich Carl von Savigny,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+414,Konrad Adolf von Malzen,1855-05-07,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+415,Adolph von Schlagintweit,1855-12-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+416,"Friedrich Wilhelm IV., König von Preußen",1855-12-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+417,"Friedrich Wilhelm IV., König von Preußen",1855-12-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+418,Hermann Schlagintweit-Sakünlünski,1855-12-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+419,Adolph von Schlagintweit,1855-12-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+420,Adolph von Schlagintweit,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+421,Adolph von Schlagintweit,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+422,"Friedrich Wilhelm IV., König von Preußen",1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+423,Adolph von Schlagintweit,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+424,Adolph von Schlagintweit,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+425,Hermann Schlagintweit-Sakünlünski,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+426,Emil Schlagintweit,1856-06-15,"Schlagintweit, Adolph von (1829-1857)","Humboldt, Alexander von (1769-1859)"
+427,Hermann Schlagintweit-Sakünlünski,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+428,Adolph von Schlagintweit,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+429,Adolph von Schlagintweit,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+430,"Friedrich Wilhelm IV., König von Preußen",1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+431,"Friedrich Wilhelm IV., König von Preußen",1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+432,Emil Schlagintweit,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+433,Emil Schlagintweit,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+434,Hermann Schlagintweit-Sakünlünski,1856-09-26,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+435,Hermann Schlagintweit-Sakünlünski,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+436,Emil Schlagintweit,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+437,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+438,Hermann Schlagintweit-Sakünlünski,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+439,Adolph von Schlagintweit,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+440,Adolph von Schlagintweit,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+441,Emil Schlagintweit,1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+442,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+443,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+444,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+445,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+446,"Friedrich Wilhelm IV., König von Preußen",1856-12-11,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+447,Hermann Schlagintweit-Sakünlünski,1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+448,Adolph von Schlagintweit,1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+449,Emil Schlagintweit,1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+450,"Friedrich Wilhelm IV., König von Preußen",1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+451,Emil Schlagintweit,1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+452,Ignaz Franz Maria von Olfers,1856-12-27,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+453,Hermann Schlagintweit-Sakünlünski,1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+454,"Friedrich Wilhelm IV., König von Preußen",1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+455,Hermann Schlagintweit-Sakünlünski,1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+456,Hermann Schlagintweit-Sakünlünski,1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+457,"Friedrich Wilhelm IV., König von Preußen",1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+458,"Friedrich Wilhelm IV., König von Preußen",1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+459,"Friedrich Wilhelm IV., König von Preußen",1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+460,"Friedrich Wilhelm IV., König von Preußen",1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+461,Adolph von Schlagintweit,1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+462,Adolph von Schlagintweit,1857-03-07,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+463,Hermann Schlagintweit-Sakünlünski,1857-06-08,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+464,Adolph von Schlagintweit,1857-06-08,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+465,A. Käcke,1857-06-08,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+466,Hermann Schlagintweit-Sakünlünski,1857-06-17,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+467,Hermann Schlagintweit-Sakünlünski,1858-01-04,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+468,Carl Richard Lepsius,1858-02-12,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+469,Carl Richard Lepsius,1858-02-12,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+470,Hermann Schlagintweit-Sakünlünski,1858-02-12,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+471,Hermann Schlagintweit-Sakünlünski,1858-02-12,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+472,Ernst Emil Illaire,1858-04-14,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+473,Adolph von Schlagintweit,1858-04-14,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+474,"Augusta, Deutsche Kaiserin und Königin von Preußen",1858-04-14,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+475,"Leopold I., König der Belgier Belgien",1858-05-19,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+476,Gottlieb Christoph Harless,1858-05-19,"Schlagintweit, Robert, Freiherr von
+                        (1833-1885)","Humboldt, Alexander von (1769-1859)"
+477,Hermann Schlagintweit-Sakünlünski,1858-07-21,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+478,Adolph von Schlagintweit,1858-07-21,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+479,Adolph von Schlagintweit,1858-07-21,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+480,Adolph von Schlagintweit,1858-07-21,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+481,Hermann Schlagintweit-Sakünlünski,1858-07-22,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+482,Adolph von Schlagintweit,1858-07-22,"Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)","Humboldt, Alexander von (1769-1859)"
+483,Hermann Schlagintweit-Sakünlünski,1858-10-04,"Humboldt, Alexander von (1769-1859)","Schlagintweit, Robert, Freiherr von
+                        (1833-1885)"
+484,"Friedrich Wilhelm IV., König von Preußen",1858-10-04,"Humboldt, Alexander von (1769-1859)","Schlagintweit, Robert, Freiherr von
+                        (1833-1885)"
+485,Hermann Schlagintweit-Sakünlünski,1859-04-02,"Humboldt, Alexander von (1769-1859)","Schlagintweit-Sakünlünski, Hermann
+                        (1826-1882)"
+</div>
+    </body>
+</html>
