@@ -1,0 +1,2916 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>PivotTable.js</title>
+
+        <!-- external libs from cdnjs -->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/d3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/c3_renderers.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+
+        <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+            .c3-line, .c3-focused {stroke-width: 3px !important;}
+            .c3-bar {stroke: white !important; stroke-width: 1;}
+            .c3 text { font-size: 12px; color: grey;}
+            .tick line {stroke: white;}
+            .c3-axis path {stroke: grey;}
+            .c3-circle { opacity: 1 !important; }
+            .c3-xgrid-focus {visibility: hidden !important;}
+        </style>
+    </head>
+    <body>
+        <script type="text/javascript">
+            $(function(){
+                if(window.location != window.parent.location)
+                    $("<a>", {target:"_blank", href:""})
+                        .text("[pop out]").prependTo($("body"));
+
+                $("#output").pivotUI(
+                    $.csv.toArrays($("#output").text()),
+                    $.extend({
+                        renderers: $.extend(
+                            $.pivotUtilities.renderers,
+                            $.pivotUtilities.c3_renderers,
+                            $.pivotUtilities.d3_renderers,
+                            $.pivotUtilities.export_renderers
+                            ),
+                        hiddenAttributes: [""]
+                    }, {})
+                ).show();
+             });
+        </script>
+        <div id="output" style="display: none;">,name,folio,date,person
+0,Šartašsee,3v,1829-06-06,humboldt
+1,Pyšma,3v,1829-06-06,humboldt
+2,Jekaterinburg,3v,1829-06-06,humboldt
+3,Berezovskij,3v,1829-06-06,humboldt
+4,Blagodat',3v,1829-06-06,humboldt
+5,Memel,5r,1829-06-15,humboldt
+6,Čusovaja,5r,1829-04-20,humboldt
+7,Čusovaja,5r,1829-04-20,humboldt
+8,Berezovskij,5v,1829-04-20,humboldt
+9,Berlin,7r,1829-06-05,humboldt
+10,Malbork,7r,1829-04-12,humboldt
+11,Kaliningrad,7r,1829-04-15,humboldt
+12,Lesnoi,7r,1829-04-16,humboldt
+13,Memel,7r,1829-04-18,humboldt
+14,Kaliningrad,7r,1829-04-18,humboldt
+15,Lesnoi,7r,1829-04-18,humboldt
+16,Omsk,7r,1829-04-18,humboldt
+17,Irtyš (Fluss),7r,1829-04-18,humboldt
+18,Indus,7r,1829-04-18,humboldt
+19,Saissansee,7r,1829-04-18,humboldt
+20,Balchaš-See,7r,1829-04-18,humboldt
+21,Aralsee,7r,1829-04-18,humboldt
+22,Aralsee,7r,1829-04-18,humboldt
+23,Tobol,7r,1829-04-18,humboldt
+24,Ischim (Fluss),7r,1829-04-18,humboldt
+25,Taschkent,7r,1829-04-18,humboldt
+26,Konstanz,8r,1829-08-18,humboldt
+27,Omsk,8v,1829-08-18,humboldt
+28,Kušva,9r,1829-08-27,humboldt
+29,Kujbyšev,9r,1829-08-27,humboldt
+30,Berlin,15r,1829-12-06,humboldt
+31,Tartu,15r,1829-12-06,humboldt
+32,Sol'-Iletsk,15v,1829-08-18,humboldt
+33,Čusovaja,15v,1829-08-18,humboldt
+34,Semej,18r,1829-08-18,humboldt
+35,Irtyš (Fluss),18r,1829-08-18,humboldt
+36,Semijarka,18r,1829-08-18,humboldt
+37,Kasachensteppe,18r,1829-08-18,humboldt
+38,Kušva,20v,1829-08-18,humboldt
+39,Blagodat',20v,1829-08-18,humboldt
+40,Kušva,20v,1829-08-18,humboldt
+41,Kušva,20v,1829-08-18,humboldt
+42,Denežkin Kamen',23v,1829-08-18,humboldt
+43,Denežkin Kamen',23v,1829-08-18,humboldt
+44,Blagodat',24r,1829-08-18,humboldt
+45,Kušva,24r,1829-08-18,humboldt
+46,Kazan,24r,1829-08-18,humboldt
+47,Kušva,24r,1829-08-18,humboldt
+48,Berlin,32r,1829-07-02,humboldt
+49,Berlin,35r,1829-07-02,humboldt
+50,Kušva,35r,1829-07-02,humboldt
+51,Berlin,38r,1829-07-02,humboldt
+52,Barnaul,43r,1829-07-02,humboldt
+53,Konžakovskij Kamen',51r,1829-07-02,humboldt
+54,Kušva,52v,1829-07-02,humboldt
+55,Kušva,53r,1829-07-02,humboldt
+56,Kušva,53r,1829-07-02,humboldt
+57,Blagodat',53v,1829-07-02,humboldt
+58,Blagodat',53v,1829-07-02,humboldt
+59,Blagodat',53v,1829-07-02,humboldt
+60,Kušva,53v,1829-07-02,humboldt
+61,Blagodat',53v,1829-07-02,humboldt
+62,Kušva,53v,1829-07-02,humboldt
+63,Konžakovskij Kamen',54v,1829-07-02,humboldt
+64,Konžakovskij Kamen',54v,1829-07-02,humboldt
+65,Konžakovskij Kamen',54v,1829-07-02,humboldt
+66,Konžakovskij Kamen',54v,1829-07-02,humboldt
+67,Oka,58v,1829-07-02,humboldt
+68,Oka,58v,1829-07-02,humboldt
+69,Oka,58v,1829-07-02,humboldt
+70,Oka,58v,1829-07-02,humboldt
+71,Taliča (Pervoural’sk),62r,1829-07-02,humboldt
+72,Taliča,62r,1829-07-02,humboldt
+73,Taliča,62r,1829-07-02,humboldt
+74,Berlin,65r,1829-07-02,humboldt
+75,Mitau,65r,1829-07-02,humboldt
+76,Mitau,65r,1829-07-02,humboldt
+77,Mitau,65r,1829-07-02,humboldt
+78,Blagodat',66r,1829-07-02,humboldt
+79,Vladimir,66r,1829-07-02,humboldt
+80,Tibet,67r,1829-07-02,humboldt
+81,Tibet,67r,1829-07-02,humboldt
+82,Tibet,67r,1829-07-02,humboldt
+83,Don,67r,1829-07-02,humboldt
+84,Semijarka,67r,1829-07-02,humboldt
+85,Zhelezinka,67r,1829-07-02,humboldt
+86,Izylbaš,67r,1829-07-02,humboldt
+87,Glininoi,67r,1829-07-02,humboldt
+88,Kyštym,68r,1829-07-02,humboldt
+89,Zlatoust,68r,1829-07-02,humboldt
+90,Kyštym,68r,1829-07-02,humboldt
+91,Ulutau,68r,1829-07-02,humboldt
+92,Sol'-Iletsk,68r,1829-07-02,humboldt
+93,Kyštym,68r,1829-07-02,humboldt
+94,Saratov,68r,1829-07-02,humboldt
+95,Sarepta,68r,1829-07-02,humboldt
+96,Elton-See,68r,1829-07-02,humboldt
+97,Astrachan (Stadt),68r,1829-07-02,humboldt
+98,Wolga,68r,1829-07-02,humboldt
+99,Astrachan (Stadt),68r,1829-07-02,humboldt
+100,Elbrus,68r,1829-07-02,humboldt
+101,Barnaul,68v,1829-07-02,humboldt
+102,Bordeaux,70r,1829-07-25,humboldt
+103,Bordeaux,70r,1829-07-25,humboldt
+104,Gironde (Département),70r,1829-07-25,humboldt
+105,Poitiers,70r,1829-07-25,humboldt
+106,Bordeaux,70r,1829-07-29,humboldt
+107,Soussans,70r,1829-07-29,humboldt
+108,Blanquefort,70r,1829-07-29,humboldt
+109,Wolga,70r,1829-07-29,humboldt
+110,Kaspisches Meer,70r,1829-07-29,humboldt
+111,Astrachan (Stadt),70r,1829-07-29,humboldt
+112,Ural (Fluss),70r,1829-07-29,humboldt
+113,Orenburg (Stadt),70r,1829-07-29,humboldt
+114,Oral,70r,1829-07-29,humboldt
+115,Atyrau,70r,1829-07-29,humboldt
+116,Wolga,70r,1829-07-29,humboldt
+117,Orenburg (Stadt),70r,1829-07-29,humboldt
+118,Oral,70r,1829-07-29,humboldt
+119,Atyrau,70r,1829-07-29,humboldt
+120,Astrachan (Stadt),70r,1829-07-29,humboldt
+121,Kaspisches Meer,70r,1829-07-29,humboldt
+122,Astrachan (Stadt),70r,1829-07-29,humboldt
+123,Voronež,70r,1829-07-29,humboldt
+124,Astrachan (Stadt),70r,1829-07-29,humboldt
+125,Voronež,70r,1829-07-29,humboldt
+126,Voronež,70r,1829-07-29,humboldt
+127,Voronež,70r,1829-07-29,humboldt
+128,Tula (Russland),70r,1829-07-29,humboldt
+129,Tula (Russland),70r,1829-07-29,humboldt
+130,Tula (Russland),70r,1829-07-29,humboldt
+131,Moskau,70r,1829-07-29,humboldt
+132,Miass (Fluss),71r,1828-05-25,humboldt
+133,Miass (Stadt),71r,1828-05-25,humboldt
+134,Miass (Fluss),71r,1828-05-25,humboldt
+135,Miass (Stadt),71r,1828-05-25,humboldt
+136,Miass (Fluss),71r,1828-05-25,humboldt
+137,Miass (Stadt),71r,1828-05-25,humboldt
+138,Iremel' (Fluss),71r,1828-05-25,humboldt
+139,Miass (Fluss),71r,1828-05-25,humboldt
+140,Miass (Stadt),71r,1828-05-25,humboldt
+141,Miass (Stadt),71r,1828-05-25,humboldt
+142,Ural (Gebirge),71r,1828-05-25,humboldt
+143,Miass (Stadt),71r,1828-05-25,humboldt
+144,Miass (Stadt),71r,1828-05-25,humboldt
+145,Ural (Gebirge),71r,1828-05-25,humboldt
+146,Miass (Stadt),71r,1828-05-25,humboldt
+147,Miass (Stadt),71r,1829-08-13,humboldt
+148,Berezovskij,71r,1829-08-13,humboldt
+149,Miass (Stadt),71r,1829-08-13,humboldt
+150,Berezovskij,71r,1829-08-13,humboldt
+151,Miass (Stadt),71r,1829-08-13,humboldt
+152,Berezovskij,71r,1829-08-13,humboldt
+153,Pyšma,71r,1829-08-13,humboldt
+154,Miass (Stadt),71r,1829-08-13,humboldt
+155,Berezovskij,71r,1829-09-04,humboldt
+156,Jekaterinburg,71r,1829-09-04,humboldt
+157,Iremel' (Fluss),71r,1829-09-04,humboldt
+158,Miass (Fluss),71r,1829-09-04,humboldt
+159,Miass (Stadt),71v,1829-09-04,humboldt
+160,Zlatoust,71v,1829-09-04,humboldt
+161,Miass (Stadt),71v,1829-09-04,humboldt
+162,Syrostan (Dorf),71v,1829-09-07,humboldt
+163,Ural (Gebirge),71v,1829-09-07,humboldt
+164,Zlatoust,71v,1829-09-07,humboldt
+165,Kyštym,71v,1829-09-11,humboldt
+166,Miass (Stadt),71v,1829-09-11,humboldt
+167,Miass (Stadt),71v,1829-09-11,humboldt
+168,Syrostan (Dorf),71v,1829-09-11,humboldt
+169,Ural (Gebirge),71v,1829-09-11,humboldt
+170,Syrostan (Dorf),71v,1829-09-11,humboldt
+171,Zlatoust,71v,1829-09-11,humboldt
+172,"Taganaj, Großer",71v,1829-09-11,humboldt
+173,Zlatoust,71v,1829-09-11,humboldt
+174,Jablonovygebirge,71v,1829-09-11,humboldt
+175,Blagodat',71v,1829-09-11,humboldt
+176,Bogoslovsk,71v,1829-09-11,humboldt
+177,Miass (Stadt),71v,1829-09-11,humboldt
+178,Miass (Stadt),71v,1829-09-11,humboldt
+179,Zlatoust,71v,1829-09-11,humboldt
+180,Ural (Gebirge),71v,1829-09-11,humboldt
+181,Aj,71v,1829-09-11,humboldt
+182,Jurma,71v,1829-09-11,humboldt
+183,"Iremel', Bol'šoj",71v,1829-09-11,humboldt
+184,Jurma,71v,1829-09-11,humboldt
+185,"Taganaj, Großer",71v,1829-09-11,humboldt
+186,"Taganaj, Kleiner",71v,1829-09-11,humboldt
+187,Kialim,71v,1829-09-11,humboldt
+188,Miass (Fluss),71v,1829-09-11,humboldt
+189,Kialim,71v,1829-09-11,humboldt
+190,"Taganaj, Kleiner",71v,1829-09-11,humboldt
+191,Ural (Gebirge),71v,1829-09-11,humboldt
+192,Miass (Stadt),71v,1829-09-11,humboldt
+193,Argasi-See,71v,1829-09-11,humboldt
+194,Miass (Fluss),71v,1829-09-11,humboldt
+195,Aj,71v,1829-09-11,humboldt
+196,Zlatoust,71v,1829-09-11,humboldt
+197,Ural (Gebirge),71v,1829-09-11,humboldt
+198,Ural (Gebirge),71v,1829-09-11,humboldt
+199,Aleksandrovskaja Sopka,71v,1829-09-11,humboldt
+200,Syrostan (Dorf),71v,1829-09-11,humboldt
+201,Miass (Stadt),71v,1829-09-11,humboldt
+202,Urenga,71v,1829-09-11,humboldt
+203,Aj,71v,1829-09-11,humboldt
+204,Ural (Gebirge),71v,1829-09-11,humboldt
+205,Iremelgebirge,71v,1829-09-11,humboldt
+206,Urenga,71v,1829-09-11,humboldt
+207,Sterlitamak,71v,1829-09-11,humboldt
+208,Belaja (Kama),71v,1829-09-11,humboldt
+209,Juraktau,71v,1829-09-11,humboldt
+210,Ural (Gebirge),71v,1829-09-11,humboldt
+211,"Iremel', Bol'šoj",71v,1829-09-11,humboldt
+212,Ural (Gebirge),71v,1829-09-11,humboldt
+213,Bogoslovsk,71v,1829-09-11,humboldt
+214,Ural (Gebirge),71v,1829-09-11,humboldt
+215,Jekaterinburg,71v,1829-09-11,humboldt
+216,Ural (Gebirge),71v,1829-06-21,humboldt
+217,Zlatoust,71v,1829-06-21,humboldt
+218,Aj,71v,1829-06-21,humboldt
+219,Miass (Fluss),71v,1829-06-21,humboldt
+220,Miass (Fluss),71v,1829-06-21,humboldt
+221,Aj,71v,1829-06-21,humboldt
+222,Iremelgebirge,71v,1829-06-21,humboldt
+223,Urenga,71v,1829-06-21,humboldt
+224,Miass (Fluss),71v,1829-06-21,humboldt
+225,Argasi-See,71v,1829-06-21,humboldt
+226,Ufa (Fluss),71v,1829-06-21,humboldt
+227,Zlatoust,71v,1829-06-21,humboldt
+228,Jekaterinburg,71v,1829-06-21,humboldt
+229,Miass (Stadt),71v,1829-06-21,humboldt
+230,Auškul’ (See),71v,1829-06-21,humboldt
+231,Kyštym,71v,1829-06-21,humboldt
+232,Auškul’ (See),71v,1829-06-21,humboldt
+233,Kusa,71v,1829-06-21,humboldt
+234,Bilimbaj,71v,1829-06-21,humboldt
+235,Syrostan (Dorf),71v,1829-06-21,humboldt
+236,Miass (Stadt),71v,1829-06-21,humboldt
+237,Syrostan (Dorf),71v,1829-06-21,humboldt
+238,Zlatoust,71v,1829-06-21,humboldt
+239,Ural (Gebirge),71v,1829-09-05,humboldt
+240,Troizk,71v,1829-09-05,humboldt
+241,Verchne-Ural'sk,71v,1829-09-05,humboldt
+242,Uj (Tobol),71v,1829-09-05,humboldt
+243,Miass (Stadt),71v,1829-09-05,humboldt
+244,Ural (Gebirge),71v,1829-09-05,humboldt
+245,Tobol,71v,1829-09-05,humboldt
+246,Uj (Tobol),71v,1829-09-05,humboldt
+247,Ural (Fluss),71v,1829-09-05,humboldt
+248,Ural (Fluss),71v,1829-09-05,humboldt
+249,Ural (Gebirge),71v,1829-09-05,humboldt
+250,Uj (Tobol),71v,1829-09-05,humboldt
+251,Arktischer Ozean,71v,1829-09-05,humboldt
+252,Kaspisches Meer,71v,1829-09-05,humboldt
+253,Ural (Gebirge),71v,1829-09-05,humboldt
+254,Uj (Tobol),71v,1829-09-05,humboldt
+255,Tobol,71v,1829-09-05,humboldt
+256,Irtyš (Fluss),71v,1829-09-05,humboldt
+257,Ob,71v,1829-09-05,humboldt
+258,Arktischer Ozean,71v,1829-09-05,humboldt
+259,Ural (Fluss),71v,1829-09-05,humboldt
+260,Kaspisches Meer,71v,1829-09-05,humboldt
+261,Miass (Stadt),71v,1829-09-05,humboldt
+262,Ural (Fluss),71v,1829-09-05,humboldt
+263,Orsk,71v,1829-09-05,humboldt
+264,Ural (Fluss),71v,1829-09-05,humboldt
+265,Ural (Gebirge),71v,1829-09-05,humboldt
+266,Orsk,71v,1829-09-05,humboldt
+267,Orenburg (Stadt),71v,1829-09-05,humboldt
+268,Oral,71v,1829-09-05,humboldt
+269,Ural (Fluss),71v,1829-09-05,humboldt
+270,Il'inka,71v,1829-09-20,humboldt
+271,Ural (Fluss),71v,1829-09-20,humboldt
+272,Kungurka,71v,1829-09-20,humboldt
+273,Polevskoj,71v,1829-09-20,humboldt
+274,Kungurka,71v,1829-09-20,humboldt
+275,Polevskoj,71v,1829-09-20,humboldt
+276,Ural (Fluss),71v,1829-09-20,humboldt
+277,Miass (Stadt),72r,1829-09-20,humboldt
+278,Barnaul,72r,1829-09-20,humboldt
+279,Ilmensee,72r,1829-09-20,humboldt
+280,Miass (Stadt),72r,1829-09-20,humboldt
+281,Miass (Stadt),72r,1829-09-07,humboldt
+282,Syrostan (Dorf),72r,1829-09-07,humboldt
+283,Zlatoust,72r,1829-09-07,humboldt
+284,Kyštym,72r,1829-09-07,humboldt
+285,Zlatoust,72r,1829-09-07,humboldt
+286,Beresowka,72r,1829-09-07,humboldt
+287,Miass (Fluss),72r,1829-09-07,humboldt
+288,Miass (Stadt),72r,1829-09-07,humboldt
+289,Miass (Fluss),72r,1829-09-07,humboldt
+290,Beresowka,72r,1829-09-07,humboldt
+291,Syrostan (Dorf),72r,1829-09-07,humboldt
+292,Miass (Stadt),72r,1829-09-07,humboldt
+293,Syrostan (Dorf),72r,1829-09-07,humboldt
+294,Miass (Stadt),72r,1829-09-07,humboldt
+295,Zlatoust,72r,1829-09-07,humboldt
+296,Zlatoust,72r,1829-09-10,humboldt
+297,"Taganaj, Großer",72v,1829-09-10,humboldt
+298,"Taganaj, Kleiner",72v,1829-09-10,humboldt
+299,Aleksandrovskaja Sopka,72v,1829-09-10,humboldt
+300,Jurma,72v,1829-09-10,humboldt
+301,Urenga,72v,1829-09-10,humboldt
+302,Auštau,72v,1829-09-10,humboldt
+303,Sankt Petersburg,72v,1829-09-10,humboldt
+304,Zlatoust,72v,1829-09-10,humboldt
+305,Zlatoust,72v,1829-09-10,humboldt
+306,Zlatoust,72v,1829-09-10,humboldt
+307,"Taganaj, Großer",72v,1829-09-10,humboldt
+308,Sak-Elga,72v,1829-09-10,humboldt
+309,Miass (Fluss),72v,1829-09-10,humboldt
+310,Sak-Elga,72v,1829-09-10,humboldt
+311,Argasi-See,72v,1829-09-10,humboldt
+312,Miass (Fluss),72v,1829-09-10,humboldt
+313,Sak-Elga,72v,1829-09-10,humboldt
+314,Miass (Fluss),72v,1829-09-10,humboldt
+315,Sak-Elga,72v,1829-09-10,humboldt
+316,Miass (Fluss),72v,1829-09-10,humboldt
+317,Ural (Gebirge),72v,1829-09-10,humboldt
+318,Poludenka,72v,1829-09-10,humboldt
+319,Poludino,72v,1829-09-10,humboldt
+320,Petropavlovsk (Omsk),72v,1829-09-10,humboldt
+321,Nižnaja Tura,72v,1829-09-10,humboldt
+322,Nižnaja Tura,72v,1829-09-10,humboldt
+323,Nižnaja Tura,72v,1829-09-10,humboldt
+324,Serebrjanka (Ortschaft),72v,1829-09-10,humboldt
+325,Visim (Ort),72v,1829-09-10,humboldt
+326,Bilimbaj,72v,1829-09-10,humboldt
+327,Neiwa,72v,1829-09-10,humboldt
+328,Ural (Gebirge),72v,1829-09-10,humboldt
+329,Zjuzel'skij,72v,1829-09-10,humboldt
+330,Polevskoj,72v,1829-09-10,humboldt
+331,Jekaterinburg,72v,1829-09-10,humboldt
+332,Ufalejka,72v,1829-09-10,humboldt
+333,Verchnij Ufalej,72v,1829-09-10,humboldt
+334,Ufalejka,72v,1829-09-10,humboldt
+335,Ural (Gebirge),72v,1829-09-10,humboldt
+336,Ural (Gebirge),72v,1829-09-10,humboldt
+337,Zjuzel'skij,72v,1829-09-10,humboldt
+338,Polevskoj,72v,1829-09-10,humboldt
+339,Jekaterinburg,72v,1829-09-10,humboldt
+340,Ufa (Fluss),72v,1829-09-10,humboldt
+341,Kyštym,72v,1829-09-10,humboldt
+342,Ufalejka,72v,1829-09-10,humboldt
+343,Kyštym,72v,1829-09-10,humboldt
+344,Ufa (Fluss),72v,1829-09-10,humboldt
+345,Njazepetrovsk,72v,1829-09-10,humboldt
+346,Kyštym,72v,1829-09-10,humboldt
+347,Kyštym,72v,1829-09-10,humboldt
+348,Zlatoust,72v,1829-09-10,humboldt
+349,Miass (Stadt),72v,1829-09-10,humboldt
+350,Syrostan (Dorf),72v,1829-09-10,humboldt
+351,Turgojak (Ort),72v,1829-09-10,humboldt
+352,Turgojak (See),72v,1829-09-10,humboldt
+353,Muchametovo,72v,1829-09-10,humboldt
+354,Kialim,72v,1829-09-10,humboldt
+355,Miass (Fluss),72v,1829-09-10,humboldt
+356,Sak-Elga,72v,1829-09-10,humboldt
+357,Sak-Elga,72v,1829-09-10,humboldt
+358,Nižnij Tagil,73r,1829-09-10,humboldt
+359,Nev'jansk,73r,1829-09-10,humboldt
+360,Belaja (Ural),73r,1829-09-10,humboldt
+361,Nižnij Tagil,73r,1829-09-10,humboldt
+362,Nižnij Tagil,73r,1829-09-10,humboldt
+363,Tagil,73r,1829-09-10,humboldt
+364,Černoistočinsk,73r,1829-09-10,humboldt
+365,Belaja (Ural),73r,1829-09-10,humboldt
+366,Belaja (Ural),73r,1829-09-10,humboldt
+367,Nev'jansk,73r,1829-09-10,humboldt
+368,Tagil,73r,1829-09-10,humboldt
+369,Nev'jansk,73r,1829-09-10,humboldt
+370,Nev'jansk,73r,1829-09-10,humboldt
+371,Polevskoj,73r,1829-09-10,humboldt
+372,Kyštym,73r,1829-09-10,humboldt
+373,Čeremšanka,73r,1829-09-10,humboldt
+374,Zlatoust,73r,1829-09-11,humboldt
+375,Kyštym,73r,1829-09-11,humboldt
+376,Miass (Stadt),73r,1829-09-11,humboldt
+377,Auškul’ (See),73r,1829-09-11,humboldt
+378,Čeremšanka,73r,1829-09-11,humboldt
+379,Atkus,73r,1829-09-11,humboldt
+380,Miass (Fluss),73r,1829-09-11,humboldt
+381,Miass (Fluss),73r,1829-09-11,humboldt
+382,Argasi-See,73r,1829-09-11,humboldt
+383,Čeremšanka,73r,1829-09-11,humboldt
+384,Kyštym,73r,1829-09-11,humboldt
+385,Uvil'dy,73r,1829-09-11,humboldt
+386,Kosaya,73r,1829-09-11,humboldt
+387,Irtjaš-See,73r,1829-09-11,humboldt
+388,Kyštym,73r,1829-09-11,humboldt
+389,Kyštym,73r,1829-09-11,humboldt
+390,Kyštym,73r,1829-09-11,humboldt
+391,Kyštym,73v,1829-09-11,humboldt
+392,Jekaterinburg,73v,1829-09-11,humboldt
+393,Kasli (Stadt),73v,1829-09-11,humboldt
+394,Ural (Gebirge),73v,1829-09-11,humboldt
+395,"Kasli-See, Großer",73v,1829-09-11,humboldt
+396,"Kasli-See, Kleiner",73v,1829-09-11,humboldt
+397,Kyštym,73v,1829-09-11,humboldt
+398,Ural (Gebirge),73v,1829-09-11,humboldt
+399,Kyštym,73v,1829-09-11,humboldt
+400,"Mauk, Kleiner (Fluss)",73v,1829-09-11,humboldt
+401,Karas'ye Ozero,73v,1829-09-11,humboldt
+402,"Mauk, Großer (Fluss)",73v,1829-09-11,humboldt
+403,Kirety-See,73v,1829-09-11,humboldt
+404,"Kasli-See, Großer",73v,1829-09-11,humboldt
+405,Kasli (Stadt),73v,1829-09-11,humboldt
+406,"Kasli-See, Kleiner",73v,1829-09-11,humboldt
+407,Sinara (See),73v,1829-09-11,humboldt
+408,Kyštym,73v,1829-09-11,humboldt
+409,Sinara (See),73v,1829-09-11,humboldt
+410,Kyštym,73v,1829-09-11,humboldt
+411,Sak-Elga,73v,1829-09-11,humboldt
+412,Kyštym,73v,1829-09-11,humboldt
+413,Čeremšanka,73v,1829-09-11,humboldt
+414,Sinara (Fluss),73v,1829-09-11,humboldt
+415,Kirjabinskoe,73v,1829-09-07,humboldt
+416,Ural (Gebirge),73v,1829-09-07,humboldt
+417,Auškul’ (See),73v,1829-09-07,humboldt
+418,Ural (Gebirge),73v,1829-09-07,humboldt
+419,Auškul’ (See),73v,1829-09-07,humboldt
+420,Poljakovka,73v,1829-09-07,humboldt
+421,Ural (Gebirge),73v,1829-09-07,humboldt
+422,Auškul’ (See),73v,1829-09-07,humboldt
+423,Kirjabinskoe,73v,1829-09-07,humboldt
+424,Kirjabinskoe,73v,1829-09-07,humboldt
+425,Ural (Gebirge),73v,1829-09-07,humboldt
+426,Nikol’skoe,73v,1829-09-07,humboldt
+427,Zlatoust,73v,1829-09-07,humboldt
+428,Zlatoust,73v,1829-09-07,humboldt
+429,Miass (Stadt),73v,1829-09-07,humboldt
+430,Ural (Gebirge),73v,1829-09-07,humboldt
+431,Ural (Gebirge),73v,1829-09-07,humboldt
+432,Miass (Stadt),73v,1829-09-07,humboldt
+433,Černaja (Miass),73v,1829-09-07,humboldt
+434,Miass (Stadt),73v,1829-09-07,humboldt
+435,Ključevskaja,73v,1829-09-07,humboldt
+436,Orsk,73v,1829-09-07,humboldt
+437,Čeljabinsk,73v,1829-09-07,humboldt
+438,Zlatoust,73v,1829-09-07,humboldt
+439,Esaulka,73v,1829-09-07,humboldt
+440,Čërnaja (Aj),73v,1829-09-07,humboldt
+441,Balašicha,73v,1829-09-07,humboldt
+442,Novozlatoust,73v,1829-09-07,humboldt
+443,Zlatoust,73v,1829-09-07,humboldt
+444,Miass (Fluss),73v,1829-09-07,humboldt
+445,Miass (Stadt),73v,1829-09-07,humboldt
+446,Berezovskij,73v,1829-09-07,humboldt
+447,Jekaterinburg,73v,1829-09-07,humboldt
+448,Nazminskij Chrebet,73v,1829-09-07,humboldt
+449,Zlatoust,73v,1829-09-07,humboldt
+450,Turgojak (See),73v,1829-09-07,humboldt
+451,Miass (Stadt),73v,1829-09-07,humboldt
+452,Zlatoust,73v,1829-09-07,humboldt
+453,Nazminskij Chrebet,73v,1829-09-07,humboldt
+454,Turgojak (See),73v,1829-09-07,humboldt
+455,Miass (Stadt),73v,1829-09-07,humboldt
+456,Troizk,73v,1829-09-07,humboldt
+457,Ural (Gebirge),73v,1829-09-07,humboldt
+458,Turgojak (See),73v,1829-09-07,humboldt
+459,Kysykul’,73v,1829-09-07,humboldt
+460,Miass (Stadt),73v,1829-09-07,humboldt
+461,Jekaterinburg,73v,1829-09-07,humboldt
+462,Serga,73v,1829-09-07,humboldt
+463,Ufa (Fluss),73v,1829-09-07,humboldt
+464,Zlatoust,73v,1829-09-07,humboldt
+465,Nazminskij Chrebet,73v,1829-09-07,humboldt
+466,Oral,73v,1829-09-07,humboldt
+467,Černovskoe,74r,1829-09-07,humboldt
+468,Miass (Stadt),74r,1829-09-07,humboldt
+469,Černovskoe,74r,1829-09-07,humboldt
+470,Ural (Gebirge),74r,1829-09-07,humboldt
+471,Miass (Stadt),74r,1829-09-07,humboldt
+472,Verchne-Ural'sk,74r,1829-09-07,humboldt
+473,Chudolaz,74r,1829-09-07,humboldt
+474,Kizilskoye,74r,1829-09-07,humboldt
+475,Grjaznušinskij,74r,1829-09-07,humboldt
+476,Vicenza,74r,1829-09-07,humboldt
+477,Euganeische Hügel,74r,1829-09-07,humboldt
+478,Vicenza,74r,1829-09-07,humboldt
+479,Verchne-Ural'sk,74r,1829-09-07,humboldt
+480,Miass (Stadt),74r,1829-09-07,humboldt
+481,Miass (Stadt),74r,1829-09-07,humboldt
+482,Urtazym,74r,1829-09-07,humboldt
+483,Urtazym,74r,1829-09-07,humboldt
+484,"Iremel', Bol'šoj",74r,1829-09-07,humboldt
+485,Verchne-Ural'sk,74r,1829-09-07,humboldt
+486,Verchne-Ural'sk,74r,1829-09-07,humboldt
+487,Verchne-Ural'sk,74r,1829-09-07,humboldt
+488,"Magnitnaja (Festung, Ortschaft)",74r,1829-09-07,humboldt
+489,"Magnitnaja (Festung, Ortschaft)",74r,1829-09-07,humboldt
+490,Kizilskoye,74r,1829-09-07,humboldt
+491,"Magnitnaja (Festung, Ortschaft)",74r,1829-09-07,humboldt
+492,Berezovskij,74r,1829-09-07,humboldt
+493,Verchne-Ural'sk,74r,1829-09-07,humboldt
+494,Orsk,74r,1829-09-07,humboldt
+495,Guberlinskische Hügel,74r,1829-09-07,humboldt
+496,Guberlinsk ,74r,1829-09-07,humboldt
+497,Verchne-Ural'sk,74r,1829-09-07,humboldt
+498,Orenburg (Stadt),74r,1829-09-07,humboldt
+499,Orenburg (Stadt),74r,1829-09-07,humboldt
+500,Orenburg (Stadt),74r,1829-09-07,humboldt
+501,Orsk,74r,1829-09-07,humboldt
+502,Orenburg (Stadt),74r,1829-09-07,humboldt
+503,Orsk,74r,1829-09-07,humboldt
+504,Oral,74r,1829-09-07,humboldt
+505,"Magnitnaja (Festung, Ortschaft)",74v,1829-09-07,humboldt
+506,Guberlinsk ,74v,1829-09-07,humboldt
+507,Sol'-Iletsk,74v,1829-09-07,humboldt
+508,Sarysu,74v,1829-09-07,humboldt
+509,Orenburg (Stadt),74v,1829-09-07,humboldt
+510,Oral,74v,1829-09-28,humboldt
+511,Oral,74v,1829-09-29,humboldt
+512,Obščij Syrt,74v,1829-09-29,humboldt
+513,Samara (Stadt),74v,1829-09-30,humboldt
+514,Samara (Stadt),74v,1829-09-30,humboldt
+515,Samara (Stadt),74v,1829-09-30,humboldt
+516,Samara (Stadt),74v,1829-09-30,humboldt
+517,Wolga,74v,1829-09-30,humboldt
+518,Wolga,74v,1829-09-30,humboldt
+519,Orenburg (Stadt),74v,1829-09-30,humboldt
+520,Samara (Stadt),74v,1829-09-30,humboldt
+521,Orenburg (Stadt),74v,1829-09-30,humboldt
+522,Orsk,75r,1829-09-21,humboldt
+523,Verchne-Ural'sk,75r,1829-09-21,humboldt
+524,Troizk,75r,1829-09-21,humboldt
+525,Chiwa,75r,1829-09-21,humboldt
+526,Orsk,75r,1829-09-19,humboldt
+527,Kabul,75r,1829-09-19,humboldt
+528,Orenburg (Stadt),75r,1829-09-19,humboldt
+529,Orenburg (Stadt),75r,1829-09-25,humboldt
+530,Moskau,75r,1829-09-25,humboldt
+531,Sok,75r,1829-09-25,humboldt
+532,Surgut,75r,1829-09-25,humboldt
+533,Buguruslan,75r,1829-09-25,humboldt
+534,Tver',75r,1829-09-25,humboldt
+535,Wolga,75r,1829-09-25,humboldt
+536,Kostyči,75r,1829-09-25,humboldt
+537,Rakhinka,75v,1829-09-25,humboldt
+538,Wolga,75v,1829-09-25,humboldt
+539,Elton-See,75v,1829-09-25,humboldt
+540,Rakhinka,75v,1829-09-25,humboldt
+541,Dubovka,75v,1829-09-25,humboldt
+542,Elton-See,75v,1829-09-25,humboldt
+543,Rakhinka,75v,1829-09-25,humboldt
+544,Elton-See,75v,1829-09-25,humboldt
+545,Elton-See,75v,1829-09-25,humboldt
+546,Korjakovka,75v,1829-09-25,humboldt
+547,Irtyš (Fluss),75v,1829-09-25,humboldt
+548,Pavlodar,75v,1829-09-25,humboldt
+549,Ust'-Kamenogorsk,75v,1829-09-25,humboldt
+550,Omsk,75v,1829-09-25,humboldt
+551,Korjakovka,75v,1829-09-25,humboldt
+552,Tobolsk,75v,1829-09-25,humboldt
+553,Omsk,75v,1829-09-25,humboldt
+554,Inder-See,75v,1829-09-25,humboldt
+555,Oral,75v,1829-09-25,humboldt
+556,Atyrau,75v,1829-09-25,humboldt
+557,Elton-See,75v,1829-09-25,humboldt
+558,Elton-See,75v,1829-09-25,humboldt
+559,Chara,75v,1829-09-25,humboldt
+560,Chara,75v,1829-09-25,humboldt
+561,Černovka,75v,1829-09-25,humboldt
+562,Elton-See,75v,1829-09-25,humboldt
+563,Chara,75v,1829-09-25,humboldt
+564,"Samaroda, Große",75v,1829-09-25,humboldt
+565,"Samaroda, Kleine",75v,1829-09-25,humboldt
+566,Elton-See,75v,1829-09-25,humboldt
+567,Elton-See,75v,1829-09-25,humboldt
+568,Elton-See,75v,1829-09-25,humboldt
+569,Elton-See,75v,1829-09-25,humboldt
+570,Elton-See,75v,1829-09-25,humboldt
+571,Wolga,76r,1829-09-25,humboldt
+572,Wolga,76r,1829-09-25,humboldt
+573,Wolga,76r,1829-09-25,humboldt
+574,Vol’sk,76r,1829-10-02,humboldt
+575,Vol’sk,76r,1829-10-02,humboldt
+576,Vol’sk,76r,1829-10-02,humboldt
+577,Wolga,76r,1829-10-05,humboldt
+578,Ust'-Zolicha,76r,1829-10-05,humboldt
+579,Kamyšin,76r,1829-10-06,humboldt
+580,Dubovka,76r,1829-10-06,humboldt
+581,Kamyšin,76r,1829-10-06,humboldt
+582,Dubovka,76r,1829-10-06,humboldt
+583,Wolga,76r,1829-10-07,humboldt
+584,Dubovka,76r,1829-10-07,humboldt
+585,Dubovka,76r,1829-10-07,humboldt
+586,Wolga,76r,1829-10-07,humboldt
+587,Dubovka,76r,1829-10-07,humboldt
+588,Wolga,76r,1829-10-07,humboldt
+589,Rakhinka,76r,1829-10-07,humboldt
+590,Wolga,76r,1829-10-07,humboldt
+591,Rakhinka,76r,1829-10-07,humboldt
+592,Elton-See,76r,1829-10-07,humboldt
+593,Elton-See,76r,1829-10-07,humboldt
+594,Elton-See,76v,1829-10-07,humboldt
+595,Dubovka,76v,1829-10-07,humboldt
+596,Kamyšin,76v,1829-10-07,humboldt
+597,Atyrau,76v,1829-10-07,humboldt
+598,Ulagan,76v,1829-10-07,humboldt
+599,Dubovka,76v,1829-10-07,humboldt
+600,Kamyšin,76v,1829-10-07,humboldt
+601,Ulagan,76v,1829-10-07,humboldt
+602,Elton-See,76v,1829-10-07,humboldt
+603,Elton-See,76v,1829-10-07,humboldt
+604,Atyrau,76v,1829-10-07,humboldt
+605,Oral,76v,1829-10-07,humboldt
+606,Oral,76v,1829-10-07,humboldt
+607,Ural (Fluss),76v,1829-10-07,humboldt
+608,Kaspisches Meer,76v,1829-10-07,humboldt
+609,Atyrau,76v,1829-10-07,humboldt
+610,Oral,76v,1829-10-07,humboldt
+611,Wolgograd,76v,1829-10-07,humboldt
+612,Aleksandrov Gaj,76v,1829-10-07,humboldt
+613,Elton-See,76v,1829-10-07,humboldt
+614,Kamyšin,76v,1829-10-07,humboldt
+615,Nikolayevsk,76v,1829-10-07,humboldt
+616,Gor’ko-Solënoye,76v,1829-10-07,humboldt
+617,Elton-See,76v,1829-10-07,humboldt
+618,Botkul',76v,1829-10-07,humboldt
+619,Elton-See,76v,1829-10-07,humboldt
+620,Baskunčak,76v,1829-10-07,humboldt
+621,Bogdo,76v,1829-10-07,humboldt
+622,Astrachan (Stadt),76v,1829-10-07,humboldt
+623,Elton-See,76v,1829-10-07,humboldt
+624,Dubovka,76v,1829-10-07,humboldt
+625,Elton-See,76v,1829-10-07,humboldt
+626,Dubovka,76v,1829-10-07,humboldt
+627,Dubovka,76v,1829-10-09,humboldt
+628,Dubovka,76v,1829-10-09,humboldt
+629,Wolgograd,76v,1829-10-09,humboldt
+630,Wolgograd,76v,1829-10-09,humboldt
+631,Wolga,76v,1829-10-09,humboldt
+632,Sarepta,77r,1829-10-12,humboldt
+633,Astrachan (Stadt),77r,1829-10-12,humboldt
+634,Sarepta,77r,1829-10-12,humboldt
+635,Grači,77r,1829-10-11,humboldt
+636,Wolga,77r,1829-10-11,humboldt
+637,Grači,77r,1829-10-11,humboldt
+638,Enotaevka,77r,1829-10-11,humboldt
+639,Lebjažinskaja,77r,1829-10-12,humboldt
+640,Astrachan (Stadt),77r,1829-10-12,humboldt
+641,Wolga,77r,1829-10-12,humboldt
+642,Grači,77r,1829-10-14,humboldt
+643,Enotaevka,77r,1829-10-14,humboldt
+644,Enotaevka,77r,1829-10-14,humboldt
+645,Enotaevka,77r,1829-10-14,humboldt
+646,Birjuč'ja kosa,77r,1829-10-14,humboldt
+647,Baku,77r,1829-10-14,humboldt
+648,Lenkoran',77r,1829-10-14,humboldt
+649,Derbent,77r,1829-10-14,humboldt
+650,Zam’yany,78v,1829-10-14,humboldt
+651,Novočercassk,78v,1829-10-14,humboldt
+652,Sarepta,78v,1829-10-14,humboldt
+653,Barabasteppe,78v,1829-10-14,humboldt
+654,Buzuluk,78v,1829-10-14,humboldt
+655,Dubovka,78v,1829-10-14,humboldt
+656,Elton-See,78v,1829-10-14,humboldt
+657,Dnestr,78v,1829-10-14,humboldt
+658,Dnepr,78v,1829-10-14,humboldt
+659,Doneč,78v,1829-10-14,humboldt
+660,Don,78v,1829-10-14,humboldt
+661,Wolga,78v,1829-10-14,humboldt
+662,Wolga,78v,1829-10-14,humboldt
+663,Sarepta,78v,1829-10-14,humboldt
+664,Sarepta,78v,1829-10-14,humboldt
+665,Barabasteppe,78v,1829-10-14,humboldt
+666,Buzuluk,78v,1829-10-14,humboldt
+667,Dubovka,78v,1829-10-14,humboldt
+668,Elton-See,78v,1829-10-14,humboldt
+669,Ural (Gebirge),78v,1829-10-14,humboldt
+670,Amur,78v,1829-10-14,humboldt
+671,Peking,78v,1829-10-14,humboldt
+672,China,78v,1829-10-14,humboldt
+673,Peking,78v,1829-10-14,humboldt
+674,Saratov,79r,1829-10-14,humboldt
+675,Vol’sk,79r,1829-10-14,humboldt
+676,Saratov,79r,1829-10-14,humboldt
+677,Bogdo,79r,1829-10-14,humboldt
+678,Baskunčak,79r,1829-10-14,humboldt
+679,Aralsee,79r,1829-10-14,humboldt
+680,Syrdarja,79r,1829-10-14,humboldt
+681,Amudarja,79r,1829-10-14,humboldt
+682,Voronež,79r,1829-10-14,humboldt
+683,Wolga,79r,1829-10-14,humboldt
+684,Kaspisches Meer,79r,1829-10-14,humboldt
+685,Zlatoust,79v,1829-10-14,humboldt
+686,Solingen,79v,1829-10-14,humboldt
+687,Solingen,79v,1829-10-14,humboldt
+688,Klingenthal,79v,1829-10-14,humboldt
+689,Klingenthal,79v,1829-10-14,humboldt
+690,Elsass,79v,1829-10-14,humboldt
+691,Solingen,79v,1829-10-14,humboldt
+692,Zlatoust,79v,1829-10-14,humboldt
+693,Zlatoust,79v,1829-10-14,humboldt
+694,Kyštym,79v,1829-09-07,humboldt
+695,Irtjaš-See,79v,1829-09-07,humboldt
+696,Kyštym,79v,1829-09-07,humboldt
+697,Miass (Stadt),79v,1829-09-07,humboldt
+698,Miass (Stadt),79v,1829-09-07,humboldt
+699,Ural (Gebirge),79v,1829-09-07,humboldt
+700,Auškul’ (See),79v,1829-09-07,humboldt
+701,Ural (Gebirge),79v,1829-09-07,humboldt
+702,Auškul’ (See),79v,1829-09-07,humboldt
+703,Kirjabinskoe,79v,1829-09-07,humboldt
+704,Ural (Gebirge),79v,1829-09-07,humboldt
+705,Nikol’skoe,79v,1829-09-07,humboldt
+706,Auškul’ (See),79v,1829-09-07,humboldt
+707,Šartašsee,79v,1829-09-07,humboldt
+708,Miass (Stadt),81r,1829-09-07,humboldt
+709,Miass (Fluss),81r,1829-09-07,humboldt
+710,Iremel' (Fluss),81r,1829-09-07,humboldt
+711,Miass (Fluss),81r,1829-09-07,humboldt
+712,Iremel' (Fluss),81r,1829-09-07,humboldt
+713,Miass (Fluss),81r,1829-09-07,humboldt
+714,Miass (Fluss),81r,1829-09-07,humboldt
+715,Miass (Fluss),81r,1829-09-07,humboldt
+716,Miass (Fluss),81r,1829-09-07,humboldt
+717,Miass (Stadt),81r,1829-09-07,humboldt
+718,Miass (Stadt),81r,1829-09-07,humboldt
+719,Ural (Gebirge),81r,1829-09-07,humboldt
+720,Iremel' (Fluss),82r,1829-09-07,humboldt
+721,Miass (Fluss),82r,1829-09-07,humboldt
+722,Iremel' (Fluss),82r,1829-09-07,humboldt
+723,Miass (Fluss),82r,1829-09-07,humboldt
+724,Miass (Stadt),82r,1829-09-07,humboldt
+725,Zlatoust,82r,1829-09-07,humboldt
+726,Miass (Stadt),82r,1829-09-07,humboldt
+727,Syrostan (Dorf),82r,1829-09-07,humboldt
+728,Miass (Stadt),82r,1829-09-07,humboldt
+729,Miass (Stadt),82r,1829-09-07,humboldt
+730,Zlatoust,82r,1829-09-07,humboldt
+731,Kyštym,82r,1829-09-07,humboldt
+732,Zlatoust,82r,1829-09-07,humboldt
+733,Syrostan (Dorf),82r,1829-09-07,humboldt
+734,Syrostan (Fluss),82r,1829-09-07,humboldt
+735,Syrostan (Dorf),82r,1829-09-07,humboldt
+736,Miass (Stadt),82r,1829-09-07,humboldt
+737,Miass (Stadt),82r,1829-09-07,humboldt
+738,Syrostan (Dorf),82r,1829-09-07,humboldt
+739,Ural (Gebirge),82r,1829-09-07,humboldt
+740,Zlatoust,82r,1829-09-07,humboldt
+741,Zlatoust,82v,1829-09-07,humboldt
+742,Syrostan (Dorf),82v,1829-09-07,humboldt
+743,Ural (Gebirge),82v,1829-09-07,humboldt
+744,Ural (Gebirge),82v,1829-09-07,humboldt
+745,Blagodat',82v,1829-09-07,humboldt
+746,Zlatoust,82v,1829-09-07,humboldt
+747,Miass (Stadt),82v,1829-09-07,humboldt
+748,Zlatoust,82v,1829-09-07,humboldt
+749,Jurma,82v,1829-09-07,humboldt
+750,Taganaj,82v,1829-09-07,humboldt
+751,Urenga,82v,1829-09-07,humboldt
+752,Iremelgebirge,82v,1829-09-07,humboldt
+753,Miass (Fluss),82v,1829-09-07,humboldt
+754,Miass (Stadt),82v,1829-09-07,humboldt
+755,Zlatoust,82v,1829-09-07,humboldt
+756,Syrostan (Dorf),82v,1829-09-07,humboldt
+757,Jurma,82v,1829-09-22,humboldt
+758,Kialim,82v,1829-09-22,humboldt
+759,Aj,82v,1829-09-22,humboldt
+760,Urenga,82v,1829-09-22,humboldt
+761,Aleksandrovskaja Sopka,82v,1829-09-22,humboldt
+762,Aj,82v,1829-09-22,humboldt
+763,Syrostan (Dorf),82v,1829-09-22,humboldt
+764,Aj,82v,1829-09-22,humboldt
+765,"Iremel', Bol'šoj",82v,1829-09-22,humboldt
+766,Ural (Gebirge),82v,1829-09-22,humboldt
+767,Syrostan (Dorf),82v,1829-09-22,humboldt
+768,Zlatoust,82v,1829-09-22,humboldt
+769,Jurma,82v,1829-09-22,humboldt
+770,"Taganaj, Großer",82v,1829-09-22,humboldt
+771,"Taganaj, Großer",82v,1829-09-22,humboldt
+772,"Taganaj, Kleiner",82v,1829-09-22,humboldt
+773,Urenga,82v,1829-09-22,humboldt
+774,Zlatoust,82v,1829-09-22,humboldt
+775,"Iremel', Bol'šoj",82v,1829-09-22,humboldt
+776,Jamantau,82v,1829-09-22,humboldt
+777,Ural (Gebirge),82v,1829-09-22,humboldt
+778,Sterlitamak,82v,1829-09-22,humboldt
+779,Belaja (Kama),82v,1829-09-22,humboldt
+780,Juraktau,82v,1829-09-22,humboldt
+781,"Iremel', Bol'šoj",82v,1829-09-22,humboldt
+782,"Iremel', Bol'šoj",82v,1829-09-22,humboldt
+783,Ural (Gebirge),82v,1829-09-22,humboldt
+784,Urenga,82v,1829-09-22,humboldt
+785,Zlatoust,82v,1829-09-22,humboldt
+786,Urenga,82v,1829-09-22,humboldt
+787,Ural (Gebirge),82v,1829-09-22,humboldt
+788,Aj,82v,1829-09-22,humboldt
+789,Kialim,82v,1829-09-22,humboldt
+790,Aj,82v,1829-09-22,humboldt
+791,Iremelgebirge,82v,1829-09-22,humboldt
+792,Zlatoust,82v,1829-09-22,humboldt
+793,Urenga,82v,1829-09-22,humboldt
+794,Kialim,82v,1829-09-22,humboldt
+795,"Taganaj, Kleiner",82v,1829-09-22,humboldt
+796,Ural (Gebirge),82v,1829-09-22,humboldt
+797,Miass (Fluss),82v,1829-09-22,humboldt
+798,Miass (Stadt),82v,1829-09-22,humboldt
+799,Ural (Gebirge),82v,1829-09-22,humboldt
+800,Zjuzel'skij,82v,1829-09-22,humboldt
+801,Polevskoj,82v,1829-09-22,humboldt
+802,Jekaterinburg,82v,1829-09-22,humboldt
+803,Ural (Gebirge),82v,1829-09-22,humboldt
+804,Zlatoust,82v,1829-09-22,humboldt
+805,Sysert,82v,1829-09-22,humboldt
+806,Jekaterinburg,82v,1829-09-22,humboldt
+807,Miass (Stadt),82v,1829-09-22,humboldt
+808,"Magnitnaja (Festung, Ortschaft)",82v,1829-09-22,humboldt
+809,Bogoslovsk,82v,1829-09-22,humboldt
+810,Berezovskij,83r,1829-09-22,humboldt
+811,Ural (Gebirge),83r,1829-09-22,humboldt
+812,Zjuzel'skij,83r,1829-09-22,humboldt
+813,Polevskoj,83r,1829-09-22,humboldt
+814,Jekaterinburg,83r,1829-09-22,humboldt
+815,Guberlinsk ,83r,1829-09-22,humboldt
+816,"Magnitnaja (Festung, Ortschaft)",83r,1829-09-22,humboldt
+817,Sakmara,83r,1829-09-22,humboldt
+818,Sakmara,83r,1829-09-22,humboldt
+819,Ural (Fluss),83r,1829-09-22,humboldt
+820,Kizilskoye,83r,1829-09-22,humboldt
+821,Guberlinskische Hügel,83r,1829-09-22,humboldt
+822,Orsk,83r,1829-09-22,humboldt
+823,Ural (Fluss),83r,1829-09-22,humboldt
+824,Sakmara,83r,1829-09-22,humboldt
+825,"Magnitnaja (Festung, Ortschaft)",83r,1829-09-22,humboldt
+826,Kizilskoye,83r,1829-09-22,humboldt
+827,Guberlinskische Hügel,83r,1829-09-22,humboldt
+828,Iremelgebirge,83r,1829-09-22,humboldt
+829,Guberlinskische Hügel,83r,1829-09-22,humboldt
+830,Ural (Fluss),83r,1829-09-22,humboldt
+831,Obščij Syrt,83r,1829-09-22,humboldt
+832,Valdajhöhen,83r,1829-09-22,humboldt
+833,Ural (Gebirge),83r,1829-09-22,humboldt
+834,Sakmara,83r,1829-09-22,humboldt
+835,Belaja (Kama),83r,1829-09-22,humboldt
+836,Bogoslovsk,83r,1829-09-22,humboldt
+837,Ural (Gebirge),83r,1829-09-22,humboldt
+838,Irtyš (Fluss),83r,1829-09-22,humboldt
+839,"Taganaj, Kleiner",83r,1829-09-22,humboldt
+840,Ural (Gebirge),83r,1829-09-22,humboldt
+841,Kialim,83r,1829-09-22,humboldt
+842,Miass (Fluss),83r,1829-09-22,humboldt
+843,Kialim,83r,1829-09-22,humboldt
+844,"Taganaj, Kleiner",83r,1829-09-22,humboldt
+845,Miass (Fluss),83r,1829-09-22,humboldt
+846,Tanalyk,83r,1829-09-22,humboldt
+847,Tanalyk,83r,1829-09-22,humboldt
+848,Ural (Gebirge),83r,1829-09-22,humboldt
+849,Talkas,83r,1829-09-22,humboldt
+850,Talkas,83r,1829-09-22,humboldt
+851,Iremelgebirge,83r,1829-09-22,humboldt
+852,Zlatoust,83r,1829-09-22,humboldt
+853,Iremelgebirge,83r,1829-09-22,humboldt
+854,Kizilskoye,83v,1829-09-22,humboldt
+855,Talkas,83v,1829-09-22,humboldt
+856,Talkas,83v,1829-09-22,humboldt
+857,Tanalyk,83v,1829-09-22,humboldt
+858,Ural (Fluss),83v,1829-09-22,humboldt
+859,Kizilskoye,83v,1829-09-22,humboldt
+860,Talkas,83v,1829-09-22,humboldt
+861,Tanalyk,83v,1829-09-22,humboldt
+862,Tanalyk,83v,1829-09-22,humboldt
+863,Ural (Fluss),83v,1829-09-22,humboldt
+864,Kizil,83v,1829-09-22,humboldt
+865,Sakmara,83v,1829-09-22,humboldt
+866,Tanalyk,83v,1829-09-22,humboldt
+867,Kizil,83v,1829-09-22,humboldt
+868,Sibirien,83v,1829-09-22,humboldt
+869,Jablonovygebirge,83v,1829-09-22,humboldt
+870,Irkutsk,83v,1829-09-22,humboldt
+871,Nerčinsk,83v,1829-09-22,humboldt
+872,Ulutau,83v,1829-09-22,humboldt
+873,Orsk,83v,1829-09-22,humboldt
+874,Sarysu,83v,1829-09-22,humboldt
+875,Sakmara,83v,1829-09-22,humboldt
+876,Zlatoust,83v,1829-09-22,humboldt
+877,Taganaj,83v,1829-09-22,humboldt
+878,Kizilskoye,83v,1829-09-22,humboldt
+879,Ural (Gebirge),83v,1829-09-22,humboldt
+880,Kyštym,83v,1829-09-22,humboldt
+881,Jekaterinburg,83v,1829-09-22,humboldt
+882,Jekaterinburg,83v,1829-09-22,humboldt
+883,Tjumen,83v,1829-09-22,humboldt
+884,Aj,83v,1829-09-22,humboldt
+885,Kialim,83v,1829-09-22,humboldt
+886,Miass (Fluss),83v,1829-09-22,humboldt
+887,Miass (Stadt),83v,1829-09-22,humboldt
+888,Argasi-See,83v,1829-09-22,humboldt
+889,Troizk,83v,1829-09-22,humboldt
+890,Arktischer Ozean,83v,1829-09-22,humboldt
+891,Kaspisches Meer,83v,1829-09-22,humboldt
+892,Troizk,83v,1829-09-22,humboldt
+893,Verchne-Ural'sk,83v,1829-09-22,humboldt
+894,Ural (Gebirge),84r,1829-09-22,humboldt
+895,Zlatoust,84r,1829-09-22,humboldt
+896,Verchne-Ural'sk,84r,1829-09-22,humboldt
+897,Verchne-Ural'sk,84r,1829-09-22,humboldt
+898,Ural (Gebirge),84r,1829-09-22,humboldt
+899,Ural (Gebirge),84r,1829-09-22,humboldt
+900,Ural (Gebirge),84r,1829-09-22,humboldt
+901,Silair,84r,1829-09-22,humboldt
+902,Orsk,84r,1829-09-22,humboldt
+903,Berezovskij,84r,1829-09-22,humboldt
+904,Jekaterinburg,84r,1829-09-22,humboldt
+905,Kusa,84r,1829-09-22,humboldt
+906,Zlatoust,84r,1829-09-22,humboldt
+907,Bilimbaj,84r,1829-09-22,humboldt
+908,Silair,84r,1829-09-22,humboldt
+909,Jekaterinburg,84r,1829-09-22,humboldt
+910,Taganaj,84r,1829-09-22,humboldt
+911,Miass (Stadt),84v,1829-09-22,humboldt
+912,Miass (Stadt),84v,1829-09-22,humboldt
+913,Nižnij Tagil,84v,1829-09-22,humboldt
+914,Kyštym,84v,1829-09-22,humboldt
+915,Bogoslovsk,84v,1829-09-22,humboldt
+916,Chiwa,84v,1829-09-22,humboldt
+917,Kyštym,85r,1829-09-22,humboldt
+918,Ural (Gebirge),85r,1829-09-22,humboldt
+919,Kyštym,85r,1829-09-22,humboldt
+920,"Kasli-See, Großer",85r,1829-09-22,humboldt
+921,Ural (Gebirge),85r,1829-09-22,humboldt
+922,Miass (Stadt),85r,1829-09-22,humboldt
+923,Jekaterinburg,85r,1829-09-22,humboldt
+924,Bogoslovsk,85r,1829-09-22,humboldt
+925,Ural (Gebirge),85r,1829-09-22,humboldt
+926,Zjuzel'skij,85r,1829-09-22,humboldt
+927,Polevskoj,85r,1829-09-22,humboldt
+928,Jekaterinburg,85r,1829-09-22,humboldt
+929,Ural (Gebirge),85r,1829-09-22,humboldt
+930,Berezovskij,85r,1829-09-22,humboldt
+931,Zlatoust,85r,1829-09-22,humboldt
+932,Berezovskij,85r,1829-09-22,humboldt
+933,Blagodat',85r,1829-09-22,humboldt
+934,Berezovskij,85r,1829-09-22,humboldt
+935,Bogoslovsk,85r,1829-09-22,humboldt
+936,Berezovskij,85r,1829-09-22,humboldt
+937,Jekaterinburg,85v,1829-09-22,humboldt
+938,Berezovskij,85v,1829-09-22,humboldt
+939,Altaj,85v,1829-09-22,humboldt
+940,Kolyvan',85v,1829-09-22,humboldt
+941,Barnaul,85v,1829-09-22,humboldt
+942,Saratov,85v,1829-09-22,humboldt
+943,Vol’sk,85v,1829-09-22,humboldt
+944,Saratov,85v,1829-09-22,humboldt
+945,Nižnij Tagil,86r,1829-09-22,humboldt
+946,Berlin,86r,1829-09-22,humboldt
+947,Miass (Stadt),86r,1829-09-22,humboldt
+948,Miass (Stadt),86r,1829-09-22,humboldt
+949,Miass (Stadt),86r,1829-09-22,humboldt
+950,Miass (Stadt),86r,1829-09-22,humboldt
+951,Miass (Stadt),86r,1829-09-22,humboldt
+952,Miass (Stadt),86r,1829-09-22,humboldt
+953,Bogoslovsk,86r,1829-09-22,humboldt
+954,Jekaterinburg,86r,1829-09-22,humboldt
+955,Miass (Stadt),86r,1829-09-22,humboldt
+956,Berlin,86r,1829-09-22,humboldt
+957,Ural (Gebirge),86r,1829-09-22,humboldt
+958,Ural (Gebirge),86v,1829-09-22,humboldt
+959,Nev'jansk,86v,1829-09-22,humboldt
+960,Berezovskij,86v,1829-09-22,humboldt
+961,Kungurka,86v,1829-09-22,humboldt
+962,Polevskoj,86v,1829-09-22,humboldt
+963,Kungurka,86v,1829-09-22,humboldt
+964,Polevskoj,86v,1829-09-22,humboldt
+965,Ural (Fluss),86v,1829-09-22,humboldt
+966,Ural (Gebirge),86v,1829-09-22,humboldt
+967,Miass (Stadt),86v,1829-09-22,humboldt
+968,Orenburg (Stadt),86v,1829-09-22,humboldt
+969,Sinara (Fluss),86v,1829-09-22,humboldt
+970,Ural (Gebirge),86v,1829-09-22,humboldt
+971,Jekaterinburg,86v,1829-09-22,humboldt
+972,Ural (Gebirge),86v,1829-09-22,humboldt
+973,Zjuzel'skij,86v,1829-09-22,humboldt
+974,Polevskoj,86v,1829-09-22,humboldt
+975,Jekaterinburg,86v,1829-09-22,humboldt
+976,Miass (Stadt),86v,1829-09-22,humboldt
+977,Ural (Gebirge),86v,1829-09-22,humboldt
+978,Zjuzel'skij,86v,1829-09-22,humboldt
+979,Polevskoj,86v,1829-09-22,humboldt
+980,Jekaterinburg,86v,1829-09-22,humboldt
+981,Ural (Gebirge),86v,1829-09-22,humboldt
+982,Ural (Gebirge),86v,1829-09-22,humboldt
+983,Serebrjanka (Ortschaft),86v,1829-09-22,humboldt
+984,Ural (Gebirge),86v,1829-09-22,humboldt
+985,Kojva,86v,1829-09-22,humboldt
+986,Poludenka,86v,1829-09-22,humboldt
+987,Kačkanar,86v,1829-09-22,humboldt
+988,Čusovaja,86v,1829-09-22,humboldt
+989,Poludenka,86v,1829-09-22,humboldt
+990,Kačkanar,86v,1829-09-22,humboldt
+991,Kojva,86v,1829-09-22,humboldt
+992,Čusovaja,86v,1829-09-22,humboldt
+993,Nižnaja Tura,86v,1829-09-22,humboldt
+994,Serebrjanka (Ortschaft),86v,1829-09-22,humboldt
+995,Visim (Ort),86v,1829-09-22,humboldt
+996,Visim (Ort),86v,1829-09-22,humboldt
+997,Nižnij Tagil,86v,1829-09-22,humboldt
+998,Belaja (Ural),86v,1829-09-22,humboldt
+999,Nižnij Tagil,86v,1829-09-22,humboldt
+1000,Mar't'jan (Fluss),86v,1829-09-22,humboldt
+1001,Nižnij Tagil,86v,1829-09-22,humboldt
+1002,Bilimbaj,86v,1829-09-22,humboldt
+1003,Neiwa,86v,1829-09-22,humboldt
+1004,Ural (Gebirge),86v,1829-09-22,humboldt
+1005,Zjuzel'skij,86v,1829-09-22,humboldt
+1006,Polevskoj,86v,1829-09-22,humboldt
+1007,Jekaterinburg,86v,1829-09-22,humboldt
+1008,Ufalejka,86v,1829-09-22,humboldt
+1009,Ufa (Fluss),86v,1829-09-22,humboldt
+1010,Kyštym,86v,1829-09-22,humboldt
+1011,Ufalejka,86v,1829-09-22,humboldt
+1012,Kyštym,86v,1829-09-22,humboldt
+1013,Ufa (Fluss),86v,1829-09-22,humboldt
+1014,Njazepetrovsk,86v,1829-09-22,humboldt
+1015,Kyštym,86v,1829-09-22,humboldt
+1016,Sak-Elga,87r,1829-09-22,humboldt
+1017,Miass (Fluss),87r,1829-09-22,humboldt
+1018,Sak-Elga,87r,1829-09-22,humboldt
+1019,Sak-Elga,87r,1829-09-22,humboldt
+1020,Miass (Fluss),87r,1829-09-22,humboldt
+1021,Karabaš,87r,1829-09-22,humboldt
+1022,Kyštym,87r,1829-09-22,humboldt
+1023,Sak-Elga,87r,1829-09-22,humboldt
+1024,Miass (Stadt),87r,1829-09-22,humboldt
+1025,Sak-Elga,87r,1829-09-22,humboldt
+1026,Sak-Elga,87r,1829-09-22,humboldt
+1027,Sak-Elga,87r,1829-09-22,humboldt
+1028,Čeremšanka,87r,1829-09-22,humboldt
+1029,Čeremšanka,87r,1829-09-22,humboldt
+1030,Atkus,87r,1829-09-22,humboldt
+1031,Atkus,87r,1829-09-22,humboldt
+1032,Miass (Fluss),87r,1829-09-22,humboldt
+1033,Kyštym,87r,1829-09-22,humboldt
+1034,Kasli (Stadt),87r,1829-09-22,humboldt
+1035,Kyštym,87r,1829-09-22,humboldt
+1036,"Mauk, Kleiner (Fluss)",87r,1829-09-22,humboldt
+1037,"Mauk, Großer (Fluss)",87r,1829-09-22,humboldt
+1038,"Kasli-See, Großer",87r,1829-09-22,humboldt
+1039,"Kasli-See, Großer",87r,1829-09-22,humboldt
+1040,"Kasli-See, Kleiner",87r,1829-09-22,humboldt
+1041,Sinara (See),87r,1829-09-22,humboldt
+1042,Kyštym,87r,1829-09-22,humboldt
+1043,Ural (Gebirge),87r,1829-09-22,humboldt
+1044,Zjuzel'skij,87r,1829-09-22,humboldt
+1045,Polevskoj,87r,1829-09-22,humboldt
+1046,Jekaterinburg,87r,1829-09-22,humboldt
+1047,Nižnij Tagil,87r,1829-09-22,humboldt
+1048,Bogoslovsk,87r,1829-09-22,humboldt
+1049,Berezovskij,87r,1829-09-22,humboldt
+1050,Ural (Fluss),87v,1829-09-22,humboldt
+1051,Orsk,87v,1829-09-22,humboldt
+1052,Guberlinskische Hügel,87v,1829-09-22,humboldt
+1053,Mugodschar-Gebirge,87v,1829-09-22,humboldt
+1054,Ustjurt-Plateau,87v,1829-09-22,humboldt
+1055,Mugodschar-Gebirge,87v,1829-09-22,humboldt
+1056,Orenburg (Stadt),87v,1829-09-22,humboldt
+1057,Syrdarja,87v,1829-09-22,humboldt
+1058,Ustjurt-Plateau,87v,1829-09-22,humboldt
+1059,Kaspisches Meer,87v,1829-09-22,humboldt
+1060,Ustjurt-Plateau,87v,1829-09-22,humboldt
+1061,Aralsee,87v,1829-09-22,humboldt
+1062,Bogdo,87v,1829-09-22,humboldt
+1063,Wolga,87v,1829-09-22,humboldt
+1064,Ural (Fluss),87v,1829-09-22,humboldt
+1065,Bogdo,87v,1829-09-22,humboldt
+1066,Wolga,87v,1829-09-22,humboldt
+1067,Wolga,87v,1829-09-22,humboldt
+1068,Bogdo,87v,1829-09-22,humboldt
+1069,Sibirien,87v,1829-09-22,humboldt
+1070,Buchara,87v,1829-09-22,humboldt
+1071,Samarkand,87v,1829-09-22,humboldt
+1072,Troizk,87v,1829-09-22,humboldt
+1073,Orenburg (Stadt),88r,1829-09-22,humboldt
+1074,Petropavlovskij (Orenburg),88r,1829-09-22,humboldt
+1075,Verchne-Ural'sk,88r,1829-09-22,humboldt
+1076,Kaspisches Meer,88r,1829-09-22,humboldt
+1077,Arktischer Ozean,88r,1829-09-22,humboldt
+1078,Petropavlovskij (Orenburg),88r,1829-09-22,humboldt
+1079,Urtazym,88r,1829-09-22,humboldt
+1080,Petropavlovskij (Orenburg),88r,1829-09-22,humboldt
+1081,Tobol,88r,1829-09-22,humboldt
+1082,Mugodschar-Gebirge,88r,1829-09-22,humboldt
+1083,Verchne-Ural'sk,88r,1829-09-22,humboldt
+1084,Orsk,88r,1829-09-22,humboldt
+1085,Mugodschar-Gebirge,88r,1829-09-22,humboldt
+1086,Aralsee,88r,1829-09-22,humboldt
+1087,Kaspisches Meer,88r,1829-09-22,humboldt
+1088,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1089,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1090,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1091,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1092,Aralsee,88r,1829-09-22,humboldt
+1093,Kaspisches Meer,88r,1829-09-22,humboldt
+1094,Amudarja,88r,1829-09-22,humboldt
+1095,Aralsee,88r,1829-09-22,humboldt
+1096,Chiwa,88r,1829-09-22,humboldt
+1097,Aralsee,88r,1829-09-22,humboldt
+1098,Orenburg (Stadt),88r,1829-09-22,humboldt
+1099,Mugodschar-Gebirge,88r,1829-09-22,humboldt
+1100,Kaspisches Meer,88r,1829-09-22,humboldt
+1101,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1102,Aralsee,88r,1829-09-22,humboldt
+1103,Ustjurt-Plateau,88r,1829-09-22,humboldt
+1104,Jekaterinburg,88v,1829-09-22,humboldt
+1105,Sankt Petersburg,88v,1829-09-22,humboldt
+1106,"Taganaj, Großer",88v,1829-09-22,humboldt
+1107,"Taganaj, Kleiner",88v,1829-09-22,humboldt
+1108,Aleksandrovskaja Sopka,88v,1829-09-22,humboldt
+1109,Jurma,88v,1829-09-22,humboldt
+1110,Urenga,88v,1829-09-22,humboldt
+1111,Auštau,88v,1829-09-22,humboldt
+1112,Zlatoust,88v,1829-09-22,humboldt
+1113,"Taganaj, Großer",88v,1829-09-22,humboldt
+1114,Zlatoust,88v,1829-09-22,humboldt
+1115,Zlatoust,88v,1829-09-22,humboldt
+1116,Zlatoust,88v,1829-09-22,humboldt
+1117,Zlatoust,88v,1829-09-22,humboldt
+1118,Aj,88v,1829-09-22,humboldt
+1119,Aleksandrovskaja Sopka,88v,1829-09-22,humboldt
+1120,Aj,88v,1829-09-22,humboldt
+1121,Tobolsk,88v,1829-09-22,humboldt
+1122,Orenburg (Stadt),88v,1829-09-22,humboldt
+1123,Zlatoust,88v,1829-09-22,humboldt
+1124,Aralsee,88v,1829-09-22,humboldt
+1125,Arktischer Ozean,88v,1829-09-22,humboldt
+1126,Aralsee,88v,1829-09-22,humboldt
+1127,Tobol,88v,1829-09-22,humboldt
+1128,Sibirien,88v,1829-09-22,humboldt
+1129,Ischim (Fluss),88v,1829-09-22,humboldt
+1130,Ural (Gebirge),88v,1829-09-22,humboldt
+1131,Miass (Stadt),89r,1829-09-22,humboldt
+1132,Zlatoust,89r,1829-09-22,humboldt
+1133,Miass (Stadt),89r,1829-09-22,humboldt
+1134,Syrostan (Dorf),89r,1829-09-07,humboldt
+1135,Zlatoust,89r,1829-09-07,humboldt
+1136,Zlatoust,89r,1829-09-08,humboldt
+1137,Zlatoust,89r,1829-09-08,humboldt
+1138,Syrostan (Dorf),89r,1829-09-10,humboldt
+1139,Ilmensee,89r,1829-09-10,humboldt
+1140,Ural (Gebirge),89r,1829-09-10,humboldt
+1141,Miass (Stadt),89r,1829-09-10,humboldt
+1142,Syrostan (Dorf),89r,1829-09-10,humboldt
+1143,Beresowka,89r,1829-09-10,humboldt
+1144,Miass (Fluss),89r,1829-09-10,humboldt
+1145,Zlatoust,89r,1829-09-10,humboldt
+1146,Syrostan (Dorf),89r,1829-09-10,humboldt
+1147,Kaspisches Meer,89v,1829-09-10,humboldt
+1148,Sarysu,89v,1829-09-10,humboldt
+1149,Sarysu,89v,1829-09-10,humboldt
+1150,Amudarja,89v,1829-09-10,humboldt
+1151,Sarysu,89v,1829-09-10,humboldt
+1152,Amudarja,89v,1829-09-10,humboldt
+1153,Kaspisches Meer,89v,1829-09-10,humboldt
+1154,Aralsee,89v,1829-09-10,humboldt
+1155,Sarysu,89v,1829-09-10,humboldt
+1156,Aralsee,89v,1829-09-10,humboldt
+1157,Teliköl,89v,1829-09-10,humboldt
+1158,Teliköl,89v,1829-09-10,humboldt
+1159,Sarysu,89v,1829-09-10,humboldt
+1160,Teliköl,89v,1829-09-10,humboldt
+1161,Sarysu,89v,1829-09-10,humboldt
+1162,Teliköl,89v,1829-09-10,humboldt
+1163,Orenburg (Stadt),89v,1829-09-10,humboldt
+1164,Kyštym,90r,1829-09-10,humboldt
+1165,Ustjurt-Plateau,90r,1829-09-10,humboldt
+1166,Troizk,90r,1829-09-10,humboldt
+1167,Syrdarja,90r,1829-09-10,humboldt
+1168,Sozak,90r,1829-09-10,humboldt
+1169,Turkestan (Stadt),90r,1829-09-10,humboldt
+1170,Kokand,90r,1829-09-10,humboldt
+1171,Orenburg (Stadt),90r,1829-09-10,humboldt
+1172,Turkestan,90r,1829-09-10,humboldt
+1173,Turkestan (Stadt),90r,1829-09-10,humboldt
+1174,Kokand,90r,1829-09-10,humboldt
+1175,Taschkent,90r,1829-09-10,humboldt
+1176,Chudžand,90r,1829-09-10,humboldt
+1177,Kokand,90r,1829-09-10,humboldt
+1178,Turkestan (Stadt),90r,1829-09-10,humboldt
+1179,Sozak,90r,1829-09-10,humboldt
+1180,Kokand,90r,1829-09-10,humboldt
+1181,Taschkent,90r,1829-09-10,humboldt
+1182,Kaschgar,90r,1829-09-10,humboldt
+1183,Samarkand,90r,1829-09-10,humboldt
+1184,Buchara,90r,1829-09-10,humboldt
+1185,Buchara,90r,1829-09-10,humboldt
+1186,Chiwa,90r,1829-09-10,humboldt
+1187,Urganch,90r,1829-09-10,humboldt
+1188,Kokand,90r,1829-09-10,humboldt
+1189,Taschkent,90r,1829-09-10,humboldt
+1190,Turkestan (Stadt),90r,1829-09-10,humboldt
+1191,Sol'-Iletsk,90v,1829-09-10,humboldt
+1192,Orenburg (Stadt),90v,1829-09-10,humboldt
+1193,Orenburg (Stadt),90v,1829-09-10,humboldt
+1194,Wolga,90v,1829-09-10,humboldt
+1195,Sankt Petersburg,90v,1829-09-10,humboldt
+1196,Sol'-Iletsk,91r,1829-09-10,humboldt
+1197,Orenburg (Stadt),91r,1829-09-10,humboldt
+1198,Sol'-Iletsk,91r,1829-09-10,humboldt
+1199,Sol'-Iletsk,91r,1829-09-10,humboldt
+1200,Guberlinskische Hügel,91r,1829-09-10,humboldt
+1201,Polen,91v,1829-09-10,humboldt
+1202,Ural (Gebirge),91v,1829-09-10,humboldt
+1203,Orsk,91v,1829-09-10,humboldt
+1204,Ural (Fluss),91v,1829-09-10,humboldt
+1205,Ural (Gebirge),91v,1829-09-10,humboldt
+1206,Jekaterinburg,91v,1829-09-10,humboldt
+1207,Sinara (Fluss),91v,1829-09-10,humboldt
+1208,Valdajhöhen,92r,1829-09-10,humboldt
+1209,Moskau,92r,1829-09-10,humboldt
+1210,Sol'-Iletsk,92r,1829-09-10,humboldt
+1211,Taschkent,93r,1829-09-10,humboldt
+1212,Turkestan (Stadt),93r,1829-09-10,humboldt
+1213,Sozak,93r,1829-09-10,humboldt
+1214,Sozak,93r,1829-09-10,humboldt
+1215,Turkestan (Stadt),93r,1829-09-10,humboldt
+1216,Kokand,93r,1829-09-10,humboldt
+1217,Taschkent,93r,1829-09-10,humboldt
+1218,Samarkand,93r,1829-09-10,humboldt
+1219,Serafschankette,93r,1829-09-10,humboldt
+1220,Hissargebirge,93r,1829-09-10,humboldt
+1221,Kaschgar,93r,1829-09-10,humboldt
+1222,Kokand,93r,1829-09-10,humboldt
+1223,Sarysu,93r,1829-09-10,humboldt
+1224,Kaschgar,93r,1829-09-10,humboldt
+1225,Kokand,93r,1829-09-10,humboldt
+1226,Buchara,93r,1829-09-10,humboldt
+1227,Chiwa,93r,1829-09-10,humboldt
+1228,Buchara,93r,1829-09-10,humboldt
+1229,Kaschgar,93r,1829-09-10,humboldt
+1230,Ural (Gebirge),93r,1829-09-10,humboldt
+1231,Mazandaran,93r,1829-09-10,humboldt
+1232,Aralsee,93r,1829-09-10,humboldt
+1233,Samarkand,93r,1829-09-10,humboldt
+1234,Turkestan (Stadt),93r,1829-09-10,humboldt
+1235,Tian Shan,93r,1829-09-10,humboldt
+1236,Taschkent,93r,1829-09-10,humboldt
+1237,Kamtschatka,93r,1829-09-10,humboldt
+1238,Semej,93v,1829-09-10,humboldt
+1239,Balchaš-See,93v,1829-09-10,humboldt
+1240,Ili (Fluss),93v,1829-09-10,humboldt
+1241,Semej,94r,1829-09-10,humboldt
+1242,Semej,94r,1829-09-10,humboldt
+1243,Indus,94r,1829-09-10,humboldt
+1244,Kaschgar,94r,1829-09-10,humboldt
+1245,Omsk,94r,1829-09-10,humboldt
+1246,Semej,94r,1829-09-10,humboldt
+1247,Zajsan,94r,1829-09-10,humboldt
+1248,Balchaš-See,94r,1829-09-10,humboldt
+1249,Kaschgar,94r,1829-09-10,humboldt
+1250,Semej,94r,1829-09-10,humboldt
+1251,Kokand,94r,1829-09-10,humboldt
+1252,Balchaš-See,94r,1829-09-10,humboldt
+1253,Balchaš-See,94r,1829-09-10,humboldt
+1254,Semej,94r,1829-09-10,humboldt
+1255,Smeïnogorsk,94r,1829-09-10,humboldt
+1256,Semej,94r,1829-09-10,humboldt
+1257,Semej,94r,1829-09-10,humboldt
+1258,Tobolsk,94r,1829-09-10,humboldt
+1259,Taschkent,94r,1829-09-10,humboldt
+1260,Ili (Fluss),94r,1829-09-10,humboldt
+1261,Orenburg (Stadt),94r,1829-09-10,humboldt
+1262,Tobol,94r,1829-09-10,humboldt
+1263,Ust'-Ujskoe,94r,1829-09-10,humboldt
+1264,Orenburg (Stadt),94r,1829-09-10,humboldt
+1265,Orenburg (Stadt),94r,1829-09-10,humboldt
+1266,Orenburg (Stadt),94v,1829-09-10,humboldt
+1267,Ilek (Ortschaft),94v,1829-09-10,humboldt
+1268,Ilek (Fluss),94v,1829-09-10,humboldt
+1269,Ural (Fluss),94v,1829-09-10,humboldt
+1270,Ilek (Ortschaft),94v,1829-09-10,humboldt
+1271,Ugol’noe,94v,1829-09-10,humboldt
+1272,Orenburg (Stadt),94v,1829-09-10,humboldt
+1273,Astrachan (Stadt),94v,1829-09-10,humboldt
+1274,Elton-See,94v,1829-09-10,humboldt
+1275,Ural (Gebirge),94v,1829-09-10,humboldt
+1276,Ural (Gebirge),94v,1829-09-10,humboldt
+1277,Miass (Fluss),94v,1829-09-10,humboldt
+1278,Miass (Stadt),94v,1829-09-10,humboldt
+1279,Turgojak (See),94v,1829-09-10,humboldt
+1280,Miass (Stadt),94v,1829-09-10,humboldt
+1281,Troizk,94v,1829-09-10,humboldt
+1282,Ural (Gebirge),94v,1829-09-10,humboldt
+1283,Turgojak (See),94v,1829-09-10,humboldt
+1284,Kysykul’,94v,1829-09-10,humboldt
+1285,Miass (Stadt),94v,1829-09-10,humboldt
+1286,Ural (Gebirge),94v,1829-09-10,humboldt
+1287,Zlatoust,94v,1829-09-10,humboldt
+1288,Zlatoust,94v,1829-09-10,humboldt
+1289,Zlatoust,94v,1829-09-10,humboldt
+1290,Esaulka,94v,1829-09-10,humboldt
+1291,Čërnaja (Aj),94v,1829-09-10,humboldt
+1292,Balašicha,94v,1829-09-10,humboldt
+1293,Zlatoust,94v,1829-09-10,humboldt
+1294,Nazminskij Chrebet,94v,1829-09-10,humboldt
+1295,Zlatoust,94v,1829-09-10,humboldt
+1296,Nazminskij Chrebet,94v,1829-09-10,humboldt
+1297,Zlatoust,94v,1829-09-10,humboldt
+1298,"Iremel', Bol'šoj",94v,1829-09-10,humboldt
+1299,Konžakovskij Kamen',94v,1829-09-10,humboldt
+1300,Denežkin Kamen',94v,1829-09-10,humboldt
+1301,Denežkin Kamen',94v,1829-09-10,humboldt
+1302,Verchne-Ural'sk,94v,1829-03-20,humboldt
+1303,Verchne-Ural'sk,94v,1829-03-20,humboldt
+1304,Verchne-Ural'sk,94v,1829-03-20,humboldt
+1305,Kizilskoye,94v,1829-03-20,humboldt
+1306,"Magnitnaja (Festung, Ortschaft)",94v,1829-03-20,humboldt
+1307,Verchne-Ural'sk,94v,1829-03-20,humboldt
+1308,Orsk,94v,1829-03-20,humboldt
+1309,Guberlinskische Hügel,94v,1829-03-20,humboldt
+1310,Guberlinsk ,94v,1829-03-20,humboldt
+1311,Verchne-Ural'sk,94v,1829-03-20,humboldt
+1312,Orenburg (Stadt),94v,1829-03-20,humboldt
+1313,Orenburg (Stadt),94v,1829-03-20,humboldt
+1314,Orsk,94v,1829-03-20,humboldt
+1315,Orenburg (Stadt),94v,1829-03-20,humboldt
+1316,Orenburg (Stadt),94v,1829-03-20,humboldt
+1317,Atyrau,94v,1829-03-20,humboldt
+1318,Orenburg (Stadt),94v,1829-03-20,humboldt
+1319,Orenburg (Stadt),94v,1829-03-20,humboldt
+1320,Miass (Stadt),95r,1829-03-20,humboldt
+1321,Orenburg (Stadt),95r,1829-03-20,humboldt
+1322,Astrachan (Stadt),95r,1829-03-20,humboldt
+1323,Miass (Stadt),95r,1829-03-20,humboldt
+1324,Ural (Gebirge),95r,1829-03-20,humboldt
+1325,Ural (Gebirge),95r,1829-03-20,humboldt
+1326,Auškul’ (See),95r,1829-03-20,humboldt
+1327,Poljakovka,95r,1829-03-20,humboldt
+1328,Černovskoe,95r,1829-03-20,humboldt
+1329,Miass (Stadt),95r,1829-03-20,humboldt
+1330,Černovskoe,95r,1829-03-20,humboldt
+1331,Ural (Gebirge),95r,1829-03-20,humboldt
+1332,Miass (Stadt),95r,1829-03-20,humboldt
+1333,Ilmensee,95r,1829-03-20,humboldt
+1334,Kolyvanskoe ozero,95r,1829-03-20,humboldt
+1335,Buchtarma,95r,1829-03-20,humboldt
+1336,Kundravy,95r,1829-03-20,humboldt
+1337,Černovskoe,95r,1829-03-20,humboldt
+1338,Čaškovskij Chrebet,95r,1829-03-20,humboldt
+1339,Kolyvanskoe ozero,95r,1829-09-02,humboldt
+1340,Troizk,95r,1829-09-02,humboldt
+1341,Miass (Stadt),95r,1829-09-02,humboldt
+1342,Troizk,95r,1829-09-02,humboldt
+1343,Miass (Stadt),95r,1829-09-02,humboldt
+1344,Miass (Stadt),95r,1829-09-02,humboldt
+1345,Verchne-Ural'sk,95r,1829-09-02,humboldt
+1346,Verchne-Ural'sk,95r,1829-09-02,humboldt
+1347,Miass (Stadt),95r,1829-09-02,humboldt
+1348,Ural (Fluss),95r,1829-09-02,humboldt
+1349,Chudolaz,95r,1829-09-02,humboldt
+1350,Kizilskoye,95r,1829-09-02,humboldt
+1351,Grjaznušinskij,95r,1829-09-02,humboldt
+1352,Kizilskoye,95r,1829-09-02,humboldt
+1353,Chudolaz,95r,1829-09-02,humboldt
+1354,Grjaznušinskij,95r,1829-09-02,humboldt
+1355,Chudolaz,95r,1829-09-02,humboldt
+1356,Grjaznušinskij,95r,1829-09-02,humboldt
+1357,Vicenza,95r,1829-09-02,humboldt
+1358,Vicenza,95r,1829-09-02,humboldt
+1359,Euganeische Hügel,95r,1795-07-04,humboldt
+1360,Ural (Gebirge),95r,1796-02-07,humboldt
+1361,Grjaznušinskij,95r,1796-02-07,humboldt
+1362,Ural (Gebirge),95r,1796-02-07,humboldt
+1363,Chudolaz,95r,1796-02-07,humboldt
+1364,Kizilskoye,95r,1796-02-07,humboldt
+1365,Grjaznušinskij,95r,1796-02-07,humboldt
+1366,Urtazym,95r,1796-02-07,humboldt
+1367,Urtazym,95r,1796-02-07,humboldt
+1368,Guberlinskische Hügel,95r,1796-02-07,humboldt
+1369,Verchne-Ural'sk,95r,1796-02-07,humboldt
+1370,Orsk,95r,1796-02-07,humboldt
+1371,Mugodschar-Gebirge,95v,1796-02-07,humboldt
+1372,Miass (Stadt),95v,1796-02-07,humboldt
+1373,Orsk,95v,1796-02-07,humboldt
+1374,Mugodschar-Gebirge,95v,1796-02-07,humboldt
+1375,Ustjurt-Plateau,95v,1796-02-07,humboldt
+1376,Guberlinsk ,95v,1796-02-07,humboldt
+1377,Aralsee,95v,1796-02-07,humboldt
+1378,Kaspisches Meer,95v,1796-02-07,humboldt
+1379,Ural (Fluss),95v,1796-02-07,humboldt
+1380,Ural (Gebirge),95v,1796-02-07,humboldt
+1381,Orsk,95v,1796-02-07,humboldt
+1382,Ural (Gebirge),95v,1796-02-07,humboldt
+1383,Guberlinsk ,95v,1796-02-07,humboldt
+1384,Iremelgebirge,95v,1796-02-07,humboldt
+1385,Ural (Gebirge),95v,1796-02-07,humboldt
+1386,Miass (Stadt),95v,1829-09-03,humboldt
+1387,Orenburg (Stadt),95v,1829-09-03,humboldt
+1388,Ustjurt-Plateau,95v,1829-09-26,humboldt
+1389,Orenburg (Stadt),95v,1829-09-26,humboldt
+1390,Ural (Gebirge),95v,1829-09-26,humboldt
+1391,Orsk,95v,1829-09-26,humboldt
+1392,Guberlinsk ,95v,1829-09-26,humboldt
+1393,Gir'yal,95v,1829-09-26,humboldt
+1394,Ural (Fluss),95v,1829-09-26,humboldt
+1395,Guberlinsk ,95v,1829-09-26,humboldt
+1396,Orsk,95v,1829-09-26,humboldt
+1397,Ural (Gebirge),95v,1829-09-26,humboldt
+1398,Orsk,95v,1829-09-26,humboldt
+1399,Magnitnaja (Berg),95v,1829-09-26,humboldt
+1400,Oral,95v,1829-09-26,humboldt
+1401,Ural (Fluss),95v,1829-09-26,humboldt
+1402,Ural (Fluss),95v,1829-09-26,humboldt
+1403,Oral,97r,1829-09-26,humboldt
+1404,Oral,97r,1829-09-26,humboldt
+1405,Sankt Petersburg,97r,1829-09-26,humboldt
+1406,"Residenz des Atamans in Uralsk / Haus von David
+                                Martem’janovič Borodin ",97r,1829-09-26,humboldt
+1407,"Residenz des Atamans in Uralsk / Haus von David
+                                Martem’janovič Borodin ",97r,1829-09-26,humboldt
+1408,Samara (Stadt),97r,1829-09-26,humboldt
+1409,Alekseevka,97r,1829-09-30,humboldt
+1410,Samara (Stadt),97r,1829-09-30,humboldt
+1411,Syzran’,97r,1829-09-30,humboldt
+1412,Wolga,97r,1829-09-30,humboldt
+1413,Batraki,97r,1829-09-30,humboldt
+1414,Kostyči,97r,1829-09-30,humboldt
+1415,Starye Kostyči,97r,1829-09-30,humboldt
+1416,Buzuluk,97r,1829-09-30,humboldt
+1417,Samara (Stadt),97r,1829-10-01,humboldt
+1418,Samara (Stadt),97r,1829-10-01,humboldt
+1419,Samara (Stadt),97r,1829-10-01,humboldt
+1420,Sergievsk,97r,1829-10-01,humboldt
+1421,Sergievsk,97r,1829-10-01,humboldt
+1422,Buguruslan,97r,1829-10-01,humboldt
+1423,Buguruslan,97r,1829-10-01,humboldt
+1424,Sergievsk,97r,1829-10-01,humboldt
+1425,Sergievsk,97r,1829-10-01,humboldt
+1426,Sergievsk,97r,1829-10-01,humboldt
+1427,Sok,97r,1829-10-01,humboldt
+1428,Surgut,97r,1829-10-01,humboldt
+1429,Suruš,97r,1829-10-01,humboldt
+1430,Šungut,97r,1829-10-01,humboldt
+1431,Surgut,97r,1829-10-01,humboldt
+1432,Šungut,97r,1829-10-01,humboldt
+1433,Sergievsk,97r,1829-10-01,humboldt
+1434,Surgut,97r,1829-10-01,humboldt
+1435,Sok,97r,1829-10-01,humboldt
+1436,Sergievsk,97r,1829-10-01,humboldt
+1437,Sok,97r,1829-10-01,humboldt
+1438,Bajtugan,97r,1829-10-01,humboldt
+1439,Don,97r,1829-10-01,humboldt
+1440,Lipeck,97r,1829-10-01,humboldt
+1441,Tver',97r,1829-10-01,humboldt
+1442,Turka,97r,1829-10-01,humboldt
+1443,Baikalsee,97r,1829-10-01,humboldt
+1444,Kamtschatka,97r,1829-10-01,humboldt
+1445,Malka,97r,1829-10-01,humboldt
+1446,Baku,96r,1829-10-01,humboldt
+1447,Baku,96r,1829-10-01,humboldt
+1448,Indien,96r,1829-10-01,humboldt
+1449,Baku,96r,1829-10-01,humboldt
+1450,Vol’sk,97v,1829-10-01,humboldt
+1451,Syzran’,97v,1829-10-02,humboldt
+1452,Saratov,97v,1829-10-02,humboldt
+1453,Wolga,97v,1829-10-02,humboldt
+1454,Vol’sk,97v,1829-10-02,humboldt
+1455,Vol’sk,97v,1829-10-02,humboldt
+1456,Astrachan (Stadt),97v,1829-10-02,humboldt
+1457,Dubovka,97v,1829-10-02,humboldt
+1458,Wolga,97v,1829-10-02,humboldt
+1459,Dubovka,97v,1829-10-02,humboldt
+1460,Wolga,97v,1829-10-02,humboldt
+1461,Dubovka,97v,1829-10-02,humboldt
+1462,Dubovka,97v,1829-10-02,humboldt
+1463,Sarepta,97v,1829-10-02,humboldt
+1464,Kaspisches Meer,97v,1829-10-02,humboldt
+1465,Sarepta,97v,1829-10-02,humboldt
+1466,Buzuluk,97v,1829-10-02,humboldt
+1467,Samara (Stadt),97v,1829-10-02,humboldt
+1468,Birjuč'ja kosa,97v,1829-10-02,humboldt
+1469,Četyre Bugry,97v,1829-10-02,humboldt
+1470,Četyre Bugry,97v,1829-10-02,humboldt
+1471,Wolga,97v,1829-10-02,humboldt
+1472,Sarepta,97v,1829-10-02,humboldt
+1473,Sarepta,97v,1829-10-02,humboldt
+1474,Samarkand,97v,1829-10-02,humboldt
+1475,Četyre Bugry,97v,1829-10-02,humboldt
+1476,Wolga,97v,1829-10-02,humboldt
+1477,Birjuč'ja kosa,97v,1829-10-02,humboldt
+1478,Wolga,97v,1829-10-02,humboldt
+1479,Kaspisches Meer,97v,1829-10-02,humboldt
+1480,Astrachan (Stadt),97v,1829-10-02,humboldt
+1481,Kuma,97v,1829-10-02,humboldt
+1482,Terek,97v,1829-10-02,humboldt
+1483,Wolga,97v,1829-10-02,humboldt
+1484,Berlin,97v,1829-10-02,humboldt
+1485,Kaspisches Meer,98r,1829-10-02,humboldt
+1486,Saratov,98r,1829-10-14,humboldt
+1487,Nižnij Novgorod,98r,1829-10-14,humboldt
+1488,Birjuč'ja kosa,98r,1829-10-15,humboldt
+1489,Birjuč'ja kosa,98r,1829-10-15,humboldt
+1490,Kaspisches Meer,98r,1829-10-15,humboldt
+1491,Kaspisches Meer,98r,1829-10-15,humboldt
+1492,Birjuč'ja kosa,98r,1829-10-16,humboldt
+1493,Četyre Bugry,98r,1829-10-16,humboldt
+1494,Četyre Bugry,98r,1829-10-16,humboldt
+1495,Edinburgh,98r,1829-10-16,humboldt
+1496,England,98r,1829-10-16,humboldt
+1497,Baku,98r,1829-10-16,humboldt
+1498,Birjuč'ja kosa,98r,1829-10-16,humboldt
+1499,Birjuč'ja kosa,98r,1829-10-16,humboldt
+1500,Baku,98r,1829-10-16,humboldt
+1501,Kaspisches Meer,98r,1829-10-16,humboldt
+1502,Kaspisches Meer,98r,1829-10-16,humboldt
+1503,Astrachan (Stadt),98r,1829-10-16,humboldt
+1504,Baku,98r,1829-10-16,humboldt
+1505,Kaspisches Meer,98r,1829-10-16,humboldt
+1506,Kaspisches Meer,98r,1828-01-08,humboldt
+1507,Astrachan (Stadt),98r,1828-01-08,humboldt
+1508,Teheran,98r,1828-01-08,humboldt
+1509,Kaspisches Meer,98r,1828-01-08,humboldt
+1510,Baku,98v,1828-01-08,humboldt
+1511,Pogorelaya Plita,98v,1828-01-08,humboldt
+1512,Baku,98v,1828-01-08,humboldt
+1513,Pogorelaya Plita,98v,1828-01-08,humboldt
+1514,Baku,98v,1828-01-08,humboldt
+1515,Baku,98v,1828-01-08,humboldt
+1516,Pogorelaya Plita,98v,1828-01-08,humboldt
+1517,Baku,98v,1828-01-08,humboldt
+1518,Kaspisches Meer,98v,1828-01-08,humboldt
+1519,Wolga,98v,1828-01-08,humboldt
+1520,Wolga,98v,1828-01-08,humboldt
+1521,Kaspisches Meer,98v,1828-01-08,humboldt
+1522,Tarki,98v,1828-01-08,humboldt
+1523,Saratov,98v,1828-01-08,humboldt
+1524,Tarki,98v,1828-01-08,humboldt
+1525,Derbent,98v,1828-01-08,humboldt
+1526,Tarki,99r,1828-01-08,humboldt
+1527,Sankt Petersburg,99r,1828-01-08,humboldt
+1528,Novgorod,99r,1828-01-08,humboldt
+1529,Astrachan (Stadt),99r,1828-01-08,humboldt
+1530,Wolga,99r,1828-01-08,humboldt
+1531,Tarki,99r,1828-01-08,humboldt
+1532,Sal'jan,100r,1828-01-08,humboldt
+1533,Gilan,100r,1828-01-08,humboldt
+1534,Mazandaran,100r,1828-01-08,humboldt
+1535,Mazandaran,100r,1828-01-08,humboldt
+1536,Derbent,100r,1828-01-08,humboldt
+1537,Baku,100r,1828-01-08,humboldt
+1538,Sal'jan,100r,1828-01-08,humboldt
+1539,Bandar Anzali,100r,1828-01-08,humboldt
+1540,Bandar Anzali,100r,1828-01-08,humboldt
+1541,Rascht,100r,1828-01-08,humboldt
+1542,Bandar Anzali,100r,1828-01-08,humboldt
+1543,Rascht,100r,1828-01-08,humboldt
+1544,Kaspisches Meer,100r,1828-01-08,humboldt
+1545,Mazandaran,100r,1828-01-08,humboldt
+1546,Kaukasus,100r,1828-01-08,humboldt
+1547,Kaspisches Meer,100r,1828-01-08,humboldt
+1548,Oral,100v,1828-01-08,humboldt
+1549,Ural (Fluss),100v,1828-01-08,humboldt
+1550,Oral,100v,1828-01-08,humboldt
+1551,Irtyš (Fluss),100v,1828-01-08,humboldt
+1552,Buchtarma,100v,1828-01-08,humboldt
+1553,Ust'-Kamenogorsk,100v,1828-01-08,humboldt
+1554,Orenburg (Stadt),100v,1828-01-08,humboldt
+1555,Wolga,100v,1829-09-29,humboldt
+1556,Syzran’,100v,1829-09-29,humboldt
+1557,Kostyči,100v,1829-09-29,humboldt
+1558,Samara (Stadt),100v,1829-09-29,humboldt
+1559,Syzran’,100v,1829-09-29,humboldt
+1560,Vol’sk,100v,1829-09-29,humboldt
+1561,Saratov,100v,1829-09-29,humboldt
+1562,Saratov,100v,1829-09-29,humboldt
+1563,Kamyšin,100v,1829-09-29,humboldt
+1564,Ust'-Zolicha,100v,1829-10-05,humboldt
+1565,Vol’sk,100v,1829-10-05,humboldt
+1566,Rakhinka,100v,1829-10-05,humboldt
+1567,Wolga,100v,1829-10-05,humboldt
+1568,Elton-See,100v,1829-10-05,humboldt
+1569,Rakhinka,100v,1829-10-05,humboldt
+1570,Orenburg (Stadt),101r,1829-10-27,humboldt
+1571,Moskau,101r,1829-10-27,humboldt
+1572,Voronež,101r,1829-10-27,humboldt
+1573,Orenburg (Stadt),101r,1829-10-27,humboldt
+1574,Ural (Fluss),101r,1829-10-27,humboldt
+1575,Ural (Fluss),101r,1829-10-27,humboldt
+1576,Ul'janovsk,101r,1829-10-27,humboldt
+1577,Samara (Stadt),101r,1829-10-27,humboldt
+1578,Oral,101r,1829-09-28,humboldt
+1579,"Residenz des Atamans in Uralsk / Haus von David
+                                Martem’janovič Borodin ",101r,1829-09-28,humboldt
+1580,Kurmanaevka,101r,1829-09-29,humboldt
+1581,Orenburg (Stadt),101r,1829-09-29,humboldt
+1582,Oral,101r,1829-09-29,humboldt
+1583,Samara (Stadt),101r,1829-09-29,humboldt
+1584,Astrachan (Stadt),101r,1829-09-29,humboldt
+1585,Mojka,101r,1829-09-29,humboldt
+1586,Samara (Stadt),101r,1829-09-30,humboldt
+1587,Wolga,101r,1829-09-30,humboldt
+1588,Wolga,101r,1829-10-01,humboldt
+1589,Batraki,101r,1829-10-01,humboldt
+1590,Wolga,101r,1829-10-01,humboldt
+1591,Širokij Buerak,101r,1829-10-02,humboldt
+1592,Wolga,101v,1829-10-02,humboldt
+1593,Vol’sk,101v,1829-10-02,humboldt
+1594,Wolga,101v,1829-10-02,humboldt
+1595,Samara (Stadt),101v,1829-10-02,humboldt
+1596,Vol’sk,101v,1829-10-02,humboldt
+1597,Vol’sk,101v,1829-10-02,humboldt
+1598,Saratov,101v,1829-10-02,humboldt
+1599,Wolga,101v,1829-10-02,humboldt
+1600,Vol’sk,101v,1829-10-02,humboldt
+1601,Saratov,101v,1829-10-02,humboldt
+1602,Wolga,101v,1829-10-02,humboldt
+1603,Dubovka,101v,1829-10-02,humboldt
+1604,Wolga,101v,1829-10-02,humboldt
+1605,Vol’sk,101v,1829-10-02,humboldt
+1606,Dubovka,101v,1829-10-02,humboldt
+1607,Saratov,101v,1829-10-02,humboldt
+1608,Vol’sk,102r,1829-10-05,humboldt
+1609,Saratov,102r,1829-10-05,humboldt
+1610,Saratov,102r,1829-10-05,humboldt
+1611,Kamyšin,102r,1829-10-05,humboldt
+1612,Wolga,102r,1829-10-05,humboldt
+1613,Saratov,102r,1829-10-05,humboldt
+1614,Wolga,102r,1829-10-05,humboldt
+1615,Dubovka,102r,1829-10-07,humboldt
+1616,Wolga,102r,1829-10-07,humboldt
+1617,Dubovka,102r,1829-10-07,humboldt
+1618,Dubovka,102r,1829-10-07,humboldt
+1619,Kolobovka,102r,1829-10-07,humboldt
+1620,Kolobovka,102r,1829-10-07,humboldt
+1621,Akhtuba,102r,1829-10-07,humboldt
+1622,Saratov,102r,1829-10-07,humboldt
+1623,Wolga,102r,1829-10-07,humboldt
+1624,Saratov,102r,1829-10-07,humboldt
+1625,Akhtuba,102r,1829-10-07,humboldt
+1626,Wolgograd,102r,1829-10-09,humboldt
+1627,Wolgograd,102r,1829-10-09,humboldt
+1628,Wolga,102r,1829-10-09,humboldt
+1629,Sarepta,102r,1829-10-10,humboldt
+1630,Grači,102r,1829-10-10,humboldt
+1631,Wolga,102r,1829-10-11,humboldt
+1632,Enotaevka,102r,1829-10-11,humboldt
+1633,Wolga,102r,1829-10-11,humboldt
+1634,Wolga,102r,1829-10-11,humboldt
+1635,Lebjažinskaja,102v,1829-10-12,humboldt
+1636,Wolga,102v,1829-10-12,humboldt
+1637,Wolga,102v,1829-10-12,humboldt
+1638,Astrachan (Stadt),102v,1829-10-12,humboldt
+1639,Astrachan (Stadt),102v,1829-10-13,humboldt
+1640,Astrachan (Stadt),102v,1829-10-14,humboldt
+1641,Wolga,102v,1829-10-14,humboldt
+1642,Birjuč'ja kosa,102v,1829-10-15,humboldt
+1643,Wolga,102v,1829-10-15,humboldt
+1644,Četyre Bugry,102v,1829-10-16,humboldt
+1645,Wolga,102v,1829-10-17,humboldt
+1646,Wolga,102v,1829-10-17,humboldt
+1647,Astrachan (Stadt),102v,1829-10-17,humboldt
+1648,Wolga,102v,1829-10-18,humboldt
+1649,Astrachan (Stadt),102v,1829-10-18,humboldt
+1650,Elton-See,103r,1829-10-07,humboldt
+1651,Dubovka,103r,1829-10-07,humboldt
+1652,Rakhinka,103r,1829-10-07,humboldt
+1653,Wolga,103r,1829-10-07,humboldt
+1654,Elton-See,103r,1829-10-07,humboldt
+1655,Dubovka,103r,1829-10-07,humboldt
+1656,Wolga,103r,1829-10-07,humboldt
+1657,Rakhinka,103r,1829-10-07,humboldt
+1658,Elton-See,103r,1829-10-07,humboldt
+1659,Rakhinka,103r,1829-10-07,humboldt
+1660,Wolga,103r,1829-10-07,humboldt
+1661,Dubovka,103r,1829-10-07,humboldt
+1662,Oral,103r,1829-10-07,humboldt
+1663,Rakhinka,103r,1829-10-07,humboldt
+1664,Rakhinka,103r,1829-10-07,humboldt
+1665,Elton-See,103r,1829-10-07,humboldt
+1666,Wolga,103r,1829-10-07,humboldt
+1667,Dubovka,103r,1829-10-07,humboldt
+1668,Elton-See,103r,1829-10-07,humboldt
+1669,Inder-See,103r,1829-10-07,humboldt
+1670,Oral,103r,1829-10-07,humboldt
+1671,Atyrau,103r,1829-10-07,humboldt
+1672,Elton-See,103r,1829-10-07,humboldt
+1673,Elton-See,103v,1829-10-07,humboldt
+1674,Sol'-Iletsk,103v,1829-10-07,humboldt
+1675,Elton-See,103v,1829-10-07,humboldt
+1676,Elton-See,103v,1829-10-07,humboldt
+1677,Černovka,103v,1829-10-07,humboldt
+1678,"Samaroda, Große",103v,1829-10-07,humboldt
+1679,"Samaroda, Kleine",103v,1829-10-07,humboldt
+1680,Elton-See,103v,1829-10-07,humboldt
+1681,Elton-See,103v,1829-10-07,humboldt
+1682,Elton-See,103v,1829-10-07,humboldt
+1683,Elton-See,103v,1829-10-07,humboldt
+1684,Elton-See,103v,1829-10-08,humboldt
+1685,Elton-See,103v,1829-10-08,humboldt
+1686,Wolga,103v,1829-10-08,humboldt
+1687,Rakhinka,103v,1829-10-08,humboldt
+1688,Elton-See,103v,1829-10-08,humboldt
+1689,Elton-See,103v,1829-10-08,humboldt
+1690,Kamyšin,103v,1829-10-08,humboldt
+1691,Ulagan,103v,1829-10-08,humboldt
+1692,Atyrau,103v,1829-10-08,humboldt
+1693,Dubovka,103v,1829-10-08,humboldt
+1694,Kamyšin,103v,1829-10-08,humboldt
+1695,Ulagan,103v,1829-10-08,humboldt
+1696,Elton-See,103v,1829-10-08,humboldt
+1697,Elton-See,103v,1829-10-08,humboldt
+1698,Ryn-Peski,103v,1829-10-08,humboldt
+1699,Elton-See,103v,1829-10-22,humboldt
+1700,Atyrau,103v,1829-10-22,humboldt
+1701,Dubovka,103v,1829-10-22,humboldt
+1702,Elton-See,103v,1829-10-22,humboldt
+1703,Kamyšin,103v,1829-10-22,humboldt
+1704,Gor’ko-Solënoye,103v,1829-10-22,humboldt
+1705,Elton-See,103v,1829-10-22,humboldt
+1706,Gor’ko-Solënoye,103v,1829-10-22,humboldt
+1707,Kamyšin,103v,1829-10-22,humboldt
+1708,Elton-See,103v,1829-10-22,humboldt
+1709,Nikolayevsk,103v,1829-10-22,humboldt
+1710,Elton-See,103v,1829-10-22,humboldt
+1711,Kamyšin,103v,1829-10-22,humboldt
+1712,Wolga,103v,1829-10-22,humboldt
+1713,Kamyšin,103v,1829-10-22,humboldt
+1714,Nikolaev,103v,1829-10-22,humboldt
+1715,Astrachan (Stadt),103v,1829-10-22,humboldt
+1716,Botkul',103v,1829-10-22,humboldt
+1717,Saratov,103v,1829-10-22,humboldt
+1718,Elton-See,103v,1829-10-22,humboldt
+1719,Botkul',103v,1829-10-22,humboldt
+1720,Astrachan (Stadt),103v,1829-10-22,humboldt
+1721,Sarepta,104r,1829-10-22,humboldt
+1722,Wolga,105r,1829-10-22,humboldt
+1723,Ili (Fluss),105r,1829-10-22,humboldt
+1724,Sibirien,105r,1829-10-22,humboldt
+1725,Ural (Gebirge),105r,1829-10-22,humboldt
+1726,Wolga,105r,1829-10-22,humboldt
+1727,Wolga,105r,1829-10-22,humboldt
+1728,Astrachan (Stadt),105r,1829-10-22,humboldt
+1729,Astrachan (Stadt),105r,1829-10-22,humboldt
+1730,Zam’yany,105r,1829-10-22,humboldt
+1731,Zam’yany,105r,1829-10-22,humboldt
+1732,Zam’yany,105r,1829-10-22,humboldt
+1733,Wolga,105r,1829-10-22,humboldt
+1734,Wolga,105r,1829-10-21,humboldt
+1735,Akhtuba,105r,1829-10-21,humboldt
+1736,Wolga,105r,1829-10-22,humboldt
+1737,Wolga,105r,1829-10-22,humboldt
+1738,Wolga,105r,1829-10-22,humboldt
+1739,Zam’yany,105r,1829-10-22,humboldt
+1740,Wolga,105r,1829-10-10,humboldt
+1741,Zam’yany,105r,1829-10-10,humboldt
+1742,Wolga,105r,1829-10-10,humboldt
+1743,Zam’yany,105r,1829-10-10,humboldt
+1744,Wolga,105r,1829-10-10,humboldt
+1745,Tibet,105r,1829-10-10,humboldt
+1746,Chiwa,105r,1829-10-10,humboldt
+1747,Astrachan (Stadt),105r,1829-10-10,humboldt
+1748,Ufa (Stadt),105r,1829-10-10,humboldt
+1749,Wolga,105r,1829-10-10,humboldt
+1750,Wolga,105v,1829-10-10,humboldt
+1751,Wolga,105v,1829-10-10,humboldt
+1752,Wolga,105v,1829-10-10,humboldt
+1753,Seroglazka,105v,1829-10-10,humboldt
+1754,Seroglazka,105v,1829-10-10,humboldt
+1755,Sarepta,105v,1829-10-10,humboldt
+1756,Seroglazka,105v,1829-10-10,humboldt
+1757,Zam’yany,105v,1829-10-10,humboldt
+1758,Wolga,105v,1829-10-10,humboldt
+1759,Zam’yany,105v,1829-10-10,humboldt
+1760,Enotaevka,105v,1829-10-10,humboldt
+1761,Akhtuba,105v,1829-10-10,humboldt
+1762,Astrachan (Stadt),105v,1829-10-10,humboldt
+1763,Nižne-Kolymsk,106r,1829-10-10,humboldt
+1764,Jakutsk (Stadt),106r,1829-10-10,humboldt
+1765,Nižne-Kolymsk,106r,1829-10-10,humboldt
+1766,Kolyma,106r,1829-10-10,humboldt
+1767,Kolyma,106r,1829-10-10,humboldt
+1768,Cape Shelagsky,106r,1829-10-10,humboldt
+1769,Sibirien,106r,1829-10-10,humboldt
+1770,Irkutsk,106r,1829-10-10,humboldt
+1771,Jakutien (Region),106r,1829-10-10,humboldt
+1772,Jakutsk (Stadt),106r,1829-10-10,humboldt
+1773,Irkutsk,106r,1829-10-10,humboldt
+1774,Tobolsk,106r,1829-10-10,humboldt
+1775,Ochotsk,106r,1829-10-10,humboldt
+1776,Jakutsk (Stadt),106r,1829-10-10,humboldt
+1777,Nižne-Kolymsk,106r,1829-10-10,humboldt
+1778,Sibirien,106r,1829-10-10,humboldt
+1779,Irkutsk,106r,1829-10-10,humboldt
+1780,Tobolsk,106r,1829-10-10,humboldt
+1781,Voronež,106r,1829-10-10,humboldt
+1782,Voronež,106r,1829-10-10,humboldt
+1783,Tula (Russland),106r,1829-10-10,humboldt
+1784,Sankt Petersburg,106r,1829-10-10,humboldt
+1785,Wolga,106r,1829-10-10,humboldt
+1786,Irtyš (Fluss),106r,1829-10-10,humboldt
+1787,Ob,106r,1829-10-10,humboldt
+1788,Indigirka,106r,1829-10-10,humboldt
+1789,Jablonovygebirge,106r,1829-10-10,humboldt
+1790,Ochotsk,106r,1829-10-10,humboldt
+1791,Irkutsk,106r,1829-10-10,humboldt
+1792,Arktischer Ozean,106r,1829-10-10,humboldt
+1793,Kaspisches Meer,106r,1829-10-10,humboldt
+1794,Indigirka,106r,1829-10-10,humboldt
+1795,Elton-See,106v,1829-10-10,humboldt
+1796,Dubovka,106v,1829-10-10,humboldt
+1797,Elton-See,106v,1829-10-10,humboldt
+1798,Elton-See,106v,1829-10-10,humboldt
+1799,Sarepta,106v,1829-10-10,humboldt
+1800,Grači,106v,1829-10-10,humboldt
+1801,Astrachan (Stadt),106v,1829-10-10,humboldt
+1802,Wolga,106v,1829-10-10,humboldt
+1803,Birjuč'ja kosa,106v,1829-10-10,humboldt
+1804,Kaspisches Meer,106v,1829-10-10,humboldt
+1805,Četyre Bugry,106v,1829-10-10,humboldt
+1806,Četyre Bugry,106v,1829-10-10,humboldt
+1807,Wolga,106v,1829-10-10,humboldt
+1808,Astrachan (Stadt),106v,1829-10-10,humboldt
+1809,Moskau,106v,1829-10-10,humboldt
+1810,Wolga,106v,1829-10-10,humboldt
+1811,Wolga,106v,1829-10-10,humboldt
+1812,Zam’yany,106v,1829-10-10,humboldt
+1813,Wolga,106v,1829-10-21,humboldt
+1814,Kaspisches Meer,106v,1829-10-21,humboldt
+1815,Orenburg (Stadt),106v,1829-10-21,humboldt
+1816,Wolga,107r,1829-10-21,humboldt
+1817,Astrachan (Stadt),107r,1829-10-21,humboldt
+1818,Lebjažinskaja,107r,1829-10-21,humboldt
+1819,Wolga,107r,1829-10-21,humboldt
+1820,Zam’yany,107r,1829-10-22,humboldt
+1821,Sarepta,107r,1829-10-24,humboldt
+1822,Sarepta,107r,1829-10-24,humboldt
+1823,Don,107r,1829-10-25,humboldt
+1824,Don,107r,1829-10-25,humboldt
+1825,Kaspisches Meer,107r,1829-10-25,humboldt
+1826,Don,107r,1829-10-25,humboldt
+1827,Semijarka,107r,1829-10-25,humboldt
+1828,Taganaj,107r,1829-09-08,humboldt
+1829,Kaspisches Meer,108v,1829-09-08,humboldt
+1830,Četyre Bugry,108v,1829-09-08,humboldt
+1831,Birjuč'ja kosa,108v,1829-09-08,humboldt
+1832,Četyre Bugry,108v,1829-09-08,humboldt
+1833,Kaspisches Meer,108v,1829-09-08,humboldt
+1834,Četyre Bugry,108v,1829-10-16,humboldt
+1835,Četyre Bugry,108v,1829-10-16,humboldt
+1836,Četyre Bugry,108v,1829-10-16,humboldt
+1837,Četyre Bugry,108v,1829-10-16,humboldt
+1838,Četyre Bugry,108v,1829-10-16,humboldt
+1839,Birjuč'ja kosa,108v,1829-10-16,humboldt
+1840,Četyre Bugry,108v,1829-10-16,humboldt
+1841,Kaspisches Meer,108v,1829-10-16,humboldt
+1842,Kaspisches Meer,108v,1829-10-16,humboldt
+1843,Miass (Stadt),109r,1829-10-16,humboldt
+1844,Astrachan (Stadt),109r,1829-10-16,humboldt
+1845,Vol’sk,109r,1829-10-16,humboldt
+1846,Dubovka,109r,1829-10-16,humboldt
+1847,Sarepta,109r,1829-10-16,humboldt
+1848,Kaspisches Meer,109r,1827-03-12,humboldt
+1849,Grači,109r,1827-03-12,humboldt
+1850,Enotaevka,109r,1827-03-12,humboldt
+1851,Enotaevka,109r,1827-03-12,humboldt
+1852,Enotaevka,109r,1827-03-12,humboldt
+1853,Astrachan (Stadt),109r,1827-03-12,humboldt
+1854,Astrachan (Stadt),109r,1827-03-12,humboldt
+1855,Tiflis,109r,1827-03-12,humboldt
+1856,Buchara,109r,1827-03-12,humboldt
+1857,Petropavlovsk (Omsk),109r,1827-03-12,humboldt
+1858,Semej,109r,1827-03-12,humboldt
+1859,Astrachan (Stadt),109r,1827-03-12,humboldt
+1860,Kaspisches Meer,109r,1827-03-12,humboldt
+1861,Četyre Bugry,109r,1827-03-12,humboldt
+1862,Kaspisches Meer,109r,1827-03-12,humboldt
+1863,Valdajhöhen,110r,1829-10-16,humboldt
+1864,Valdaj,110r,1829-10-16,humboldt
+1865,Wolga,110r,1829-10-16,humboldt
+1866,Wolga,110r,1829-10-16,humboldt
+1867,Wolga,110r,1829-10-16,humboldt
+1868,Orenburg (Stadt),110r,1829-10-16,humboldt
+1869,Buchara,110r,1829-10-16,humboldt
+1870,Baikalsee,110r,1829-10-16,humboldt
+1871,Tobolsk,110r,1829-10-16,humboldt
+1872,Irkutsk,110r,1829-10-16,humboldt
+1873,Baikalsee,110r,1829-10-16,humboldt
+1874,Kaspisches Meer,111r,1829-10-16,humboldt
+1875,Aralsee,111r,1829-10-16,humboldt
+1876,Sankt Petersburg,111r,1829-10-16,humboldt
+1877,Aralsee,111r,1829-10-16,humboldt
+1878,Aralsee,111r,1829-10-16,humboldt
+1879,Kaspisches Meer,111r,1829-10-16,humboldt
+1880,Aralsee,111r,1829-10-16,humboldt
+1881,Ustjurt-Plateau,111r,1829-10-16,humboldt
+1882,Mugodschar-Gebirge,111r,1829-10-16,humboldt
+1883,Mugodschar-Gebirge,111r,1829-10-16,humboldt
+1884,Aralsee,111r,1829-09-26,humboldt
+1885,Kaspisches Meer,111r,1829-09-26,humboldt
+1886,Mugodschar-Gebirge,111r,1829-09-26,humboldt
+1887,Ustjurt-Plateau,111r,1829-09-26,humboldt
+1888,Chiwa,111r,1829-09-26,humboldt
+1889,Ustjurt-Plateau,111r,1829-09-26,humboldt
+1890,Kaspisches Meer,111r,1829-09-26,humboldt
+1891,Aralsee,111r,1829-09-26,humboldt
+1892,Aralsee,111r,1829-09-26,humboldt
+1893,Kaspisches Meer,111r,1829-09-26,humboldt
+1894,Aralsee,111r,1829-09-26,humboldt
+1895,Kaspisches Meer,111r,1829-09-26,humboldt
+1896,Ustjurt-Plateau,111r,1829-09-26,humboldt
+1897,Smeïnogorsk,112v,1829-09-26,humboldt
+1898,Ust'-Kamenogorsk,112v,1829-09-26,humboldt
+1899,Barnaul,112v,1829-09-26,humboldt
+1900,Barnaul,112v,1829-09-26,humboldt
+1901,Baku,112v,1829-09-26,humboldt
+1902,Kaspisches Meer,112v,1829-09-26,humboldt
+1903,Astrachan (Stadt),112v,1829-09-26,humboldt
+1904,Četyre Bugry,112v,1829-09-26,humboldt
+1905,Četyre Bugry,112v,1829-09-26,humboldt
+1906,Kaspisches Meer,112v,1829-09-26,humboldt
+1907,Astrachan (Stadt),114r,1829-10-16,humboldt
+1908,Don,114r,1829-10-16,humboldt
+1909,Kaukasus,114r,1829-10-16,humboldt
+1910,Asowsches Meer,114r,1829-10-16,humboldt
+1911,Kaspisches Meer,114r,1829-10-16,humboldt
+1912,Georgien,114r,1829-10-16,humboldt
+1913,Georgien,114r,1829-10-16,humboldt
+1914,Georgien,114r,1829-10-16,humboldt
+1915,Krim,114r,1829-10-16,humboldt
+1916,Krim,114r,1829-10-16,humboldt
+1917,Aluschta,114r,1829-10-16,humboldt
+1918,Sankt Petersburg,114r,1829-10-16,humboldt
+1919,Riga,114r,1829-10-16,humboldt
+1920,Ostpreußen,114r,1829-10-16,humboldt
+1921,Elbing,114r,1829-10-16,humboldt
+1922,Kaliningrad,114r,1829-10-16,humboldt
+1923,Elbing,114r,1829-10-16,humboldt
+1924,Kaliningrad,114r,1829-10-16,humboldt
+1925,Düna,114r,1829-10-16,humboldt
+1926,Rucava,114r,1829-10-16,humboldt
+1927,Düna,114r,1829-10-16,humboldt
+1928,Tobolsk,114v,1829-10-16,humboldt
+1929,Berëzovo,114v,1829-10-16,humboldt
+1930,Salechard,114v,1829-10-16,humboldt
+1931,Berëzovo,114v,1829-10-16,humboldt
+1932,Bronnikovo,114v,1829-10-16,humboldt
+1933,Dem'yanskoye (Gouv. Tobolsk),114v,1829-10-16,humboldt
+1934,Tobolsk,114v,1829-10-16,humboldt
+1935,Samarowo,114v,1829-10-16,humboldt
+1936,Berëzovo,114v,1829-10-16,humboldt
+1937,Berëzovo,114v,1829-10-16,humboldt
+1938,Berëzovo,114v,1829-10-16,humboldt
+1939,Salechard,114v,1829-10-16,humboldt
+1940,Salechard,114v,1829-10-16,humboldt
+1941,Arktischer Ozean,114v,1829-10-16,humboldt
+1942,Orenburg (Stadt),121r,1829-10-16,humboldt
+1943,Chiwa,121r,1829-10-16,humboldt
+1944,Kokand,121r,1829-10-16,humboldt
+1945,Taschkent,121r,1829-10-16,humboldt
+1946,Kabul,121r,1829-10-16,humboldt
+1947,Kaschgar,121r,1829-10-16,humboldt
+1948,Taschkent,121r,1829-10-16,humboldt
+1949,Troizk,121r,1829-10-16,humboldt
+1950,Elbrus,122v,1829-10-16,humboldt
+1951,Kazbek,122v,1829-10-16,humboldt
+1952,Kaspisches Meer,122v,1829-10-16,humboldt
+1953,Elbrus,122v,1829-10-16,humboldt
+1954,Sankt Petersburg,122v,1829-10-16,humboldt
+1955,Irkutsk,122v,1829-10-16,humboldt
+1956,Irkutsk,122v,1829-10-16,humboldt
+1957,Jakutsk (Stadt),122v,1829-10-16,humboldt
+1958,Jakutsk (Stadt),122v,1829-10-16,humboldt
+1959,Sankt Petersburg,122v,1829-10-16,humboldt
+1960,Sankt Petersburg,122v,1829-10-16,humboldt
+1961,Europa,122v,1829-10-16,humboldt
+1962,Ararat,123r,1829-10-16,humboldt
+1963,Astrachan (Stadt),123r,1829-10-16,humboldt
+1964,Astrachan (Stadt),123r,1829-10-16,humboldt
+1965,Astrachan (Stadt),123r,1829-10-20,humboldt
+1966,Ural (Gebirge),123r,1829-11-03,humboldt
+1967,Kamtschatka,123r,1829-11-03,humboldt
+1968,Irkutsk,123r,1829-11-03,humboldt
+1969,Jakutsk (Stadt),123r,1829-11-03,humboldt
+1970,Elbrus,123r,1829-11-03,humboldt
+1971,Ararat,123r,1829-11-03,humboldt
+1972,Nerčinsk,124r,1829-11-03,humboldt
+1973,Ridderskij,124r,1829-11-03,humboldt
+1974,Ust'-Kamenogorsk,124r,1829-11-03,humboldt
+1975,Altaj,124r,1829-11-03,humboldt
+1976,Ust'-Buchtarma,124r,1829-11-03,humboldt
+1977,Baty,124r,1829-11-03,humboldt
+1978,Zlatoust,124r,1829-11-03,humboldt
+1979,Sol'-Iletsk,124r,1829-11-03,humboldt
+1980,Miass (Stadt),124r,1829-11-03,humboldt
+1981,Voronež,124r,1829-11-03,humboldt
+1982,Tartu,124r,1829-11-03,humboldt
+1983,Tula (Russland),124r,1829-11-03,humboldt
+1984,Jekaterinburg,124r,1829-11-03,humboldt
+1985,Kyštym,124r,1829-11-03,humboldt
+1986,Nev'jansk,124r,1829-11-03,humboldt
+1987,Moskau,124v,1829-11-03,humboldt
+1988,Novočercassk,124v,1829-11-03,humboldt
+1989,Orenburg (Stadt),124v,1829-11-03,humboldt
+1990,Sol'-Iletsk,124v,1829-11-03,humboldt
+1991,Sankt Petersburg,125r,1829-11-03,humboldt
+1992,Tobolsk,125v,1829-12-06,humboldt
+1993,Tobolsk,125v,1829-12-06,humboldt
+1994,Tobolsk,125v,1829-07-21,humboldt
+1995,Tobolsk,125v,1829-07-21,humboldt
+1996,Geburtskirche,125v,1829-07-21,humboldt
+1997,Kazan,125v,1829-07-21,humboldt
+1998,Barnaul,125v,1829-07-21,humboldt
+1999,Paris,125v,1829-07-21,humboldt
+2000,Kazan,125v,1829-07-21,humboldt
+2001,Paris,125v,1829-07-21,humboldt
+2002,Moskau,125v,1829-07-21,humboldt
+2003,Kazan,125v,1829-07-21,humboldt
+2004,Kazan,125v,1829-07-21,humboldt
+2005,Moskau,125v,1829-07-21,humboldt
+2006,Wolga,125v,1829-07-21,humboldt
+2007,Kazan,125v,1829-07-21,humboldt
+2008,Barnaul,125v,1829-07-21,humboldt
+2009,Barnaul,125v,1829-07-21,humboldt
+2010,Wolga,125v,1829-07-21,humboldt
+2011,Kazan,125v,1829-07-21,humboldt
+2012,Wolga,125v,1829-07-21,humboldt
+2013,"Kaban-See, Oberer",125v,1829-07-21,humboldt
+2014,"Kaban-See, Mittlerer",125v,1829-07-21,humboldt
+2015,Barnaul,125v,1829-07-21,humboldt
+2016,Barnaul,125v,1829-07-21,humboldt
+2017,Irkutsk,125v,1829-07-21,humboldt
+2018,Tomsk,125v,1829-07-21,humboldt
+2019,Barnaul,126r,1829-07-21,humboldt
+2020,Moskau,126r,1829-07-21,humboldt
+2021,Moskau,126r,1829-07-21,humboldt
+2022,Sankt Petersburg,126r,1829-07-21,humboldt
+2023,Moskau,126r,1829-07-21,humboldt
+2024,Kazan,126r,1829-07-21,humboldt
+2025,Perm,126r,1829-07-21,humboldt
+2026,Jekaterinburg,126r,1829-07-21,humboldt
+2027,Tobolsk,126r,1829-07-21,humboldt
+2028,Kujbyšev,126r,1829-07-21,humboldt
+2029,Tomsk,126r,1829-07-21,humboldt
+2030,Irkutsk,126r,1829-07-21,humboldt
+2031,Moskau,126r,1829-07-21,humboldt
+2032,Nižnij Novgorod,126r,1829-07-21,humboldt
+2033,Nižnij Novgorod,126r,1829-07-21,humboldt
+2034,Tobolsk,126r,1829-07-21,humboldt
+2035,Jakutsk (Stadt),126r,1829-07-21,humboldt
+2036,Nižnij Novgorod,126r,1829-07-21,humboldt
+2037,Kazan,126r,1829-07-21,humboldt
+2038,Irkutsk,126r,1829-07-21,humboldt
+2039,Jakutsk (Stadt),126r,1829-07-21,humboldt
+2040,Tobolsk,126r,1829-07-21,humboldt
+2041,Irkutsk,126r,1829-07-21,humboldt
+2042,Miass (Stadt),126v,1829-07-21,humboldt
+2043,Zlatoust,126v,1829-07-21,humboldt
+2044,Kyštym,126v,1829-07-21,humboldt
+2045,Orenburg (Stadt),126v,1829-07-21,humboldt
+2046,Oral,126v,1829-07-21,humboldt
+2047,Saratov,126v,1829-07-21,humboldt
+2048,Sarepta,126v,1829-07-21,humboldt
+2049,Wolga,126v,1829-07-21,humboldt
+2050,Astrachan (Stadt),126v,1829-07-21,humboldt
+2051,Voronež,126v,1829-07-21,humboldt
+2052,Troizk,126v,1829-07-21,humboldt
+2053,Elton-See,126v,1829-07-21,humboldt
+2054,Astrachan (Stadt),126v,1829-07-21,humboldt
+2055,Orenburg (Stadt),127r,1829-07-21,humboldt
+2056,Astrachan (Stadt),127r,1829-07-21,humboldt
+2057,Kaspisches Meer,127r,1829-10-13,humboldt
+2058,Wolga,127r,1829-10-13,humboldt
+2059,Tobolsk,127r,1829-10-13,humboldt
+2060,Potsdam,127r,1829-10-13,humboldt
+2061,Tartu,127r,1829-10-13,humboldt
+2062,Tobolsk,127r,1829-10-13,humboldt
+2063,Bogoslovsk,127r,1829-10-13,humboldt
+2064,Murzinka,127r,1829-10-13,humboldt
+2065,Kušva,127r,1829-10-13,humboldt
+2066,Orenburg (Stadt),127r,1829-10-13,humboldt
+2067,Ural (Gebirge),127r,1829-10-13,humboldt
+2068,Zjuzel'skij,127r,1829-10-13,humboldt
+2069,Polevskoj,127r,1829-10-13,humboldt
+2070,Jekaterinburg,127r,1829-10-13,humboldt
+2071,Nižne-Isetskij,127r,1829-10-13,humboldt
+2072,Verch-Isetskij,127r,1829-10-13,humboldt
+2073,Nižnaja Tura,127r,1829-10-13,humboldt
+2074,Barnaul,127r,1829-10-13,humboldt
+2075,Tanger,127v,1829-10-13,humboldt
+2076,Mekka,127v,1829-10-13,humboldt
+2077,Spanien,127v,1829-10-13,humboldt
+2078,Afrika,127v,1829-10-13,humboldt
+2079,Timbuktu,127v,1829-10-13,humboldt
+2080,Dongola,127v,1829-10-13,humboldt
+2081,Dongola,127v,1829-10-13,humboldt
+2082,Ägypten,127v,1829-10-13,humboldt
+2083,Griechenland,127v,1829-10-13,humboldt
+2084,Türkei,127v,1829-10-13,humboldt
+2085,Russland,127v,1829-10-13,humboldt
+2086,Indien,127v,1829-10-13,humboldt
+2087,Malediven,127v,1829-10-13,humboldt
+2088,China,127v,1829-10-13,humboldt
+2089,Ceylon,127v,1829-10-13,humboldt
+2090,Sumatra,127v,1829-10-13,humboldt
+2091,Java,127v,1829-10-13,humboldt
+2092,Mongolei,127v,1829-10-13,humboldt
+2093,Ostafrika,127v,1829-10-13,humboldt
+2094,Indischer Ozean,127v,1829-10-13,humboldt
+2095,Bolgar,127v,1829-10-13,humboldt
+2096,Bolgar,127v,1829-10-13,humboldt
+2097,Bolgar,127v,1829-10-13,humboldt
+2098,Astrachan (Stadt),127v,1829-10-13,humboldt
+2099,Wolga,127v,1829-10-13,humboldt
+2100,Astrachan (Stadt),127v,1829-10-13,humboldt
+2101,Wolga,127v,1829-10-13,humboldt
+2102,Istanbul,127v,1829-10-13,humboldt
+2103,Istanbul,127v,1829-10-13,humboldt
+2104,Ural (Gebirge),127v,1829-10-13,humboldt
+2105,Sankt Petersburg,128r,1829-10-13,humboldt
+2106,Saratov,128v,1829-10-13,humboldt
+2107,Moskau,128v,1829-10-13,humboldt
+2108,Sarepta,129r,1829-11-06,humboldt
+2109,Astrachan (Stadt),129r,1829-10-24,humboldt
+2110,Voronež,129r,1829-10-24,humboldt
+2111,Astrachan (Stadt),130r,1829-10-17,humboldt
+2112,Astrachan (Stadt),130r,1829-10-17,humboldt
+2113,Birjuč'ja kosa,131r,1829-10-17,humboldt
+2114,Kaspisches Meer,131r,1829-10-17,humboldt
+2115,Astrachan (Stadt),131r,1829-10-17,humboldt
+2116,Astrachan (Stadt),131r,1829-10-17,humboldt
+2117,Sankt Petersburg,131r,1829-10-17,humboldt
+2118,Atyrau,131r,1829-10-17,humboldt
+2119,Atyrau,131r,1829-10-17,humboldt
+2120,Kaspisches Meer,131r,1829-10-17,humboldt
+2121,Wolga,131r,1829-10-17,humboldt
+2122,Wolga,131r,1829-10-17,humboldt
+2123,Kaspisches Meer,131r,1829-10-17,humboldt
+2124,Birjuč'ja kosa,131r,1829-10-17,humboldt
+2125,Wolga,131v,1829-10-17,humboldt
+2126,Kaspisches Meer,131v,1829-10-17,humboldt
+2127,Birjuč'ja kosa,131v,1829-10-17,humboldt
+2128,Birjuč'ja kosa,131v,1829-10-17,humboldt
+2129,Astrachan (Stadt),131v,1829-10-15,humboldt
+2130,Atyrau,131v,1829-10-15,humboldt
+2131,Kaspisches Meer,131v,1829-10-15,humboldt
+2132,Elton-See,131v,1829-10-15,humboldt
+2133,Astrachan (Stadt),132r,1829-10-15,humboldt
+2134,Astrachan (Stadt),132r,1829-10-13,humboldt
+2135,Astrachan (Stadt),132r,1829-10-13,humboldt
+2136,Sarepta,132v,1829-10-13,humboldt
+2137,Sarepta,133r,1829-10-13,humboldt
+2138,Sarepta,133r,1829-10-09,humboldt
+2139,Elton-See,133v,1829-10-09,humboldt
+2140,Elton-See,133v,1829-10-09,humboldt
+2141,Dubovka,133v,1829-10-07,humboldt
+2142,Dubovka,133v,1829-10-07,humboldt
+2143,Don,133v,1829-10-07,humboldt
+2144,Saratov,134r,1829-10-07,humboldt
+2145,Astrachan (Stadt),134r,1829-10-07,humboldt
+2146,Orenburg (Stadt),134r,1829-10-07,humboldt
+2147,Oral,134v,1829-10-07,humboldt
+2148,Oral,134v,1829-10-07,humboldt
+2149,Oral,134v,1829-10-07,humboldt
+2150,Orenburg (Stadt),134v,1829-10-07,humboldt
+2151,Oral,135r,1829-10-07,humboldt
+2152,"Residenz des Atamans in Uralsk / Haus von David
+                                Martem’janovič Borodin ",135r,1829-10-10,humboldt
+2153,Oral,135r,1829-10-10,humboldt
+2154,Oral,135r,1829-10-10,humboldt
+2155,Orenburg (Stadt),135v,1829-10-10,humboldt
+2156,Orenburg (Stadt),136r,1829-10-10,humboldt
+2157,Orenburg (Stadt),136v,1829-09-25,humboldt
+2158,Auštau,136v,1829-09-21,humboldt
+2159,Taganaj,136v,1829-09-21,humboldt
+2160,Taganaj,136v,1829-09-21,humboldt
+2161,Zlatoust,137r,1829-09-23,humboldt
+2162,Zlatoust,137r,1829-09-09,humboldt
+2163,Miass (Stadt),137r,1829-09-09,humboldt
+2164,Kyštym,137r,1829-09-09,humboldt
+2165,Kyštym,137r,1829-09-11,humboldt
+2166,Taganaj,137r,1829-09-11,humboldt
+2167,Tara,137r,1829-09-11,humboldt
+2168,Kujbyšev,137r,1829-09-11,humboldt
+2169,"Taganaj, Großer",137r,1829-09-11,humboldt
+2170,Kyštym,137r,1829-09-11,humboldt
+2171,Kyštym,137r,1829-09-11,humboldt
+2172,Kyštym,137r,1829-09-11,humboldt
+2173,Kyštym,137r,1829-08-29,humboldt
+2174,Kyštym,137r,1829-08-29,humboldt
+2175,Miass (Stadt),137v,1829-08-29,humboldt
+2176,Kundravy,137v,1829-09-05,humboldt
+2177,Miass (Stadt),137v,1829-09-03,humboldt
+2178,Miass (Stadt),137v,1829-09-05,humboldt
+2179,Zlatoust,137v,1829-09-05,humboldt
+2180,Zlatoust,137v,1829-09-05,humboldt
+2181,Ufa (Stadt),137v,1829-09-09,humboldt
+2182,Miass (Stadt),138r,1829-09-09,humboldt
+2183,Ilmensee,138r,1829-09-06,humboldt
+2184,Miass (Stadt),138r,1829-09-06,humboldt
+2185,Miass (Stadt),138r,1829-09-06,humboldt
+2186,Straßburg,138r,1829-09-06,humboldt
+2187,Miass (Stadt),138v,1829-09-06,humboldt
+2188,Miass (Stadt),138v,1829-09-05,humboldt
+2189,Miass (Stadt),138v,1829-09-06,humboldt
+2190,Omsk,139r,1829-09-06,humboldt
+2191,Petropavlovsk (Omsk),139r,1829-09-06,humboldt
+2192,Koelga,139r,1829-09-03,humboldt
+2193,Orsk,139r,1829-09-03,humboldt
+2194,Čeljabinsk,139r,1829-09-03,humboldt
+2195,Troizk,139r,1829-09-03,humboldt
+2196,Miass (Stadt),139r,1829-09-03,humboldt
+2197,Miass (Stadt),139r,1829-09-03,humboldt
+2198,Troizk,139v,1829-08-23,humboldt
+2199,Troizk,139v,1829-09-02,humboldt
+2200,Presnovka,140r,1829-08-30,humboldt
+2201,Presnovka,140r,1829-08-31,humboldt
+2202,Presnogor'kovka,140r,1829-08-31,humboldt
+2203,Petropavlovsk (Omsk),140r,1829-08-31,humboldt
+2204,Aa,140r,1829-08-30,humboldt
+2205,Presnogor'kovka,140r,1829-08-31,humboldt
+2206,Presnovka,140r,1829-08-31,humboldt
+2207,Presnogor'kovka,140r,1829-08-31,humboldt
+2208,Zverinogolovskoe,140r,1829-08-31,humboldt
+2209,Irtyš (Fluss),140r,1829-08-31,humboldt
+2210,Semej,140r,1829-08-31,humboldt
+2211,Presnogor'kovka,140r,1829-08-31,humboldt
+2212,Ust'-Ujskoe,140r,1829-09-01,humboldt
+2213,Irtyš (Fluss),140r,1829-09-01,humboldt
+2214,Narym,140r,1829-09-01,humboldt
+2215,Omsk,140r,1829-09-01,humboldt
+2216,Irtyš (Fluss),140r,1829-09-01,humboldt
+2217,Narym,140r,1829-09-01,humboldt
+2218,Ust'-Buchtarma,140r,1829-09-01,humboldt
+2219,Ust'-Kamenogorsk,140r,1829-09-01,humboldt
+2220,Semej,140r,1829-09-01,humboldt
+2221,Omsk,140r,1829-09-01,humboldt
+2222,Tobol,140r,1829-09-01,humboldt
+2223,Omsk,140r,1829-09-01,humboldt
+2224,Ust'-Ujskoe,140r,1829-09-01,humboldt
+2225,Orenburg (Stadt),140r,1829-09-01,humboldt
+2226,Ust'-Ujskoe,140r,1829-09-01,humboldt
+2227,Uj (Tobol),140r,1829-09-01,humboldt
+2228,Ural (Fluss),140r,1829-09-01,humboldt
+2229,Zverinogolovskoe,140r,1829-09-01,humboldt
+2230,Verchne-Ural'sk,140r,1829-09-01,humboldt
+2231,Karakul'skoe,140r,1829-09-01,humboldt
+2232,Troizk,140r,1829-09-01,humboldt
+2233,Kundravy,140r,1829-09-03,humboldt
+2234,Kundravy,140r,1829-09-03,humboldt
+2235,Troizk,140v,1829-09-03,humboldt
+2236,Ključevskaja,140v,1829-09-03,humboldt
+2237,Miass (Stadt),140v,1829-09-03,humboldt
+2238,Kundravy,140v,1829-09-03,humboldt
+2239,Miass (Stadt),140v,1829-09-03,humboldt
+2240,Auštau,140v,1829-09-03,humboldt
+2241,Auškul’ (See),140v,1829-09-03,humboldt
+2242,Kyštym,140v,1829-09-03,humboldt
+2243,Miass (Stadt),140v,1829-09-03,humboldt
+2244,Miass (Stadt),140v,1829-09-03,humboldt
+2245,Auškul’ (See),140v,1829-09-03,humboldt
+2246,Miass (Fluss),140v,1829-09-03,humboldt
+2247,Miass (Stadt),140v,1829-09-03,humboldt
+2248,Berlin,140v,1829-09-05,humboldt
+2249,Kyštym,141r,1829-09-05,humboldt
+2250,Mugodschar-Gebirge,141r,1829-09-05,humboldt
+2251,Ustjurt-Plateau,141r,1829-09-05,humboldt
+2252,Aralsee,141r,1829-09-05,humboldt
+2253,Kaspisches Meer,141r,1829-09-05,humboldt
+2254,Aralsee,141r,1829-09-05,humboldt
+2255,Kaspisches Meer,141r,1829-09-05,humboldt
+2256,Zlatoust,141r,1829-09-05,humboldt
+2257,Irkutsk,141r,1829-09-05,humboldt
+2258,Bialystok,141r,1829-09-05,humboldt
+2259,Zlatoust,141r,1829-09-05,humboldt
+2260,Zlatoust,141r,1829-09-05,humboldt
+2261,Aleksandrovskaja Sopka,141r,1829-09-05,humboldt
+2262,Ural (Gebirge),141r,1829-09-05,humboldt
+2263,Kolyvan',141r,1829-09-05,humboldt
+2264,Altaj,141r,1829-09-05,humboldt
+2265,Altaj,141r,1829-09-05,humboldt
+2266,Pruth,141r,1829-07-05,humboldt
+2267,Ungarn,141r,1829-07-05,humboldt
+2268,Schlesien,141r,1829-07-05,humboldt
+2269,Madrid,141r,1829-07-05,humboldt
+2270,Schneekoppe,141r,1829-07-05,humboldt
+2271,Kundravy,141r,1829-07-05,humboldt
+2272,Kazan,141r,1829-07-05,humboldt
+2273,Jekaterinburg,141r,1829-07-05,humboldt
+2274,Kušva,141r,1829-07-05,humboldt
+2275,Tobolsk,141r,1829-07-05,humboldt
+2276,Barnaul,141r,1829-07-05,humboldt
+2277,Ust'-Kamenogorsk,141r,1829-07-05,humboldt
+2278,Omsk,141r,1829-07-05,humboldt
+2279,Presnovka,141r,1829-07-05,humboldt
+2280,Troizk,141r,1829-07-05,humboldt
+2281,Astrachan (Stadt),142r,1829-07-05,humboldt
+2282,Sarepta,142r,1829-07-05,humboldt
+2283,Sankt Petersburg,142r,1829-07-05,humboldt
+2284,Orenburg (Stadt),142r,1829-11-13,humboldt
+2285,Wolga,142r,1829-11-13,humboldt
+2286,Jekaterinburg,142r,1829-11-13,humboldt
+2287,Aralsee,143r,1829-11-13,humboldt
+2288,Irtyš (Fluss),143r,1829-11-13,humboldt
+2289,Kama,143r,1829-11-13,humboldt
+2290,Orenburg (Stadt),144r,1829-11-13,humboldt
+2291,Collegium Crozensis,145r,1829-11-13,humboldt
+2292,Orsk,145r,1829-11-13,humboldt
+2293,Verchne-Ural'sk,145r,1829-11-13,humboldt
+2294,Troizk,145r,1829-11-13,humboldt
+2295,Orenburg (Stadt),145r,1829-11-13,humboldt
+2296,Orsk,145r,1829-11-13,humboldt
+2297,Orsk,145r,1829-09-19,humboldt
+2298,Orenburg (Stadt),145r,1829-12-07,humboldt
+2299,Afghanistan,145r,1829-12-07,humboldt
+2300,Sankt Petersburg,145r,1829-12-07,humboldt
+2301,Kabul,145r,1829-12-07,humboldt
+2302,Buchara,145r,1829-12-07,humboldt
+2303,Orenburg (Stadt),145r,1829-12-07,humboldt
+2304,Orsk,145r,1829-09-29,humboldt
+2305,Chiwa,145r,1829-09-29,humboldt
+2306,Kabul,145r,1829-09-29,humboldt
+2307,Miass (Stadt),146r,1829-09-29,humboldt
+2308,Syrostan (Dorf),146r,1829-09-29,humboldt
+2309,Zlatoust,146r,1829-09-29,humboldt
+2310,Saratov,146r,1829-09-29,humboldt
+2311,Dubovka,146r,1829-09-29,humboldt
+2312,Sarepta,146r,1829-09-29,humboldt
+2313,Enotaevka,146r,1829-09-29,humboldt
+2314,Astrachan (Stadt),146r,1829-09-29,humboldt
+2315,Dubovka,146r,1829-09-29,humboldt
+2316,Orenburg (Stadt),146r,1829-09-29,humboldt
+2317,Samara (Stadt),146r,1829-09-29,humboldt
+0,Berlin,147r,1829-09-29,ehrenberg
+1,Sankt Petersburg,147r,1829-09-29,ehrenberg
+2,Moskau,147r,1829-09-29,ehrenberg
+3,Novgorod,147r,1829-09-29,ehrenberg
+4,Orenburg (Stadt),147r,1829-09-29,ehrenberg
+5,Baty,147r,1829-09-29,ehrenberg
+6,Berlin,147r,1829-09-29,ehrenberg
+7,Tartu,147r,1829-09-29,ehrenberg
+8,Berlin,2r,1829-09-29,ehrenberg
+9,Sankt Petersburg,2r,1829-04-12,ehrenberg
+10,Berlin,2r,1829-04-12,ehrenberg
+11,Sankt Petersburg,2r,1829-04-12,ehrenberg
+12,Carskoe Selo,12v,1829-05-20,ehrenberg
+13,Novgorod,12v,1829-05-21,ehrenberg
+14,Valdajhöhen,12v,1829-05-21,ehrenberg
+15,Valdajhöhen,12v,1829-05-21,ehrenberg
+16,Valdajhöhen,13r,1829-05-22,ehrenberg
+17,Vyšnij Voločëk,13r,1829-05-23,ehrenberg
+18,Vyšnevolockaja vodnaja sistema,13r,1829-05-23,ehrenberg
+19,Tver',13r,1829-05-23,ehrenberg
+20,Moskau,13v,1829-05-24,ehrenberg
+21,Sperlingsberge,14r,1829-05-27,ehrenberg
+22,Moskau,14v,1829-05-28,ehrenberg
+23,Pokrov,14v,1829-05-28,ehrenberg
+24,Vladimir,14v,1829-05-29,ehrenberg
+25,Murom,15r,1829-05-30,ehrenberg
+26,Murom,15r,1829-05-30,ehrenberg
+27,Oka,15r,1829-05-30,ehrenberg
+28,Velet'ma,15r,1829-05-30,ehrenberg
+29,Oka,15r,1829-05-30,ehrenberg
+30,Velet'ma,15r,1829-05-30,ehrenberg
+31,Tëša,15r,1829-05-30,ehrenberg
+32,Moskau,15v,1829-05-31,ehrenberg
+33,Nižnij Novgorod,15v,1829-05-31,ehrenberg
+34,Oka,15v,1829-05-31,ehrenberg
+35,Wolga,15v,1829-05-31,ehrenberg
+36,Moskau,16r,1829-05-31,ehrenberg
+37,Vladimir,16r,1829-05-31,ehrenberg
+38,Saale,16r,1829-05-31,ehrenberg
+39,Bad Kösen,16r,1829-05-31,ehrenberg
+40,Wolga,16v,1829-06-01,ehrenberg
+41,Makar'ev,16v,1829-06-02,ehrenberg
+42,Nižnij Novgorod,16v,1829-06-02,ehrenberg
+43,Wolga,17r,1829-06-02,ehrenberg
+44,Vasil'sursk,17r,1829-06-02,ehrenberg
+45,Koz'modem'yansk,17r,1829-06-02,ehrenberg
+46,Wolga,17r,1829-06-02,ehrenberg
+47,Wolga,17v,1829-06-03,ehrenberg
+48,Kazan,17v,1829-06-04,ehrenberg
+49,Bayreuth,18r,1829-06-04,ehrenberg
+50,Kazan,18r,1829-06-04,ehrenberg
+51,Magdeburg,18r,1829-06-04,ehrenberg
+52,Wolga,18r,1829-06-05,ehrenberg
+53,Bolgar,18r,1829-06-05,ehrenberg
+54,Bolgar,18v,1829-06-06,ehrenberg
+55,Perm,20v,1829-06-13,ehrenberg
+56,Kungur,20v,1829-06-13,ehrenberg
+57,Bilimbaj,21r,1829-06-15,ehrenberg
+58,Jekaterinburg,21r,1829-06-15,ehrenberg
+59,Nižne-Isetskij,21v,1829-06-17,ehrenberg
+60,Berezovskij,22r,1829-06-16,ehrenberg
+61,Šartašsee,23r,1829-06-20,ehrenberg
+62,Verch-Isetskij,23r,1829-06-20,ehrenberg
+63,Jekaterinburg,23r,1829-06-21,ehrenberg
+64,Jekaterinburg,30v,1829-06-22,ehrenberg
+65,Polevskoj,30v,1829-06-22,ehrenberg
+66,Gornyj ščit,30v,1829-06-22,ehrenberg
+67,Polevskoj,31r,1829-06-23,ehrenberg
+68,Jekaterinburg,31r,1829-06-24,ehrenberg
+69,Jekaterinburg,31v,1829-06-25,ehrenberg
+70,Verchnaja Pyšma,31v,1829-06-25,ehrenberg
+71,Pyšma,31v,1829-06-25,ehrenberg
+72,Ayat',31v,1829-06-25,ehrenberg
+73,Mostovskoye,31v,1829-06-25,ehrenberg
+74,Verchnaja Pyšma,31v,1829-06-25,ehrenberg
+75,Nev'jansk,31v,1829-06-26,ehrenberg
+76,Neiwa,31v,1829-06-26,ehrenberg
+77,Nejvo-Rudjanka,31v,1829-06-26,ehrenberg
+78,Nejvo-Rudjanskij prud,31v,1829-06-26,ehrenberg
+79,Nev'jansk,32r,1829-06-27,ehrenberg
+80,Nižnij Tagil,32r,1829-06-27,ehrenberg
+81,Tagil,32r,1829-06-27,ehrenberg
+82,Viljuj,32r,1829-06-28,ehrenberg
+83,Černoistočinsk,32v,1829-06-29,ehrenberg
+84,Belaja (Ural),32v,1829-06-29,ehrenberg
+85,Černoistočinskij Prud,32v,1829-06-29,ehrenberg
+86,Černoistočinsk,32v,1829-06-29,ehrenberg
+87,Ural (Gebirge),32v,1829-06-29,ehrenberg
+88,Nižnij Tagil,33r,1829-06-30,ehrenberg
+89,Laja,33r,1829-06-30,ehrenberg
+90,Laja,33r,1829-06-30,ehrenberg
+91,Laja,33r,1829-06-30,ehrenberg
+92,Kušva,33r,1829-06-30,ehrenberg
+93,Blagodat',33r,1829-07-01,ehrenberg
+94,Tura,33v,1829-07-01,ehrenberg
+95,Nižnaja Tura,33v,1829-07-01,ehrenberg
+96,Imennaja,33v,1829-07-01,ehrenberg
+97,Malaja Imennaja,33v,1829-07-01,ehrenberg
+98,Ayat',33v,1829-07-01,ehrenberg
+99,Nižnaja Tura,33v,1829-07-01,ehrenberg
+100,Bogoslovsk,33v,1829-07-02,ehrenberg
+101,Verchotur'e,33v,1829-07-02,ehrenberg
+102,Tura,33v,1829-07-02,ehrenberg
+103,Lobva,34r,1829-07-03,ehrenberg
+104,Kakgva,34r,1829-07-03,ehrenberg
+105,Ural (Gebirge),34v,1829-07-03,ehrenberg
+106,Konžakovskij Kamen',34v,1829-07-03,ehrenberg
+107,Bogoslovsk,34v,1829-07-03,ehrenberg
+108,Bogoslovsk,34v,1829-07-04,ehrenberg
+109,Tur'inskije Rudniki,34v,1829-07-04,ehrenberg
+110,Tur'inskije Rudniki,35r,1829-07-04,ehrenberg
+111,Konžakovskij Kamen',35r,1829-07-05,ehrenberg
+112,Petropavlovsk (Perm),35r,1829-07-05,ehrenberg
+113,Tura,35v,1829-07-07,ehrenberg
+114,Laja,35v,1829-07-07,ehrenberg
+115,Tagil,35v,1829-07-07,ehrenberg
+116,Alapaevsk,35v,1829-07-08,ehrenberg
+117,Rež,35v,1829-07-08,ehrenberg
+118,Murzinka,35v,1829-07-09,ehrenberg
+119,Murzinka,35v,1829-07-09,ehrenberg
+120,Murzinka,35v,1829-07-10,ehrenberg
+121,Sizikova,35v,1829-07-10,ehrenberg
+122,Šajtanski,35v,1829-07-10,ehrenberg
+123,Šajtanski,35v,1829-07-10,ehrenberg
+124,Jekaterinburg,36r,1829-07-11,ehrenberg
+125,Jekaterinburg,36r,1829-07-12,ehrenberg
+126,Šartašsee,36r,1829-07-13,ehrenberg
+127,Jekaterinburg,36r,1829-07-13,ehrenberg
+128,Šartašskij,36r,1829-07-13,ehrenberg
+129,Jekaterinburg,36v,1829-07-14,ehrenberg
+130,Šartašsee,36v,1829-07-17,ehrenberg
+131,Iset',37r,1829-07-17,ehrenberg
+132,Tjumen,37r,1829-07-17,ehrenberg
+133,Jekaterinburg,37r,1829-07-18,ehrenberg
+134,Tjumen,37r,1829-07-19,ehrenberg
+135,Tjumen,37r,1829-07-19,ehrenberg
+136,Vladimir,37r,1829-07-19,ehrenberg
+137,Tobol,37r,1829-07-19,ehrenberg
+138,Tobol,37v,1829-07-20,ehrenberg
+139,Abalak,38r,1829-07-24,ehrenberg
+140,Irtyš (Fluss),38r,1829-07-24,ehrenberg
+141,Irtyš (Fluss),38r,1829-07-24,ehrenberg
+142,Abalak,38r,1829-07-24,ehrenberg
+143,Irtyš (Fluss),38r,1829-07-24,ehrenberg
+144,Irtyš (Fluss),38r,1829-07-24,ehrenberg
+145,Vikulovo,38v,1829-07-25,ehrenberg
+146,Ischim (Fluss),38v,1829-07-25,ehrenberg
+147,Rybina,38v,1829-07-26,ehrenberg
+148,Jekaterinburg,38v,1829-07-26,ehrenberg
+149,Tara,38v,1829-07-26,ehrenberg
+150,Sekmenovo,39r,1829-07-27,ehrenberg
+151,Irtyš (Fluss),39r,1829-07-27,ehrenberg
+152,Voznesenska,39r,1829-07-28,ehrenberg
+153,Irtyš (Fluss),39r,1829-07-28,ehrenberg
+154,Om',39r,1829-07-28,ehrenberg
+155,Kujbyšev,39r,1829-07-28,ehrenberg
+156,Kujbyšev,39v,1829-07-29,ehrenberg
+157,Kujbyšev,39v,1829-07-29,ehrenberg
+158,Om',39v,1829-07-29,ehrenberg
+159,Sibirien,39v,1829-07-29,ehrenberg
+160,Kargatskij Forpost,40r,1829-07-30,ehrenberg
+161,Kargatskij Forpost,40r,1829-07-30,ehrenberg
+162,Itkul',40r,1829-07-30,ehrenberg
+163,Ob,40r,1829-07-31,ehrenberg
+164,Ob,40r,1829-07-31,ehrenberg
+165,Berdsk,40r,1829-07-31,ehrenberg
+166,Ob,40r,1829-07-31,ehrenberg
+167,Irtyš (Fluss),40r,1829-07-31,ehrenberg
+168,Tobolsk,40r,1829-07-31,ehrenberg
+169,Berdsk,40r,1829-07-31,ehrenberg
+170,Anisimovo,40v,1829-08-01,ehrenberg
+171,Tal'menka,40v,1829-08-01,ehrenberg
+172,Čumyš,40v,1829-08-01,ehrenberg
+173,Ob,40v,1829-08-01,ehrenberg
+174,Barnaul,40v,1829-08-02,ehrenberg
+175,Barnaul,40v,1829-08-02,ehrenberg
+176,Tomsk,41r,1829-08-03,ehrenberg
+177,Ob,41r,1829-08-03,ehrenberg
+178,Kolyvanskoe ozero,41v,1829-08-06,ehrenberg
+179,Smeïnogorsk,41v,1829-08-06,ehrenberg
+180,Barnaul,41v,1829-08-06,ehrenberg
+181,Smeïnogorsk,42r,1829-08-08,ehrenberg
+182,Bystrucha,42v,1829-08-10,ehrenberg
+183,Ulba,42v,1829-08-10,ehrenberg
+184,Ridderskij,42v,1829-08-10,ehrenberg
+185,Ridderskij,42v,1829-08-11,ehrenberg
+186,Ridderskij,43v,1829-08-12,ehrenberg
+187,Ust'-Kamenogorsk,43v,1829-08-12,ehrenberg
+188,Ust'-Kamenogorsk,43v,1829-08-12,ehrenberg
+189,Ust'-Buchtarma,43v,1829-08-14,ehrenberg
+190,Ulba,43v,1829-08-14,ehrenberg
+191,Severnoye,43v,1829-08-14,ehrenberg
+192,Severnoye,44r,1829-08-15,ehrenberg
+193,Ust'-Buchtarma,44r,1829-08-15,ehrenberg
+194,Baty,44r,1829-08-15,ehrenberg
+195,Irtyš (Fluss),44r,1829-08-16,ehrenberg
+196,Baty,44v,1829-08-17,ehrenberg
+197,Narym,44v,1829-08-17,ehrenberg
+198,Mongolei,44v,1829-08-17,ehrenberg
+199,Russland,44v,1829-08-17,ehrenberg
+200,Ust'-Kamenogorsk,44v,1829-08-17,ehrenberg
+201,Baty,44v,1829-08-17,ehrenberg
+202,Irtyš (Fluss),44v,1829-08-17,ehrenberg
+203,Irtyš (Fluss),44v,1829-08-17,ehrenberg
+204,Baty,44v,1829-08-17,ehrenberg
+205,Irtyš (Fluss),45r,1829-08-17,ehrenberg
+206,Peking,45r,1829-08-17,ehrenberg
+207,Baty,45v,1829-08-17,ehrenberg
+208,Ust'-Kamenogorsk,45v,1829-08-17,ehrenberg
+209,Ust'-Buchtarma,45v,1829-08-17,ehrenberg
+210,Narym,45v,1829-08-17,ehrenberg
+211,Mongolei,46r,1829-08-17,ehrenberg
+212,Irtyš (Fluss),46r,1829-08-17,ehrenberg
+213,Nil,46r,1829-08-17,ehrenberg
+214,Ust'-Buchtarma,46r,1829-08-18,ehrenberg
+215,Ust'-Buchtarma,46v,1829-08-19,ehrenberg
+216,Irtyš (Fluss),46v,1829-08-19,ehrenberg
+217,Ust'-Kamenogorsk,46v,1829-08-19,ehrenberg
+218,Ust'-Kamenogorsk,46v,1829-08-20,ehrenberg
+219,Saissansee,46v,1829-08-20,ehrenberg
+220,Omsk,46v,1829-08-20,ehrenberg
+221,Ulba,46v,1829-08-20,ehrenberg
+222,Irtyš (Fluss),46v,1829-08-21,ehrenberg
+223,Irtyš (Fluss),47r,1829-08-21,ehrenberg
+224,Irtyš (Fluss),47r,1829-08-21,ehrenberg
+225,Elbe,47r,1829-08-21,ehrenberg
+226,Wittenberg,47r,1829-08-21,ehrenberg
+227,Semej,47r,1829-08-21,ehrenberg
+228,Semej,47r,1829-08-22,ehrenberg
+229,China,47r,1829-08-22,ehrenberg
+230,Kokand,47v,1829-08-22,ehrenberg
+231,Karasuk,47v,1829-08-24,ehrenberg
+232,Irtyš (Fluss),47v,1829-08-24,ehrenberg
+233,Čerlak,48r,1829-08-25,ehrenberg
+234,Izylbaš,48r,1829-08-25,ehrenberg
+235,Pokrovo-Irtyšskoje,48r,1829-08-25,ehrenberg
+236,Irtyš (Fluss),48r,1829-08-25,ehrenberg
+237,Pokrovo-Irtyšskoje,48r,1829-08-25,ehrenberg
+238,Izylbaš,48r,1829-08-25,ehrenberg
+239,Tjumen,48r,1829-08-25,ehrenberg
+240,Tobolsk,48r,1829-08-25,ehrenberg
+241,Irtyš (Fluss),48r,1829-08-25,ehrenberg
+242,Omsk,48r,1829-08-25,ehrenberg
+243,Pokrovo-Irtyšskoje,48r,1829-08-25,ehrenberg
+244,Omsk,49r,1829-08-28,ehrenberg
+245,Irtyš (Fluss),49r,1829-08-28,ehrenberg
+246,Petropavlovsk (Omsk),49v,1829-08-30,ehrenberg
+247,Presnovka,49v,1829-08-31,ehrenberg
+248,Ust'-Ujskoe,50r,1829-09-01,ehrenberg
+249,Uj (Tobol),50r,1829-09-01,ehrenberg
+250,Tobol,50r,1829-09-01,ehrenberg
+251,Buchara,50r,1829-09-01,ehrenberg
+252,Troizk,50r,1829-09-01,ehrenberg
+253,Troizk,50v,1829-09-02,ehrenberg
+254,Troizk,50v,1829-09-02,ehrenberg
+255,Tobolsk,50v,1829-09-03,ehrenberg
+256,Ključevskaja,50v,1829-09-03,ehrenberg
+257,Miass (Stadt),50v,1829-09-03,ehrenberg
+258,Ilmensee,51r,1829-09-05,ehrenberg
+259,Ilmensee,51v,1829-09-06,ehrenberg
+260,Miass (Stadt),51v,1829-09-07,ehrenberg
+261,Syrostan (Dorf),51v,1829-09-07,ehrenberg
+262,Zlatoust,51v,1829-09-07,ehrenberg
+263,Syrostan (Fluss),51v,1829-09-07,ehrenberg
+264,Miass (Fluss),51v,1829-09-07,ehrenberg
+265,"Taganaj, Großer",52r,1829-09-08,ehrenberg
+266,Zlatoust,52v,1829-09-09,ehrenberg
+267,Kyštym,52v,1829-09-10,ehrenberg
+268,Muchametovo,52v,1829-09-10,ehrenberg
+269,Turgojak (See),52v,1829-09-10,ehrenberg
+270,Kyštym,52v,1829-09-11,ehrenberg
+271,Čeremšanka,52v,1829-09-11,ehrenberg
+272,Turgojak (See),53r,1829-09-12,ehrenberg
+273,Turgojak (See),53r,1829-09-12,ehrenberg
+274,Kyštym,53r,1829-09-12,ehrenberg
+275,Miass (Stadt),53r,1829-09-13,ehrenberg
+276,Miass (Fluss),53r,1829-09-13,ehrenberg
+277,Turgojak (See),53r,1829-09-13,ehrenberg
+278,Miass (Stadt),53r,1829-09-13,ehrenberg
+279,Jekaterinburg,53v,1829-09-15,ehrenberg
+280,Zlatoust,53v,1829-09-15,ehrenberg
+281,Auškul’ (See),53v,1829-09-16,ehrenberg
+282,Miass (Stadt),53v,1829-09-16,ehrenberg
+283,Tungatarova,53v,1829-09-16,ehrenberg
+284,Verchne-Ural'sk,54r,1829-09-17,ehrenberg
+285,Spasskij,54r,1829-09-17,ehrenberg
+286,"Magnitnaja (Festung, Ortschaft)",54r,1829-09-17,ehrenberg
+287,Syrtinskij,54r,1829-09-18,ehrenberg
+288,Orenburg (Stadt),54r,1829-09-18,ehrenberg
+289,Kizilskoye,54r,1829-09-18,ehrenberg
+290,Tereklinskoj,54v,1829-09-19,ehrenberg
+291,Orsk,54v,1829-09-19,ehrenberg
+292,Orsk,54v,1829-09-19,ehrenberg
+293,Ural (Gebirge),54v,1829-09-19,ehrenberg
+294,Verchne-Osernoje,55r,1829-09-20,ehrenberg
+295,Ural (Fluss),55r,1829-09-20,ehrenberg
+296,Orenburg (Stadt),55r,1829-09-21,ehrenberg
+297,Chiwa,55r,1829-09-21,ehrenberg
+298,Buchara,55r,1829-09-21,ehrenberg
+299,Chiwa,55r,1829-09-21,ehrenberg
+300,Buchara,55r,1829-09-21,ehrenberg
+301,Sol'-Iletsk,55v,1829-09-22,ehrenberg
+302,Sol'-Iletsk,55v,1829-09-22,ehrenberg
+303,Sakmara,57r,1829-09-24,ehrenberg
+304,Orenburg (Stadt),57v,1829-09-26,ehrenberg
+305,Nižneozernoe,57v,1829-09-26,ehrenberg
+306,Sakmara,57v,1829-09-26,ehrenberg
+307,Sakmara,57v,1829-09-26,ehrenberg
+308,Sakmara,57v,1829-09-26,ehrenberg
+309,Kirsanovo,58r,1829-09-27,ehrenberg
+310,Rubežnoe,58r,1829-09-27,ehrenberg
+311,Ural (Fluss),58r,1829-09-27,ehrenberg
+312,Oral,58r,1829-09-27,ehrenberg
+313,Oral,58r,1829-09-27,ehrenberg
+314,Ural (Fluss),58r,1829-09-28,ehrenberg
+315,Obščij Syrt,58r,1829-09-28,ehrenberg
+316,Buzuluk,58v,1829-09-29,ehrenberg
+317,Samara (Stadt),58v,1829-09-30,ehrenberg
+318,Wolga,59r,1829-10-01,ehrenberg
+319,Batraki,59r,1829-10-01,ehrenberg
+320,Syzran’,59r,1829-10-01,ehrenberg
+321,Vol’sk,59r,1829-10-02,ehrenberg
+322,Vol’sk,59v,1829-10-03,ehrenberg
+323,Katharinenstadt,59v,1829-10-03,ehrenberg
+324,Schaffhausen,59v,1829-10-03,ehrenberg
+325,Saratov,59v,1829-10-04,ehrenberg
+326,Saratov,60r,1829-10-06,ehrenberg
+327,Kamyšin,60v,1829-10-07,ehrenberg
+328,Wolga,60v,1829-10-07,ehrenberg
+329,Dubovka,60v,1829-10-08,ehrenberg
+330,Elton-See,60v,1829-10-08,ehrenberg
+331,Elton-See,61r,1829-10-09,ehrenberg
+332,Dubovka,61r,1829-10-10,ehrenberg
+333,Sarepta,61r,1829-10-10,ehrenberg
+334,Wolgograd,61r,1829-10-10,ehrenberg
+335,Grači,61v,1829-10-11,ehrenberg
+336,Wolga,61v,1829-10-11,ehrenberg
+337,Ural (Gebirge),61v,1829-10-11,ehrenberg
+338,Kopanovka,61v,1829-10-11,ehrenberg
+339,Enotaevka,61v,1829-10-11,ehrenberg
+340,Lebjažinskaja,61v,1829-10-12,ehrenberg
+341,Wolga,61v,1829-10-12,ehrenberg
+342,Astrachan (Stadt),62r,1829-10-12,ehrenberg
+343,Wolga,62r,1829-10-12,ehrenberg
+344,Berlin,62v,1829-10-13,ehrenberg
+345,Berlin,62v,1829-10-13,ehrenberg
+346,Birjuč'ja kosa,62v,1829-10-15,ehrenberg
+347,Iran,63r,1829-10-15,ehrenberg
+348,Četyre Bugry,63r,1829-10-15,ehrenberg
+349,Četyre Bugry,63v,1829-10-16,ehrenberg
+350,Astrachan (Stadt),64r,1829-10-18,ehrenberg
+351,Astrachan (Stadt),65r,1829-10-21,ehrenberg
+352,Zam’yany,65r,1829-10-21,ehrenberg
+353,Seroglazka,65v,1829-10-22,ehrenberg
+354,Vetljanskaja,66r,1829-10-23,ehrenberg
+355,Sarepta,66r,1829-10-24,ehrenberg
+356,Wolgograd,66v,1829-10-25,ehrenberg
+357,Don,66v,1829-10-25,ehrenberg
+358,Don,66v,1829-10-25,ehrenberg
+359,Voronež,67v,1829-10-28,ehrenberg
+360,Voronež,68r,1829-10-29,ehrenberg
+361,Don,68r,1829-10-29,ehrenberg
+362,Wolga,68r,1829-10-29,ehrenberg
+363,Zadonsk,68r,1829-10-30,ehrenberg
+364,Tula (Russland),68v,1829-11-01,ehrenberg
+365,Upa,68v,1829-11-01,ehrenberg
+366,Moskau,69r,1829-11-03,ehrenberg
+367,Moskau,71r,1829-11-08,ehrenberg
+368,Moskau,72r,1829-11-10,ehrenberg
+369,Tver',72r,1829-11-10,ehrenberg
+370,Vyšnij Voločëk,72r,1829-11-11,ehrenberg
+371,Jedrovo,72r,1829-11-11,ehrenberg
+372,Tver',72r,1829-11-11,ehrenberg
+373,Vyšnij Voločëk,72r,1829-11-11,ehrenberg
+374,Bronnitsa,72v,1829-11-12,ehrenberg
+375,Novgorod,72v,1829-11-12,ehrenberg
+376,Spasskaja Polist',72v,1829-11-12,ehrenberg
+377,Wolchow,72v,1829-11-12,ehrenberg
+378,Carskoe Selo,73r,1829-11-13,ehrenberg
+379,Sankt Petersburg,73r,1829-11-13,ehrenberg
+380,Sankt Petersburg,73r,1829-11-13,ehrenberg
+381,Ural (Gebirge),73r,1829-11-13,ehrenberg
+382,Wassiljewski-Insel,73v,1829-11-15,ehrenberg
+383,Wassiljewski-Insel,73v,1829-11-15,ehrenberg
+384,Dnipro,73v,1829-11-15,ehrenberg
+385,Bachmut,73v,1829-11-15,ehrenberg
+386,Dnepr,73v,1829-11-15,ehrenberg
+387,Hamburg,74r,1829-11-15,ehrenberg
+388,Jekaterinburg,74r,1829-11-16,ehrenberg
+389,Tobolsk,74r,1829-11-16,ehrenberg
+390,Nižnij Novgorod,74v,1829-11-16,ehrenberg
+391,Sankt Petersburg,79r,1829-11-17,ehrenberg
+392,Opolje,79r,1829-12-16,ehrenberg
+393,Jamburg,79r,1829-12-16,ehrenberg
+394,Luga,79r,1829-12-16,ehrenberg
+395,Narva (Stadt),79r,1829-12-16,ehrenberg
+396,Narva (Stadt),79r,1829-12-16,ehrenberg
+397,Vaivara,79r,1829-12-16,ehrenberg
+398,Torma,79r,1829-12-17,ehrenberg
+399,Tartu,79r,1829-12-17,ehrenberg
+400,Tartu,79r,1829-12-18,ehrenberg
+401,Sankt Petersburg,79v,1829-12-18,ehrenberg
+402,Astrachan (Stadt),79v,1829-12-18,ehrenberg
+403,Spasskij,80r,1829-12-18,ehrenberg
+404,Sankt Petersburg,80r,1829-12-18,ehrenberg
+405,Moskau,80r,1829-12-18,ehrenberg
+406,Nižnij Novgorod,80r,1829-12-18,ehrenberg
+407,Kazan,80r,1829-12-18,ehrenberg
+408,Bolgar,80r,1829-12-18,ehrenberg
+409,Kazan,80r,1829-12-18,ehrenberg
+410,Jekaterinburg,80r,1829-12-18,ehrenberg
+411,Jekaterinburg,80r,1829-12-18,ehrenberg
+412,Jekaterinburg,80r,1829-12-18,ehrenberg
+413,Bogoslovsk,80r,1829-12-18,ehrenberg
+414,Jekaterinburg,80r,1829-12-18,ehrenberg
+415,Tobolsk,80r,1829-12-18,ehrenberg
+416,Tobolsk,80r,1829-12-18,ehrenberg
+417,Barnaul,80r,1829-12-18,ehrenberg
+418,Barnaul,80r,1829-12-18,ehrenberg
+419,Smeïnogorsk,80r,1829-12-18,ehrenberg
+420,Smeïnogorsk,80r,1829-12-18,ehrenberg
+421,Kolyvan',80r,1829-12-18,ehrenberg
+422,Ust'-Kamenogorsk,80r,1829-12-18,ehrenberg
+423,Ust'-Kamenogorsk,80r,1829-12-18,ehrenberg
+424,Altaj,80r,1829-12-18,ehrenberg
+425,Ust'-Buchtarma,80r,1829-12-18,ehrenberg
+426,Ust'-Kamenogorsk,80r,1829-12-18,ehrenberg
+427,Taganaj,80v,1829-12-18,ehrenberg
+428,Taganaj,80v,1829-12-18,ehrenberg
+429,Ust'-Kamenogorsk,80v,1829-12-18,ehrenberg
+430,Semej,80v,1829-12-18,ehrenberg
+431,Semej,80v,1829-12-18,ehrenberg
+432,Omsk,80v,1829-12-18,ehrenberg
+433,Omsk,80v,1829-12-18,ehrenberg
+434,Petropavlovsk (Omsk),80v,1829-12-18,ehrenberg
+435,Petropavlovsk (Omsk),80v,1829-12-18,ehrenberg
+436,Troizk,80v,1829-12-18,ehrenberg
+437,Miass (Stadt),80v,1829-12-18,ehrenberg
+438,Miass (Stadt),80v,1829-12-18,ehrenberg
+439,Zlatoust,80v,1829-12-18,ehrenberg
+440,Miass (Stadt),80v,1829-12-18,ehrenberg
+441,Verchne-Ural'sk,80v,1829-12-18,ehrenberg
+442,Verchne-Ural'sk,80v,1829-12-18,ehrenberg
+443,Orenburg (Stadt),80v,1829-12-18,ehrenberg
+444,Sol'-Iletsk,80v,1829-12-18,ehrenberg
+445,Saratov,80v,1829-12-18,ehrenberg
+446,Saratov,80v,1829-12-18,ehrenberg
+447,Kamyšin,80v,1829-12-18,ehrenberg
+448,Tobolsk,80v,1829-12-18,ehrenberg
+449,Elton-See,80v,1829-12-18,ehrenberg
+450,Sarepta,80v,1829-12-18,ehrenberg
+451,Astrachan (Stadt),80v,1829-12-18,ehrenberg
+452,Astrachan (Stadt),80v,1829-12-18,ehrenberg
+453,Sankt Petersburg,80v,1829-12-18,ehrenberg
+454,Izylbaš,81r,1829-12-18,ehrenberg
+455,Pokrovo-Irtyšskoje,81r,1829-12-18,ehrenberg
+456,Ridderskij,81v-82r,1829-12-18,ehrenberg
+457,Tartu,82v,1829-12-18,ehrenberg
+458,Gromotucha,82v,1829-12-18,ehrenberg
+459,Jekaterinburg,83r,1829-12-18,ehrenberg
+460,Kosulino,83r,1829-12-18,ehrenberg
+461,Černokorovskoe,83r,1829-12-18,ehrenberg
+462,Kamyšlovskaja sloboda,83r,1829-12-18,ehrenberg
+463,Novopyšminskaja sloboda,83r,1829-12-18,ehrenberg
+464,Tjumen,83r,1829-12-18,ehrenberg
+465,Ural (Gebirge),85r,1829-09-03,ehrenberg
+466,Pyšma,85r,1829-09-03,ehrenberg
+467,Kungur,89r,1829-09-03,ehrenberg
+468,Berezovskij,89r,1829-09-03,ehrenberg
+469,Ural (Gebirge),89r,1829-09-03,ehrenberg
+470,Berezovskij,89r,1829-09-03,ehrenberg
+471,Berezovskij,89r,1829-09-03,ehrenberg
+472,Šartašsee,89r,1829-09-03,ehrenberg
+473,Verchnaja Pyšma,89r,1829-09-03,ehrenberg
+474,Verchnaja Pyšma,89r,1829-09-03,ehrenberg
+475,Nižnij Tagil,89r,1829-09-03,ehrenberg
+476,Berezovskij,89v,1829-09-03,ehrenberg
+477,Ural (Gebirge),89v,1829-09-03,ehrenberg
+478,Barabasteppe,89v,1829-09-03,ehrenberg
+479,Nižnij Novgorod,90r,1829-09-03,ehrenberg
+480,Kazan,90r,1829-09-03,ehrenberg
+481,Memel,91r,1829-04-22,ehrenberg
+482,Nimmersatt,91r,1829-04-22,ehrenberg
+483,Polangen,91r,1829-04-22,ehrenberg
+484,Oberbartau,91r,1829-04-23,ehrenberg
+485,Paplacken,91r,1829-04-23,ehrenberg
+486,Tadeicken,91r,1829-04-23,ehrenberg
+487,Skrunda,91r,1829-04-23,ehrenberg
+488,Windau,91r,1829-04-23,ehrenberg
+489,Saldus,91r,1829-04-24,ehrenberg
+490,Dobele,91r,1829-04-24,ehrenberg
+491,Mitau,91r,1829-04-24,ehrenberg
+492,Aa,91r,1829-04-25,ehrenberg
+493,Cena,91r,1829-04-25,ehrenberg
+494,Eckau,91r,1829-04-25,ehrenberg
+495,Olai,91r,1829-04-25,ehrenberg
+496,Riga,91r,1829-04-25,ehrenberg
+497,Neuermühlen,91r,1829-04-25,ehrenberg
+498,Engelhardshof,91r,1829-04-26,ehrenberg
+499,Moskva,91r,1829-04-26,ehrenberg
+500,Kama,91r,1829-04-26,ehrenberg
+501,Kungur,91r,1829-04-26,ehrenberg
+502,Bolgar,91r,1829-04-26,ehrenberg
+503,Oka,91r,1829-04-26,ehrenberg
+504,Lenči,91v,1829-04-26,ehrenberg
+505,Strenči ,91v,1829-04-26,ehrenberg
+506,Jekaterinburg,91v,1829-04-26,ehrenberg
+507,Jekaterinburg,91v,1829-04-26,ehrenberg
+508,Nižne-Isetskij,91v,1829-04-26,ehrenberg
+509,Berezovskij,91v,1829-04-26,ehrenberg
+510,Šartašsee,91v,1829-04-26,ehrenberg
+511,Berezovskij,91v,1829-04-26,ehrenberg
+512,Verchnaja Pyšma,91v,1829-04-26,ehrenberg
+513,Astrachan (Stadt),92r,1829-04-26,ehrenberg
+514,Nižne-Isetskij,92v,1829-04-26,ehrenberg
+515,Nižnaja Tura,92v,1829-04-26,ehrenberg
+516,Berezovskij,92v,1829-04-26,ehrenberg
+517,Murzinka,92v,1829-04-26,ehrenberg
+518,Kušva,92v,1829-04-26,ehrenberg
+519,Tomsk,92v,1829-04-26,ehrenberg
+520,Baty,93r,1829-09-01,ehrenberg
+521,Barnaul,93r,1829-09-01,ehrenberg
+522,Ust'-Buchtarma,93r,1829-09-01,ehrenberg
+523,Kolyvan',93r,1829-09-01,ehrenberg
+524,Ridderskij,93r,1829-09-01,ehrenberg
+525,Ust'-Kamenogorsk,93r,1829-09-01,ehrenberg
+526,Ust'-Buchtarma,93r,1829-09-01,ehrenberg
+527,Tobolsk,93r,1829-09-01,ehrenberg
+</div>
+    </body>
+</html>
