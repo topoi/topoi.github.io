@@ -43,7 +43,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.9/d3.min.js"></script>
 <script src="L.D3SvgOverlay.min.js"></script>
 
-<script type="text/javascript">
+script type="text/javascript">
 
 </script>
 <script src="sample-geojson.js" type="text/javascript"></script>
@@ -89,7 +89,7 @@
                this.closePopup();
            });
 	   layer.on('click', function (e) {
-               alert("hallo")
+               document.getElementById("text").innerHTML='<object type="text/html" data="NavigatorVersion1/docs/designentwicklung/index.html" style="height:1000px; width:100%;"></object>';     
            });
 	   
 	}
@@ -135,24 +135,8 @@
 	}).addTo(map);
 
 
-  
+ 
 
-  var marker = L.marker(location);
-  marker.bindPopup('Long description with extra formatting ...');
-  marker.on('mouseover', customTip);
-  marker.on('click', customPop);
-
-
-  
-  
- function showText(e){
-     
-     var point = map.latLngToContainerPoint(e.latlng);
-        var tooltip = d3.select(map.getContainer())
-            .append("div")
-            .attr("class", "tooltip")
-            document.getElementById("text").innerHTML='<object type="text/html" data="NavigatorVersion1/docs/designentwicklung/index.html" style="height:1000px; width:100%;"></object>';        
-    }
     function onMouseOut(e){
         d3.select(map.getContainer()).select(".tooltip").remove();
     }
